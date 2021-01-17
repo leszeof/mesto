@@ -16,10 +16,12 @@
       <form class="popup-form popup__form" action=""> <!-- сама форма -->
         <fieldset class="popup-form__fieldset">
           <legend class="popup-form__legend">Редактировать профиль</legend>
-          <label class="popup-form__label" for="">
-            <input class="popup-form__input" id="" type="text" value=""></label>
-          <label class="popup-form__label" for="">
-            <input class="popup-form__input" id="" type="text" value=""></label>
+
+          <label class="popup-form__label popup-form__label_hidden" for="user-name">Имя пользователя</label>
+          <input class="popup-form__input" id="user-name" type="text" value="">
+
+          <label class="popup-form__label popup-form__label_hidden" for="additional-user-info">Подпись к профилю</label>
+          <input class="popup-form__input" id="additional-user-info" type="text" value="">
         </fieldset>
         <button class="popup-form__submit-button" type="submit">Сохранить</button>
       </form>

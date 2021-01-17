@@ -5,13 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
 </head>
-<body>
+<body class="page">
   <div class="page-container">
     <header></header>
     <main></main>
     <footer></footer>
   </div>
-  <div class="popup"></div>
+  <div class="popup"> <!-- затенение -->
+    <div class="popup__container"> <!-- контейнер формы -->
+      <form class="popup-form popup__form" action=""> <!-- сама форма -->
+        <fieldset class="popup-form__fieldset">
+          <legend class="popup-form__legend">Редактировать профиль</legend>
+
+          <label class="popup-form__label popup-form__label_hidden" for="user-name">Имя пользователя</label>
+          <input class="popup-form__input" id="user-name" type="text" value="">
+
+          <label class="popup-form__label popup-form__label_hidden" for="additional-user-info">Подпись к профилю</label>
+          <input class="popup-form__input" id="additional-user-info" type="text" value="">
+        </fieldset>
+        <button class="popup-form__submit-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <script src="./script.js"></script>
 </body>
 </html>

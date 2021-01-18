@@ -25,16 +25,14 @@ editProfileCloseButton.addEventListener('click', closePopupEditUserProfile);
 
 function editProfileFormSubmitHandler(event) {
   event.preventDefault();
-  // Получите значение полей jobInput и nameInput из свойства value
+
   let newUserName = editProfileUserNameInput.value;
   let newUserJob = editProfileUserJobInput.value;
 
-  // Выберите элементы, куда должны быть вставлены значения полей
   currentUserName.textContent = newUserName;
   currentUserJob.textContent = newUserJob;
 
   closePopupEditUserProfile();
-  // Вставьте новые значения с помощью textContent
 }
 
 editProfileForm.addEventListener('submit', editProfileFormSubmitHandler);

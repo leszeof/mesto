@@ -1,0 +1,31 @@
+.user-profile__description {
+  margin: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.22;
+}
+
+@media (max-width: 768px) {
+  .user-profile__description {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 620px) {
+  .user-profile__description {
+    text-align: center;
+  }
+}
+
+@media (max-width: 320px) {
+  .user-profile__description {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    /*text-align: center;*/
+  }
+}

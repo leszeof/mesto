@@ -1,0 +1,6 @@
+.cards-item__info-wrapper {
+  padding: 15px 22px 0 21px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}

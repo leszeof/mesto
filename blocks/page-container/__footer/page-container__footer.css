@@ -1,0 +1,21 @@
+.page-container__footer {
+  max-width: 900px;
+  margin: 67px auto 60px auto;
+}
+
+@media (max-width: 1024px) {
+  .page-container__footer {
+    max-width: 880px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .page-container__footer {
+    padding-left: 19px;
+    padding-right: 19px;
+    margin-top: 48px;
+    margin-bottom: 36px;
+  }
+}

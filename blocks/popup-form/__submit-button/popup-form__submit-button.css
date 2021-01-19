@@ -1,6 +1,7 @@
 .popup-form__submit-button {
   margin: 0;
   margin-top: 48px;
+  padding: 14px;
 
   font-family: 'Inter';
   font-style: normal;
@@ -11,10 +12,6 @@
   color: #ffffff;
 
   background-color: #000000;
-  /*width: 358px;
-  height: 50px;*/
-  /*margin: 48px auto 36px;*/
-  padding: 14px;
   cursor: pointer;
   border: none;
 
@@ -39,24 +36,7 @@
   .popup-form__submit-button {
     margin-top: 45px;
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: normal;
     font-size: 14px;
     line-height: 1.21;
-    text-align: center;
-  }
-}
-
-@media (max-width: 320px) {
-  .popup-form__submit-button {
-    margin-top: 45px;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 1.21;
-    text-align: center;
   }
 }

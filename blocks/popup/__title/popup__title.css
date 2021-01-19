@@ -6,7 +6,7 @@
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
-  line-height: 29px;
+  line-height: 1.2;
 
   color: #000000;
 }
@@ -15,21 +15,6 @@
   .popup__title {
     margin-bottom: 75px;
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 900;
-    font-size: 18px;
-    line-height: 1.22;
-  }
-}
-
-@media (max-width: 320px) {
-  .popup__title {
-    margin-bottom: 75px;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 900;
     font-size: 18px;
     line-height: 1.22;
   }

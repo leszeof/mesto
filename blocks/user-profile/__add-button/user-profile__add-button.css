@@ -1,17 +1,17 @@
 .user-profile__add-button {
   width: 150px;
   height: 50px;
-  /*padding: 14px 60px;
-  */padding: 0;
+  padding: 0;
   margin-left: auto;
   box-sizing: border-box;
+
   background-image: url('./images/add-icon.svg');
   background-position: 50%;
   background-repeat: no-repeat;
   background-color: transparent;
   background-size: 22px 22px;
-  /*outline: none;
-  */border: 2px solid #ffffff;
+
+  border: 2px solid #ffffff;
   cursor: pointer;
 
   transition: opacity 0.5s linear;
@@ -50,8 +50,6 @@
 
 @media (max-width: 320px) {
   .user-profile__add-button {
-    /*margin-left: 0;
-    width: 100%;*/
     background-size: 16px 16px;
   }
 }

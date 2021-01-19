@@ -11,12 +11,6 @@
   background-color: #ffffff;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  /*
-  transform: translate(50%, 50%);
-  -webkit-transform: translate(50%, 50%);
-  -moz-transform: translate(50%, 50%);
-  -ms-transform: translate(50%, 50%);
-  -o-transform: translate(50%, 50%);*/
 }
 
 @media (max-width: 620px) {
@@ -25,18 +19,5 @@
     width: 282px;
     height: 322px;
     padding: 25px 22px;
-    /*padding-bottom: 0;*/
-
-  }
-}
-
-@media (max-width: 320px) {
-  .popup__container {
-    margin: 0 auto;
-    width: 282px;
-    height: 322px;
-    padding: 25px 22px;
-    /*padding-bottom: 0;*/
-
   }
 }

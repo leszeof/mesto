@@ -4,9 +4,3 @@
   max-width: 340px;
   margin-bottom: 14px;
 }
-
-@media (max-width: 620px) {
-  .user-profile__info {
-    margin-bottom: 14px;
-  }
-}

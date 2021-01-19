@@ -9,9 +9,6 @@
   row-gap: 20px;
   column-gap: 17px;
   -moz-column-gap: 17px;
-
-  /*max-width: 900px;
-  margin: 0 auto;*/
 }
 
 @media (max-width: 1024px) {

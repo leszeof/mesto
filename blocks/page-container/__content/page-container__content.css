@@ -9,9 +9,3 @@
     padding-right: 0;
   }
 }
-
-@media (max-width: 320px) {
-  .page-container__content {
-
-  }
-}

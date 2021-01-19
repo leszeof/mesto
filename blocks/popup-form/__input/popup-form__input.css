@@ -16,23 +16,3 @@
 .popup-form__input:first-of-type {
   margin-bottom: 30px;
 }
-
-@media (max-width: 620px) {
-  .popup-form__input {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 1.21;
-  }
-}
-
-@media (max-width: 320px) {
-  .popup-form__input {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 1.21;
-  }
-}

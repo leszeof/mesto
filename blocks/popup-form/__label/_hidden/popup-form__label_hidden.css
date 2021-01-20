@@ -1,9 +1,0 @@
-.popup-form__label_hidden {
-  position: absolute;
-  width: 1px;
-  margin: -1px;
-  font-size: 0;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-}

@@ -1,5 +1,6 @@
 .user-profile__info-wrapper {
   margin-left: 30px;
+  max-width: 340px;
 }
 
 @media (max-width: 1024px) {
@@ -18,5 +19,14 @@
   .user-profile__info-wrapper {
     margin-bottom: 36px;
     margin-left: 0;
+    max-width: 282px;
   }
 }
+
+@media (max-width: 320px) {
+  .user-profile__info-wrapper {
+    margin: 0 auto;
+    margin-bottom: 33px;
+  }
+}
+

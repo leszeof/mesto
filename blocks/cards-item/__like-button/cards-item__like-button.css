@@ -1,6 +1,7 @@
 .cards-item__like-button {
   width: 23px;
   height: 19px;
+  outline: none;
   transition: background-image, 0.6s linear;
   -webkit-transition: background-image, 0.6s linear;
   -moz-transition: background-image, 0.6s linear;

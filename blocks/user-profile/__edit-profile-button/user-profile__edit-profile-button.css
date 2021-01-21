@@ -3,17 +3,14 @@
   min-height: 24px;
   padding: 0;
   box-sizing: border-box;
-
   background-image: url('../../../images/edit-icon.svg');
   background-position: 50%;
   background-repeat: no-repeat;
   background-color: transparent;
   background-size: 10px 10px;
-
   border: 1px solid #ffffff;
   outline: none;
   cursor: pointer;
-
   transition: opacity 0.5s linear;
   -webkit-transition: opacity 0.5s linear;
   -moz-transition: opacity 0.5s linear;
@@ -36,7 +33,6 @@
   .user-profile__edit-profile-button {
     min-width: 18px;
     min-height: 18px;
-
     background-size: 7.5px 7.5px;
   }
 }

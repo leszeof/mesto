@@ -2,19 +2,15 @@
   position: absolute;
   top: -40px;
   right: -40px;
-
   width: 40px;
   height: 40px;
   padding: 0;
-
   background-image: url('../../../images/close-icon.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
-
   border: none;
   cursor: pointer;
-
   transition: opacity 0.5s linear;
   -webkit-transition: opacity 0.5s linear;
   -moz-transition: opacity 0.5s linear;
@@ -29,8 +25,15 @@
 @media (max-width: 620px) {
   .popup__close-button {
     right: 0;
-
     width: 26px;
     height: 26px;
+  }
+}
+
+@media (max-width: 320px) {
+  .popup__close-button {
+    right: 5px;
+    top: -45px;
+    background-size: 36px 36px;
   }
 }

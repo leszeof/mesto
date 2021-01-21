@@ -1,25 +1,20 @@
 .user-profile__add-button {
   width: 150px;
-  height: 50px;
-  padding: 0;
+  padding: 23px;
   margin-left: auto;
   box-sizing: border-box;
-
   background-image: url('../../../images/add-icon.svg');
   background-position: 50%;
   background-repeat: no-repeat;
   background-color: transparent;
   background-size: 22px 22px;
-
   border: 2px solid #ffffff;
   cursor: pointer;
-
   transition: opacity 0.5s linear;
   -webkit-transition: opacity 0.5s linear;
   -moz-transition: opacity 0.5s linear;
   -ms-transition: opacity 0.5s linear;
   -o-transition: opacity 0.5s linear;
-
   border-radius: 2px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;

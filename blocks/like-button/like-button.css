@@ -1,11 +1,9 @@
 .like-button {
   padding: 0;
-
   background-image: url('../../images/like-icon.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
-
   cursor: pointer;
   border: none;
 }

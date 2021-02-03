@@ -1,33 +1,37 @@
-// modal window, edit user profile
-
 // variables
-let editProfileOpenButton = document.querySelector('.user-profile__edit-profile-button');
-let editProfileCloseButton = document.querySelector('.popup__close-button');
-let editProfilePopupWindow = document.querySelector('.popup');
-let editProfileForm = document.querySelector('.popup__form');
-let editProfileUserNameInput = editProfileForm.querySelector('.popup-form__input_type_name');
-let editProfileUserJobInput = editProfileForm.querySelector('.popup-form__input_type_job');
-let currentUserName = document.querySelector('.user-profile__name');
-let currentUserJob = document.querySelector('.user-profile__description');
+  // user profile popup variables
+const editProfileOpenButton = document.querySelector('.user-profile__edit-profile-button');
+const editProfileCloseButton = document.querySelector('.popup__close-button');
+const editProfilePopupWindow = document.querySelector('.popup');
+const editProfileForm = document.querySelector('.popup__form');
+const editProfileUserNameInput = editProfileForm.querySelector('.popup-form__input_type_name');
+const editProfileUserJobInput = editProfileForm.querySelector('.popup-form__input_type_job');
+const currentUserName = document.querySelector('.user-profile__name');
+const currentUserJob = document.querySelector('.user-profile__description');
 
-// open modal window function
+  // like variables
+const likeButtons = document.querySelectorAll('.cards-item__like-button');
+
+// Functions
+// user profile popup functions
+  // open user profile popup
 function openPopupEditUserProfile() {
   editProfilePopupWindow.classList.add('popup_opened');
   editProfileUserNameInput.value = currentUserName.textContent;
   editProfileUserJobInput.value = currentUserJob.textContent;
 }
 
-// close modal window function
+  // close user profile popup
 function closePopupEditUserProfile() {
   editProfilePopupWindow.classList.remove('popup_opened');
 }
 
-// update user info from modal window
+  // update user profile
 function editProfileFormSubmitHandler(event) {
   event.preventDefault();
 
-  let newUserName = editProfileUserNameInput.value;
-  let newUserJob = editProfileUserJobInput.value;
+  const newUserName = editProfileUserNameInput.value;
+  const newUserJob = editProfileUserJobInput.value;
 
   currentUserName.textContent = newUserName;
   currentUserJob.textContent = newUserJob;
@@ -35,7 +39,22 @@ function editProfileFormSubmitHandler(event) {
   closePopupEditUserProfile();
 }
 
-// event listeners for edit user profile
+// like button function
+function setLikeButton(event) {
+  if (event.target.classList.contains('cards-item__like-button_active')) {
+    event.target.classList.toggle('cards-item__like-button_active')
+  } else {
+    event.target.classList.toggle('cards-item__like-button_active')
+  }
+}
+
+// event listeners
+  // event listeners for user profile popup
 editProfileOpenButton.addEventListener('click', openPopupEditUserProfile);
 editProfileCloseButton.addEventListener('click', closePopupEditUserProfile);
 editProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
+
+  // event listeners for like-buttons
+likeButtons.forEach( (button) => {
+  button.addEventListener('click', setLikeButton)
+})

@@ -10,9 +10,13 @@
 }
 
 .cards-item__like-button:hover {
-  background-image: url('../../../images/like-icon-hover.svg');
+  opacity: 0.5;
 }
 
 .cards-item__like-button:active {
+  background-image: url('../../../images/like-icon-active.svg');
+}
+
+.cards-item__like-button_active {
   background-image: url('../../../images/like-icon-active.svg');
 }

@@ -9,7 +9,7 @@ const editProfileUserJobInput = editProfileForm.querySelector('.popup-form__inpu
 const currentUserName = document.querySelector('.user-profile__name');
 const currentUserJob = document.querySelector('.user-profile__description');
 
-  // like variables
+  // like card variable //! выкинуть нах, не нужно
 let likeButtons = document.querySelectorAll('.cards-item__like-button');
 
   // initial cards variables
@@ -68,7 +68,7 @@ function editProfileFormSubmitHandler(event) {
   closePopupEditUserProfile();
 }
 
-// like button function
+// like card function
 function setLikeButton(event) {
   if (event.target.classList.contains('cards-item__like-button_active')) {
     event.target.classList.toggle('cards-item__like-button_active');
@@ -77,19 +77,30 @@ function setLikeButton(event) {
   }
 }
 
+// delete card function
+function deleteCard(event) {
+  //console.log(event.target.closest('li'));
+  console.log(event.target.id);
+
+  event.target.closest('li').remove() //! рабочее удаление элемента из верстки
+}
+
 // renders cards on start function
 function renderInitialCards(arrayOfCards) {
   let cardsContainer = document.querySelector('.cards__list');
   let cardItemTemplate = document.querySelector('.template-card-item').content;
 
-  let cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
   //! вариант 1 = через for (рабочий)
   for (let i = 0; i < arrayOfCards.length; i++) {
+    let cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
     const { name, link } = arrayOfCards[i];
     cardElement.querySelector('.cards-item__image').src = link;
     cardElement.querySelector('.cards-item__image').alt = name;
     cardElement.querySelector('.cards-item__title').textContent = name;
     cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton); // альтернативное решение с лайками (вроде самое адекватное)
+
+    // кнопка удаления
+    cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard);
 
     cardsContainer.prepend(cardElement);
   }
@@ -124,6 +135,9 @@ function renderInitialCards(arrayOfCards) {
 
 }
 renderInitialCards(initialCards);
+
+
+
 
 
 // event listeners

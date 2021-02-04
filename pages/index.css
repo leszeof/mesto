@@ -22,11 +22,14 @@
 /* Cards section */
 @import url('../blocks/cards/__list/cards__list.css');
 @import url('../blocks/cards-item/cards-item.css');
+@import url('../blocks/cards/__item/cards__item.css');
 @import url('../blocks/cards-item/__image/cards-item__image.css');
 @import url('../blocks/cards-item/__info-wrapper/cards-item__info-wrapper.css');
 @import url('../blocks/cards-item/__title/cards-item__title.css');
 @import url('../blocks/like-button/like-button.css');
 @import url('../blocks/cards-item/__like-button/cards-item__like-button.css');
+@import url('../blocks/delete-button/delete-button.css');
+@import url('../blocks/cards-item/__delete-button/cards-item__delete-button.css');
 /* Footer section */
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/page-container/__footer/page-container__footer.css');

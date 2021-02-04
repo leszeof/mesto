@@ -31,13 +31,24 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup">
+  <div class="popup popup_type_edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup-form popup__form" action="validate" name="edit-profile-form">
         <input class="popup-form__input popup-form__input_type_name" id="user-name" type="text" name="new-user-name" placeholder="Имя пользователя" aria-label="Введите имя пользователя">
         <input class="popup-form__input popup-form__input_type_job" id="additional-user-info" type="text" name="new-user-description" placeholder="Описание пользователя" aria-label="Введите описание пользователя">
         <button class="popup-form__submit-button" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close-button" type="button" aria-label="Закрыть всплывающее окно редактирования профиля"></button>
+    </div>
+  </div>
+  <div class="popup popup_type_add-place">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup-form popup__form" action="validate" name="edit-profile-form">
+        <input class="popup-form__input popup-form__input_type_place" id="new-place" type="text" name="new-place-name" placeholder="Название" aria-label="Введите название нового места">
+        <input class="popup-form__input popup-form__input_type_link" id="new-place-link" type="text" name="new-place-link" placeholder="Ссылка на картинку" aria-label="Введите URL ссылку на картинку">
+        <button class="popup-form__submit-button" type="submit">Создать</button>
       </form>
       <button class="popup__close-button" type="button" aria-label="Закрыть всплывающее окно редактирования профиля"></button>
     </div>

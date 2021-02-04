@@ -1,18 +1,26 @@
 // variables
-  // user profile popup variables
+  // user profile popup
+const editProfilePopupWindow = document.querySelector('.popup.popup_type_edit-profile');
 const editProfileOpenButton = document.querySelector('.user-profile__edit-profile-button');
-const editProfileCloseButton = document.querySelector('.popup__close-button');
-const editProfilePopupWindow = document.querySelector('.popup');
-const editProfileForm = document.querySelector('.popup__form');
+const editProfileCloseButton = editProfilePopupWindow.querySelector('.popup__close-button');
+const editProfileForm = editProfilePopupWindow.querySelector('.popup__form');
 const editProfileUserNameInput = editProfileForm.querySelector('.popup-form__input_type_name');
 const editProfileUserJobInput = editProfileForm.querySelector('.popup-form__input_type_job');
 const currentUserName = document.querySelector('.user-profile__name');
 const currentUserJob = document.querySelector('.user-profile__description');
 
-  // like card variable //! выкинуть нах, не нужно
+  // add new place popup
+const addNewCardPopupWindow = document.querySelector('.popup.popup_type_add-place');
+const addCardOpenButton = document.querySelector('.user-profile__add-button');
+const addCardCloseButton = addNewCardPopupWindow.querySelector('.popup__close-button');
+const addCardForm = addNewCardPopupWindow.querySelector('.popup__form');
+const addCardNewPlaceInput = editProfileForm.querySelector('.popup-form__input_type_place');
+const addCardNewPlaceLinkInput = editProfileForm.querySelector('.popup-form__input_type_link');
+
+  // like card //! выкинуть нах, не нужно
 let likeButtons = document.querySelectorAll('.cards-item__like-button');
 
-  // initial cards variables
+  // initial cards
 const initialCards = [
   {
     name: 'Архыз',
@@ -42,7 +50,28 @@ const initialCards = [
 
 
 // Functions
-// user profile popup functions
+function openPopup(popup) {
+  if (popup.classList.contains('popup_type_edit')) {
+    editProfilePopupWindow.classList.add('popup_opened');
+    editProfileUserNameInput.value = currentUserName.textContent;
+    editProfileUserJobInput.value = currentUserJob.textContent;
+  } else if (popup.classList.contains('popup_type_add-place')) {
+    addNewCardPopupWindow.classList.add('popup_opened');
+  }
+
+}
+
+function closePopup(popup) {
+  if (popup.classList.contains('popup_type_edit')) {
+    editProfilePopupWindow.classList.remove('popup_opened');
+  } else if (popup.classList.contains('popup_type_add-place')) {
+    addNewCardPopupWindow.classList.remove('popup_opened');
+  }
+}
+
+
+
+// user profile popup
   // open user profile popup
 function openPopupEditUserProfile() {
   editProfilePopupWindow.classList.add('popup_opened');
@@ -85,7 +114,7 @@ function deleteCard(event) {
   event.target.closest('li').remove() //! рабочее удаление элемента из верстки
 }
 
-// renders cards on start function
+// renders cards on start
 function renderInitialCards(arrayOfCards) {
   let cardsContainer = document.querySelector('.cards__list');
   let cardItemTemplate = document.querySelector('.template-card-item').content;
@@ -145,6 +174,15 @@ renderInitialCards(initialCards);
 editProfileOpenButton.addEventListener('click', openPopupEditUserProfile);
 editProfileCloseButton.addEventListener('click', closePopupEditUserProfile);
 editProfileForm.addEventListener('submit', editProfileFormSubmitHandler);
+
+  // event listeners for add place popup
+addCardOpenButton.addEventListener('click', () => {
+  openPopup(addNewCardPopupWindow);
+})
+addCardCloseButton.addEventListener('click', () => {
+  closePopup(addNewCardPopupWindow);
+})
+
 
   //! event listeners for like-buttons -- убрал, так как уже не актуально стало (вешаем при рендеринге и создании карточек этого слушателя)
 // likeButtons.forEach( (button) => {

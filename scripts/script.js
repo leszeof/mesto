@@ -17,6 +17,10 @@ const newPlacePopupForm = newCardPopupWindow.querySelector('.popup__form');
 const newPlaceInput = newPlacePopupForm.querySelector('.popup-form__input_type_place');
 const newPlaceImageLinkInput = newPlacePopupForm.querySelector('.popup-form__input_type_link');
 
+  // image preview popup
+const imagePreviewPopupWindow = document.querySelector('.popup.popup_type_image-preview');
+const imagePreviewCloseButton = imagePreviewPopupWindow.querySelector('.popup__close-button');
+
   // like card //! выкинуть нах, не нужно
 // let likeButtons = document.querySelectorAll('.cards-item__like-button');
 
@@ -48,7 +52,6 @@ const initialCards = [
   }
 ];
 
-
 // Functions
 function openPopup(popup) {
   if (popup.classList.contains('popup_type_edit')) {
@@ -57,20 +60,28 @@ function openPopup(popup) {
     editProfileUserJobInput.value = currentUserJob.textContent;
   } else if (popup.classList.contains('popup_type_add-place')) {
     newCardPopupWindow.classList.add('popup_opened');
+  } else if (popup.classList.contains('popup_type_image-preview')) {
+    fillImagePreviewPopup(event); // не совсем ясно в каком порядке это надо делать
+    imagePreviewPopupWindow.classList.add('popup_opened');
+    // инициируется запуск функции, которая будет наполнять модалку
+    // например event.target.src (картинка на которой клик) + event.target.alt вынимаем
   }
-
 }
 
 function closePopup(popup) {
   if (popup.classList.contains('popup_type_edit')) {
     editProfilePopupWindow.classList.remove('popup_opened');
+    //! очистку полей сюда засунуть и все что было в той функции
   } else if (popup.classList.contains('popup_type_add-place')) {
     newCardPopupWindow.classList.remove('popup_opened');
+    //! очистку полей сюда засунуть и все что было в той функции
+  } else if (popup.classList.contains('popup_type_image-preview')) {
+    imagePreviewPopupWindow.classList.remove('popup_opened');
   }
 }
 
 
-//TODO убрать закрытие и открытие, будет одна общая функция на все
+//TODO убрать закрытие и открытие, будет одна общая функция на все, не забыть переделать eventListener внизу! (либо отдельные которые, либо которые в функции навешиваются)
 // user profile popup
   // open user profile popup
 function openPopupEditUserProfile() {
@@ -83,6 +94,10 @@ function openPopupEditUserProfile() {
 function closePopupEditUserProfile() {
   editProfilePopupWindow.classList.remove('popup_opened');
 }
+
+///
+
+
 
   // update user profile
 function editProfile(event) {
@@ -185,11 +200,11 @@ function addNewPlace(event) {
   let newCard = generateNewCard(newPlace, newPlaceImageLink);
 
   cardsContainer.prepend(newCard);
-  newPlaceInput.value = '';
-  newPlaceImageLinkInput.value = '';
   closePopup(newCardPopupWindow);
+  //! перенести в closeModal()
+  newPlaceImageLinkInput.value = '';
+  newPlaceInput.value = '';
 }
-
 
 
 function generateNewCard(name, link) {
@@ -198,14 +213,32 @@ function generateNewCard(name, link) {
   cardElement.querySelector('.cards-item__image').src = link;
   cardElement.querySelector('.cards-item__image').alt = name;
   cardElement.querySelector('.cards-item__title').textContent = name;
-  cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton); // альтернативное решение с лайками (вроде самое адекватное)
 
-  // кнопка удаления
-  cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard);
+  // event-listeners
+  cardElement.querySelector('.cards-item__image').addEventListener('click', () => {
+    openPopup(imagePreviewPopupWindow);
+  });
+  cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton); // альтернативное решение с лайками (вроде самое адекватное)
+  cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard); // кнопка удаления, слушатель
 
   return cardElement;
 }
 
+
+function fillImagePreviewPopup(event) {
+  // функция, которая будет наполнять сам попап картинкой + подпись
+  console.log(event);
+
+  //! в целом переменные можно выкинуть? посмотри чеклист
+  const image = event.target.src;
+  const caption = event.target.alt;
+
+  const imagePreview = document.querySelector('.popup__image');
+  const imageCaption = document.querySelector('.popup__image-caption')
+
+  imagePreview.src = image;
+  imageCaption.textContent = caption
+}
 
 // event listeners
   // event listeners for user profile popup
@@ -220,8 +253,12 @@ newPlacePopupOpenButton.addEventListener('click', () => {
 newPlacePopupCloseButton.addEventListener('click', () => {
   closePopup(newCardPopupWindow);
 })
-
 newPlacePopupForm.addEventListener('submit', addNewPlace)
+
+  // event listeners for image preview popup
+imagePreviewCloseButton.addEventListener('click', () => {
+  closePopup(imagePreviewPopupWindow);
+});
 
 
   //! event listeners for like-buttons -- убрал, так как уже не актуально стало (вешаем при рендеринге и создании карточек этого слушателя)

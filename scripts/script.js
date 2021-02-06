@@ -21,9 +21,6 @@ const newPlaceImageLinkInput = newPlacePopupForm.querySelector('.popup-form__inp
 const imagePreviewPopupWindow = document.querySelector('.popup.popup_type_image-preview');
 const imagePreviewCloseButton = imagePreviewPopupWindow.querySelector('.popup__close-button');
 
-  // like card //! выкинуть нах, не нужно
-// let likeButtons = document.querySelectorAll('.cards-item__like-button');
-
   // initial cards
 const initialCards = [
   {
@@ -53,51 +50,37 @@ const initialCards = [
 ];
 
 // Functions
+  // open popup, universal function
 function openPopup(popup) {
-  if (popup.classList.contains('popup_type_edit')) {
+  if (popup.classList.contains('popup_type_edit-profile')) {
     editProfilePopupWindow.classList.add('popup_opened');
     editProfileUserNameInput.value = currentUserName.textContent;
     editProfileUserJobInput.value = currentUserJob.textContent;
+
   } else if (popup.classList.contains('popup_type_add-place')) {
     newCardPopupWindow.classList.add('popup_opened');
+
   } else if (popup.classList.contains('popup_type_image-preview')) {
-    fillImagePreviewPopup(event); // не совсем ясно в каком порядке это надо делать
+    fillImagePreviewPopup(event);
+
     imagePreviewPopupWindow.classList.add('popup_opened');
-    // инициируется запуск функции, которая будет наполнять модалку
-    // например event.target.src (картинка на которой клик) + event.target.alt вынимаем
   }
 }
 
+  // close popup, universal function
 function closePopup(popup) {
-  if (popup.classList.contains('popup_type_edit')) {
+  if (popup.classList.contains('popup_type_edit-profile')) {
     editProfilePopupWindow.classList.remove('popup_opened');
-    //! очистку полей сюда засунуть и все что было в той функции
+
   } else if (popup.classList.contains('popup_type_add-place')) {
     newCardPopupWindow.classList.remove('popup_opened');
-    //! очистку полей сюда засунуть и все что было в той функции
+    newPlaceImageLinkInput.value = '';
+    newPlaceInput.value = '';
+
   } else if (popup.classList.contains('popup_type_image-preview')) {
     imagePreviewPopupWindow.classList.remove('popup_opened');
   }
 }
-
-
-//TODO убрать закрытие и открытие, будет одна общая функция на все, не забыть переделать eventListener внизу! (либо отдельные которые, либо которые в функции навешиваются)
-// user profile popup
-  // open user profile popup
-function openPopupEditUserProfile() {
-  editProfilePopupWindow.classList.add('popup_opened');
-  editProfileUserNameInput.value = currentUserName.textContent;
-  editProfileUserJobInput.value = currentUserJob.textContent;
-}
-
-  // close user profile popup
-function closePopupEditUserProfile() {
-  editProfilePopupWindow.classList.remove('popup_opened');
-}
-
-///
-
-
 
   // update user profile
 function editProfile(event) {
@@ -109,7 +92,7 @@ function editProfile(event) {
   currentUserName.textContent = newUserName;
   currentUserJob.textContent = newUserJob;
 
-  closePopupEditUserProfile();
+  closePopup(editProfilePopupWindow);
 }
 
 // like card function
@@ -123,93 +106,39 @@ function setLikeButton(event) {
 
 // delete card function
 function deleteCard(event) {
-  //console.log(event.target.closest('li'));
-  console.log(event.target.id); //!убрать
-
-  event.target.closest('li').remove() //! рабочее удаление элемента из верстки
+  event.target.closest('li').remove();
 }
 
 // renders cards on start
-function renderInitialCards(arrayOfCards) {
-  let cardsContainer = document.querySelector('.cards__list');
-  //! убрать let cardItemTemplate = document.querySelector('.template-card-item').content;
+function renderInitialCards(rawArrayOfCards) {
+  const cardsContainer = document.querySelector('.cards__list');
 
-  //! вариант 1 = через for (рабочий)
-  // for (let i = 0; i < arrayOfCards.length; i++) {
-  //   let cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
-  //   const { name, link } = arrayOfCards[i];
-  //   cardElement.querySelector('.cards-item__image').src = link;
-  //   cardElement.querySelector('.cards-item__image').alt = name;
-  //   cardElement.querySelector('.cards-item__title').textContent = name;
-  //   cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton); // альтернативное решение с лайками (вроде самое адекватное)
-
-  //   // кнопка удаления
-  //   cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard);
-
-  //   cardsContainer.prepend(cardElement);
-  // }
-
-
-  //! вариант 2 = через map (рабочий)
-  // let readyCards = arrayOfCards.map( (card) => {
-  //   let cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
-  //   cardElement.querySelector('.cards-item__image').src = card.link;
-  //   cardElement.querySelector('.cards-item__image').alt = card.name;
-  //   cardElement.querySelector('.cards-item__title').textContent = card.name;
-
-  //   // event listener for like-button
-  //   cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton); // альтернативное решение с лайками (вроде самое адекватное)
-
-  //   return cardElement;
-  // })
-  // cardsContainer.prepend(...readyCards);
-  // likeButtons = document.querySelectorAll('.cards-item__like-button'); // решение для лайков, скорее всего плохое
-
-
-  //! вариант 3 = через forEach (рабочий)
-  // arrayOfCards.forEach( (card) => {
-  //   let cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
-  //   cardElement.querySelector('.cards-item__image').src = card.link;
-  //   cardElement.querySelector('.cards-item__image').alt = card.name;
-  //   cardElement.querySelector('.cards-item__title').textContent = card.name;
-  //   cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton); // альтернативное решение с лайками (вроде самое адекватное)
-
-  //   cardsContainer.prepend(cardElement);
-  // })
-
-
-  //! вариант 4, для рефакторинга (запускает конструкцию на массиве, затем идет в функцию newCardFunction2, которая вернет карточки поштучно)
-  let readyCards = arrayOfCards.map( (item) => {
-    let newCard= generateNewCard(item.name, item.link);
+  const renderedCards = rawArrayOfCards.map( (item) => {
+    const newCard= generateNewCard(item.name, item.link);
     return newCard;
   })
 
-  cardsContainer.prepend(...readyCards);
+  cardsContainer.prepend(...renderedCards);
 }
 renderInitialCards(initialCards);
 
-
+// add new card function
 function addNewPlace(event) {
   event.preventDefault();
 
-  let cardsContainer = document.querySelector('.cards__list');
-  console.log(newPlaceInput);
-  const newPlace = newPlaceInput.value;
+  const cardsContainer = document.querySelector('.cards__list');
+  const newPlaceName = newPlaceInput.value;
   const newPlaceImageLink = newPlaceImageLinkInput.value;
-
-  let newCard = generateNewCard(newPlace, newPlaceImageLink);
-
+  const newCard = generateNewCard(newPlaceName, newPlaceImageLink);
   cardsContainer.prepend(newCard);
+
   closePopup(newCardPopupWindow);
-  //! перенести в closeModal()
-  newPlaceImageLinkInput.value = '';
-  newPlaceInput.value = '';
 }
 
-
+// generate a card
 function generateNewCard(name, link) {
-  let cardItemTemplate = document.querySelector('.template-card-item').content;
-  let cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
+  const cardItemTemplate = document.querySelector('.template-card-item').content;
+  const cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
   cardElement.querySelector('.cards-item__image').src = link;
   cardElement.querySelector('.cards-item__image').alt = name;
   cardElement.querySelector('.cards-item__title').textContent = name;
@@ -218,52 +147,45 @@ function generateNewCard(name, link) {
   cardElement.querySelector('.cards-item__image').addEventListener('click', () => {
     openPopup(imagePreviewPopupWindow);
   });
-  cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton); // альтернативное решение с лайками (вроде самое адекватное)
-  cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard); // кнопка удаления, слушатель
+  cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton);
+  cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard);
 
   return cardElement;
 }
 
-
+// insert new content in preview image popup
 function fillImagePreviewPopup(event) {
-  // функция, которая будет наполнять сам попап картинкой + подпись
-  console.log(event);
-
-  //! в целом переменные можно выкинуть? посмотри чеклист
   const image = event.target.src;
-  const caption = event.target.alt;
+  const title = event.target.alt;
 
   const imagePreview = document.querySelector('.popup__image');
-  const imageCaption = document.querySelector('.popup__image-caption')
+  const imageCaption = document.querySelector('.popup__image-caption');
 
   imagePreview.src = image;
-  imageCaption.textContent = caption
+  imagePreview.alt = title;
+  imageCaption.textContent = title;
 }
 
-// event listeners
+// global event listeners
   // event listeners for user profile popup
-editProfileOpenButton.addEventListener('click', openPopupEditUserProfile);
-editProfileCloseButton.addEventListener('click', closePopupEditUserProfile);
+editProfileOpenButton.addEventListener('click', () => {
+  openPopup(editProfilePopupWindow);
+});
+editProfileCloseButton.addEventListener('click', () => {
+  closePopup(editProfilePopupWindow);
+});
 editProfileForm.addEventListener('submit', editProfile);
 
   // event listeners for add place popup
 newPlacePopupOpenButton.addEventListener('click', () => {
   openPopup(newCardPopupWindow);
-})
+});
 newPlacePopupCloseButton.addEventListener('click', () => {
   closePopup(newCardPopupWindow);
-})
-newPlacePopupForm.addEventListener('submit', addNewPlace)
+});
+newPlacePopupForm.addEventListener('submit', addNewPlace);
 
   // event listeners for image preview popup
 imagePreviewCloseButton.addEventListener('click', () => {
   closePopup(imagePreviewPopupWindow);
 });
-
-
-  //! event listeners for like-buttons -- убрал, так как уже не актуально стало (вешаем при рендеринге и создании карточек этого слушателя)
-// likeButtons.forEach( (button) => {
-//   button.addEventListener('click', setLikeButton)
-// })
-
-

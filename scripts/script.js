@@ -1,6 +1,6 @@
 // variables
   // user profile popup
-const editProfilePopupWindow = document.querySelector('.popup.popup_type_edit-profile');
+const editProfilePopupWindow = document.querySelector('.popup_type_edit-profile');
 const editProfileOpenButton = document.querySelector('.user-profile__edit-profile-button');
 const editProfileCloseButton = editProfilePopupWindow.querySelector('.popup__close-button');
 const editProfileForm = editProfilePopupWindow.querySelector('.popup__form');
@@ -10,7 +10,7 @@ const currentUserName = document.querySelector('.user-profile__name');
 const currentUserJob = document.querySelector('.user-profile__description');
 
   // add new place popup
-const newCardPopupWindow = document.querySelector('.popup.popup_type_add-place');
+const newCardPopupWindow = document.querySelector('.popup_type_add-place');
 const newPlacePopupOpenButton = document.querySelector('.user-profile__add-button');
 const newPlacePopupCloseButton = newCardPopupWindow.querySelector('.popup__close-button');
 const newPlacePopupForm = newCardPopupWindow.querySelector('.popup__form');
@@ -18,7 +18,7 @@ const newPlaceInput = newPlacePopupForm.querySelector('.popup-form__input_type_p
 const newPlaceImageLinkInput = newPlacePopupForm.querySelector('.popup-form__input_type_link');
 
   // image preview popup
-const imagePreviewPopupWindow = document.querySelector('.popup.popup_type_image-preview');
+const imagePreviewPopupWindow = document.querySelector('.popup_type_image-preview');
 const imagePreviewCloseButton = imagePreviewPopupWindow.querySelector('.popup__close-button');
 
   // initial cards
@@ -51,7 +51,7 @@ const initialCards = [
 
 // Functions
   // open popup, universal function
-function openPopup(popup) {
+function openPopup(popup, event) {
   if (popup.classList.contains('popup_type_edit-profile')) {
     editProfilePopupWindow.classList.add('popup_opened');
     editProfileUserNameInput.value = currentUserName.textContent;
@@ -144,8 +144,8 @@ function generateNewCard(name, link) {
   cardElement.querySelector('.cards-item__title').textContent = name;
 
   // event-listeners
-  cardElement.querySelector('.cards-item__image').addEventListener('click', () => {
-    openPopup(imagePreviewPopupWindow);
+  cardElement.querySelector('.cards-item__image').addEventListener('click', (event) => {
+    openPopup(imagePreviewPopupWindow, event);
   });
   cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton);
   cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard);

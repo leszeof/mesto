@@ -48,6 +48,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+const cardsContainer = document.querySelector('.cards__list');
 
 // Functions
   // open popup, universal function
@@ -73,14 +74,12 @@ function closePopup(popup) {
 
   } else if (popup.classList.contains('popup_type_add-place')) {
     newCardPopupWindow.classList.remove('popup_opened');
-    newPlaceImageLinkInput.value = '';
-    newPlaceInput.value = '';
+    clearInputValues();
 
   } else if (popup.classList.contains('popup_type_image-preview')) {
     imagePreviewPopupWindow.classList.remove('popup_opened');
   }
 }
-
 
   // set input values on open edit profile popup
 function setInputValues() {
@@ -88,7 +87,11 @@ function setInputValues() {
   editProfileUserJobInput.value = currentUserJob.textContent;
 }
 
-  // clear inputs values on open edit profile popup
+  // clear inputs values on close add new place popup
+function clearInputValues() {
+  newPlaceImageLinkInput.value = '';
+  newPlaceInput.value = '';
+}
 
   // update user profile
 function editProfile(event) {
@@ -115,8 +118,6 @@ function deleteCard(event) {
 
 // renders cards on start
 function renderInitialCards(rawArrayOfCards) {
-  const cardsContainer = document.querySelector('.cards__list');
-
   const renderedCards = rawArrayOfCards.map( (item) => {
     const newCard= generateNewCard(item.name, item.link);
     return newCard;
@@ -130,7 +131,6 @@ renderInitialCards(initialCards);
 function addNewPlace(event) {
   event.preventDefault();
 
-  const cardsContainer = document.querySelector('.cards__list');
   const newPlaceName = newPlaceInput.value;
   const newPlaceImageLink = newPlaceImageLinkInput.value;
   const newCard = generateNewCard(newPlaceName, newPlaceImageLink);

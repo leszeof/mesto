@@ -106,7 +106,7 @@ function setLikeButton(event) {
 
 // delete card function
 function deleteCard(event) {
-  event.target.closest('li').remove();
+  event.target.closest('.cards__item').remove();
 }
 
 // renders cards on start

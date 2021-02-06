@@ -1,4 +1,4 @@
-// variables
+// Variables
   // user profile popup
 const editProfilePopupWindow = document.querySelector('.popup_type_edit-profile');
 const editProfileOpenButton = document.querySelector('.user-profile__edit-profile-button');
@@ -20,6 +20,9 @@ const newPlaceImageLinkInput = newPlacePopupForm.querySelector('.popup-form__inp
   // image preview popup
 const imagePreviewPopupWindow = document.querySelector('.popup_type_image-preview');
 const imagePreviewCloseButton = imagePreviewPopupWindow.querySelector('.popup__close-button');
+// TODO внести imagePreview imageCaption  из модального окна в переменные, чтобы при запуске функций не искать их по новой
+const imagePreview = document.querySelector('.popup__image');
+const imageCaption = document.querySelector('.popup__image-caption');
 
   // initial cards
 const initialCards = [
@@ -51,46 +54,37 @@ const initialCards = [
 const cardsContainer = document.querySelector('.cards__list');
 
 // Functions
-  // open popup, universal function
-function openPopup(popup, event) {
+  // open any popup, universal function
+function openPopup(popup) {
   if (popup.classList.contains('popup_type_edit-profile')) {
     editProfilePopupWindow.classList.add('popup_opened');
-    setInputValues();
 
   } else if (popup.classList.contains('popup_type_add-place')) {
     newCardPopupWindow.classList.add('popup_opened');
 
   } else if (popup.classList.contains('popup_type_image-preview')) {
-    fillImagePreviewPopup(event);
-
     imagePreviewPopupWindow.classList.add('popup_opened');
   }
 }
 
-  // close popup, universal function
+  // close any popup, universal function
 function closePopup(popup) {
   if (popup.classList.contains('popup_type_edit-profile')) {
     editProfilePopupWindow.classList.remove('popup_opened');
 
   } else if (popup.classList.contains('popup_type_add-place')) {
     newCardPopupWindow.classList.remove('popup_opened');
-    clearInputValues();
 
   } else if (popup.classList.contains('popup_type_image-preview')) {
     imagePreviewPopupWindow.classList.remove('popup_opened');
   }
 }
 
-  // set input values on open edit profile popup
+//edit user profile popup functions
+  // set input values when opening edit profile popup
 function setInputValues() {
   editProfileUserNameInput.value = currentUserName.textContent;
   editProfileUserJobInput.value = currentUserJob.textContent;
-}
-
-  // clear inputs values on close add new place popup
-function clearInputValues() {
-  newPlaceImageLinkInput.value = '';
-  newPlaceInput.value = '';
 }
 
   // update user profile
@@ -116,18 +110,8 @@ function deleteCard(event) {
   event.target.closest('.cards__item').remove();
 }
 
-// renders cards on start
-function renderInitialCards(rawArrayOfCards) {
-  const renderedCards = rawArrayOfCards.map( (item) => {
-    const newCard= generateNewCard(item.name, item.link);
-    return newCard;
-  })
-
-  cardsContainer.prepend(...renderedCards);
-}
-renderInitialCards(initialCards);
-
-// add new card function
+// add new place popup functions
+  // add new card function
 function addNewPlace(event) {
   event.preventDefault();
 
@@ -139,17 +123,38 @@ function addNewPlace(event) {
   closePopup(newCardPopupWindow);
 }
 
-// generate a card
+  // clear inputs values when close add new place popup
+function clearInputValues() {
+  newPlaceImageLinkInput.value = '';
+  newPlaceInput.value = '';
+}
+
+// card add functionality (on start and in progress)
+  // renders cards on start
+function renderInitialCards(rawArrayOfCards) {
+  const renderedCards = rawArrayOfCards.map( (item) => {
+    const newCard= generateNewCard(item.name, item.link);
+    return newCard;
+  })
+
+  cardsContainer.prepend(...renderedCards);
+}
+renderInitialCards(initialCards);
+
+  // generate a card at any moment
 function generateNewCard(name, link) {
   const cardItemTemplate = document.querySelector('.template-card-item').content;
   const cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
-  cardElement.querySelector('.cards-item__image').src = link;
-  cardElement.querySelector('.cards-item__image').alt = name;
+
+  const cardImage = cardElement.querySelector('.cards-item__image')
+  cardImage.src = link;
+  cardImage.alt = name;
   cardElement.querySelector('.cards-item__title').textContent = name;
 
   // event-listeners
   cardElement.querySelector('.cards-item__image').addEventListener('click', (event) => {
-    openPopup(imagePreviewPopupWindow, event);
+    fillImagePreviewPopup(event);
+    openPopup(imagePreviewPopupWindow);
   });
   cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton);
   cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard);
@@ -157,23 +162,22 @@ function generateNewCard(name, link) {
   return cardElement;
 }
 
-// insert new content in preview image popup
+// image preview popup functions
+  // insert new content in preview image popup
 function fillImagePreviewPopup(event) {
   const image = event.target.src;
   const title = event.target.alt;
-
-  const imagePreview = document.querySelector('.popup__image');
-  const imageCaption = document.querySelector('.popup__image-caption');
 
   imagePreview.src = image;
   imagePreview.alt = title;
   imageCaption.textContent = title;
 }
 
-// global event listeners
+// Event listeners
   // event listeners for user profile popup
 editProfileOpenButton.addEventListener('click', () => {
-  openPopup(editProfilePopupWindow);
+  setInputValues();
+  openPopup(editProfilePopupWindow)
 });
 editProfileCloseButton.addEventListener('click', () => {
   closePopup(editProfilePopupWindow);
@@ -187,7 +191,10 @@ newPlacePopupOpenButton.addEventListener('click', () => {
 newPlacePopupCloseButton.addEventListener('click', () => {
   closePopup(newCardPopupWindow);
 });
-newPlacePopupForm.addEventListener('submit', addNewPlace);
+newPlacePopupForm.addEventListener('submit', (event) => {
+  addNewPlace(event);
+  clearInputValues();
+});
 
   // event listeners for image preview popup
 imagePreviewCloseButton.addEventListener('click', () => {

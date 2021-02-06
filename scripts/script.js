@@ -97,11 +97,7 @@ function editProfile(event) {
 
 // like card function
 function setLikeButton(event) {
-  if (event.target.classList.contains('cards-item__like-button_active')) {
-    event.target.classList.toggle('cards-item__like-button_active');
-  } else {
-    event.target.classList.toggle('cards-item__like-button_active');
-  }
+  event.target.classList.toggle('cards-item__like-button_active');
 }
 
 // delete card function

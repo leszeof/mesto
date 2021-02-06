@@ -54,8 +54,7 @@ const initialCards = [
 function openPopup(popup, event) {
   if (popup.classList.contains('popup_type_edit-profile')) {
     editProfilePopupWindow.classList.add('popup_opened');
-    editProfileUserNameInput.value = currentUserName.textContent;
-    editProfileUserJobInput.value = currentUserJob.textContent;
+    setInputValues();
 
   } else if (popup.classList.contains('popup_type_add-place')) {
     newCardPopupWindow.classList.add('popup_opened');
@@ -81,6 +80,15 @@ function closePopup(popup) {
     imagePreviewPopupWindow.classList.remove('popup_opened');
   }
 }
+
+
+  // set input values on open edit profile popup
+function setInputValues() {
+  editProfileUserNameInput.value = currentUserName.textContent;
+  editProfileUserJobInput.value = currentUserJob.textContent;
+}
+
+  // clear inputs values on open edit profile popup
 
   // update user profile
 function editProfile(event) {

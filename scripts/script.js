@@ -56,28 +56,12 @@ const cardsContainer = document.querySelector('.cards__list');
 // Functions
   // open any popup, universal function
 function openPopup(popup) {
-  if (popup.classList.contains('popup_type_edit-profile')) {
-    editProfilePopupWindow.classList.add('popup_opened');
-
-  } else if (popup.classList.contains('popup_type_add-place')) {
-    newCardPopupWindow.classList.add('popup_opened');
-
-  } else if (popup.classList.contains('popup_type_image-preview')) {
-    imagePreviewPopupWindow.classList.add('popup_opened');
-  }
+  popup.classList.add('popup_opened');
 }
 
   // close any popup, universal function
 function closePopup(popup) {
-  if (popup.classList.contains('popup_type_edit-profile')) {
-    editProfilePopupWindow.classList.remove('popup_opened');
-
-  } else if (popup.classList.contains('popup_type_add-place')) {
-    newCardPopupWindow.classList.remove('popup_opened');
-
-  } else if (popup.classList.contains('popup_type_image-preview')) {
-    imagePreviewPopupWindow.classList.remove('popup_opened');
-  }
+  popup.classList.remove('popup_opened');
 }
 
 //edit user profile popup functions

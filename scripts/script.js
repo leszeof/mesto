@@ -20,7 +20,6 @@ const newPlaceImageLinkInput = newPlacePopupForm.querySelector('.popup-form__inp
   // image preview popup
 const imagePreviewPopupWindow = document.querySelector('.popup_type_image-preview');
 const imagePreviewCloseButton = imagePreviewPopupWindow.querySelector('.popup__close-button');
-// TODO внести imagePreview imageCaption  из модального окна в переменные, чтобы при запуске функций не искать их по новой
 const imagePreview = document.querySelector('.popup__image');
 const imageCaption = document.querySelector('.popup__image-caption');
 

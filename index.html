@@ -34,9 +34,12 @@
   <div class="popup popup_type_edit-profile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup-form popup__form" action="validate" name="edit-profile-form">
-        <input class="popup-form__input popup-form__input_type_name" id="user-name" type="text" name="new-user-name" placeholder="Имя пользователя" aria-label="Введите имя пользователя">
-        <input class="popup-form__input popup-form__input_type_job" id="additional-user-info" type="text" name="new-user-description" placeholder="Описание пользователя" aria-label="Введите описание пользователя">
+      <form class="popup-form popup__form" action="validate" name="edit-profile-form" novalidate>
+        <input id="user-name" class="popup-form__input popup-form__input_type_name" name="new-user-name" type="text" minlength="2" maxlength="40"
+        placeholder="Имя пользователя" aria-label="Введите имя пользователя" required>
+
+        <input id="additional-user-info" class="popup-form__input popup-form__input_type_job" name="new-user-description" type="text" minlength="2" maxlength="200" placeholder="Описание пользователя" aria-label="Введите описание пользователя" required>
+
         <button class="popup-form__submit-button" type="submit">Сохранить</button>
       </form>
       <button class="popup__close-button" type="button" aria-label="Закрыть всплывающее окно редактирования профиля"></button>
@@ -45,9 +48,11 @@
   <div class="popup popup_type_add-place">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup-form popup__form" action="validate" name="edit-profile-form">
-        <input class="popup-form__input popup-form__input_type_place" id="new-place" type="text" name="new-place-name" placeholder="Название" aria-label="Введите название нового места">
-        <input class="popup-form__input popup-form__input_type_link" id="new-place-link" type="text" name="new-place-link" placeholder="Ссылка на картинку" aria-label="Введите URL ссылку на картинку">
+      <form class="popup-form popup__form" action="validate" name="add-new-place-form" novalidate>
+        <input id="new-place" class="popup-form__input popup-form__input_type_place" name="new-place-name" type="text" minlength="1" maxlength="30" placeholder="Название" aria-label="Введите название нового места" required>
+
+        <input id="new-place-link" class="popup-form__input popup-form__input_type_link" name="new-place-link" type="url" minlength="1" placeholder="Ссылка на картинку" aria-label="Введите URL ссылку на картинку" required>
+
         <button class="popup-form__submit-button" type="submit">Создать</button>
       </form>
       <button class="popup__close-button" type="button" aria-label="Закрыть всплывающее окно редактирования профиля"></button>

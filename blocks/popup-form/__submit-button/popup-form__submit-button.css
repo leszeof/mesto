@@ -28,6 +28,15 @@
   opacity: 0.8;
 }
 
+.popup-form__submit-button:disabled {
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  opacity: 0.2;
+  color: #000000;
+  background-color: transparent;
+  cursor: default;
+}
+
 @media (max-width: 620px) {
   .popup-form__submit-button {
     margin-top: 44px;

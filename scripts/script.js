@@ -176,6 +176,12 @@ function fillImagePreviewPopup(event) {
   imageCaption.textContent = title;
 }
 
+// disables submit button for add place popup when popup is reused
+function disableSubmitButton(formElement) {
+  const submitButton = formElement.querySelector('.popup-form__submit-button');
+  submitButton.disabled = true;
+}
+
 // Event listeners
   // Event listeners for user profile popup
   // open user profile popup
@@ -198,6 +204,7 @@ editProfileForm.addEventListener('submit', (event) => {
 // Event listeners for add place popup
   // open add place popup
 newPlacePopupOpenButton.addEventListener('click', () => {
+  disableSubmitButton(newPlacePopupForm);
   openPopup(newCardPopupWindow);
 });
   // close add place popup
@@ -210,7 +217,6 @@ newPlacePopupForm.addEventListener('submit', (event) => {
   addNewPlace(event);
   newPlacePopupForm.reset();
   closePopup(newCardPopupWindow);
-
 });
 
   // Event listeners for image preview popup

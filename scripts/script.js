@@ -100,8 +100,6 @@ function editProfile(event) {
 
   currentUserName.textContent = newUserName;
   currentUserJob.textContent = newUserJob;
-
-  closePopup(editProfilePopupWindow);
 }
 
 // like card function
@@ -123,8 +121,6 @@ function addNewPlace(event) {
   const newPlaceImageLink = newPlaceImageLinkInput.value;
   const newCard = generateNewCard(newPlaceName, newPlaceImageLink);
   cardsContainer.prepend(newCard);
-
-  closePopup(newCardPopupWindow);
 }
 
   // clear inputs values when close add new place popup
@@ -185,7 +181,7 @@ function fillImagePreviewPopup(event) {
   // open user profile popup
 editProfileOpenButton.addEventListener('click', () => {
   setInputValues();
-  openPopup(editProfilePopupWindow)
+  openPopup(editProfilePopupWindow);
 });
   // close edit profile popup
 editProfileCloseButton.addEventListener('click', () => {
@@ -194,9 +190,12 @@ editProfileCloseButton.addEventListener('click', () => {
   // close edit profile popup on overlay click
 editProfilePopupWindow.addEventListener('click', closePopupOnOverlayClick);
   // submit edit profile form
-editProfileForm.addEventListener('submit', editProfile);
+editProfileForm.addEventListener('submit', (event) => {
+  editProfile(event);
+  closePopup(editProfilePopupWindow);
+})
 
-  // Event listeners for add place popup
+// Event listeners for add place popup
   // open add place popup
 newPlacePopupOpenButton.addEventListener('click', () => {
   openPopup(newCardPopupWindow);
@@ -209,7 +208,9 @@ newPlacePopupCloseButton.addEventListener('click', () => {
 newCardPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 newPlacePopupForm.addEventListener('submit', (event) => {
   addNewPlace(event);
-  clearInputValues();
+  newPlacePopupForm.reset();
+  closePopup(newCardPopupWindow);
+
 });
 
   // Event listeners for image preview popup

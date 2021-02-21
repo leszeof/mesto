@@ -123,12 +123,6 @@ function addNewPlace(event) {
   cardsContainer.prepend(newCard);
 }
 
-  // clear inputs values when close add new place popup
-function clearInputValues() {
-  newPlaceImageLinkInput.value = '';
-  newPlaceInput.value = '';
-}
-
 // card add functionality (on start and in progress)
   // renders cards on start
 function renderInitialCards(rawArrayOfCards) {

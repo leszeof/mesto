@@ -235,31 +235,7 @@ class Card {
     return this._htmlCard;
   }
 
-  // set listeners on a card
-  _setEventListeners() {
-    console.log(this._htmlCard);
-    // fill and open image preview popup
-    this._htmlCard.querySelector('.cards-item__image').addEventListener('click', (event) => {
-      fillImagePreviewPopup(event);
-      openPopup(imagePreviewPopupWindow);
-    });
 
-    // like card listener
-    this._htmlCard.querySelector('.cards-item__like-button').addEventListener('click', (event) => {
-      setLikeButton(event);
-    });
-
-    // delete card listener
-    this._htmlCard.querySelector('.cards-item__delete-button').addEventListener('click', (event) => {
-      deleteCard(event);
-    });
-  }
-
-  // TODO т.к лайки и удаления это часть функционала их надо вхуярить сюда в класс
-  // обработчики
-    // лайк
-    // открывание превью по клику на картинку
-    // удаление карточки
 
 
 }

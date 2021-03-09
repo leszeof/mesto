@@ -200,5 +200,11 @@ imagePreviewCloseButton.addEventListener('click', () => {
 imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
 
-const formValidator = new FormValidator(validationSettings , newPlacePopupForm);
-formValidator.enableValidation();
+// Enable validation on forms
+  // add new place form validator
+const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
+newPlacePopupFormValidator.enableValidation();
+
+  // edit user profile form validator
+const editProfileFormValidator = new FormValidator(validationSettings , editProfileForm);
+editProfileFormValidator.enableValidation();

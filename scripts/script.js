@@ -98,12 +98,14 @@ function editProfile(event) {
 function addNewPlace(event) {
   event.preventDefault();
 
-  const newPlaceName = newPlaceInput.value;
-  const newPlaceImageLink = newPlaceImageLinkInput.value;
+  const newCardData = {
+    name: newPlaceInput.value,
+    link: newPlaceImageLinkInput.value,
+  }
 
-  //! надо обращаться к классу
-  const newCard = generateNewCard(newPlaceName, newPlaceImageLink);
-  cardsContainer.prepend(newCard);
+  const newCardElement = new Card(newCardData, '.cards-item').generateCard();
+
+  cardsContainer.prepend(newCardElement);
 }
 
 
@@ -198,6 +200,7 @@ function renderInitialCards(rawArrayOfCards) {
 }
 renderInitialCards(initialCards);
 
+//! больше не нужно
   // generate a card at any moment
 // function generateNewCard(name, link) {
 //   const cardItemTemplate = document.querySelector('.template-card-item').content;

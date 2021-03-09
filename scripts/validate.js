@@ -1,31 +1,50 @@
 class FormValidator {
   constructor(settingsObj, formToValidate) {
-    // настройки
+    // settings
     this._formSelector = settingsObj.formSelector;
     this._inputSelector = settingsObj.inputSelector;
     this._submitButtonSelector = settingsObj.submitButtonSelector;
     this._inputWithErrorClass = settingsObj.inputWithErrorClass;
     this._activeSpanErrorClass = settingsObj.activeSpanErrorClass;
 
-    // элемент который надо провалидировать
+    // form to validate
     this._formToValidate = formToValidate;
   }
 
+  // public entrance function of FormValidator class
   enableValidation() {
-    // const formList = Array.from(document.querySelectorAll(formSelector));
     this._formToValidate.addEventListener('submit', (event) => {
       event.preventDefault();
     })
 
     this._setEventListeners();
-
   }
 
-
-
+  // set event-listeners on submit button and input
   _setEventListeners() {
+    const inputList = Array.from(this._formToValidate.querySelectorAll(this._inputSelector));
+    const submitButtonElement = this._formToValidate.querySelector(this._submitButtonSelector);
+
+    inputList.forEach (inputElement => {
+      inputElement.addEventListener('input', () => {
+        this._checkInputValidity(inputElement);
+
+        this._toggleSubmitButtonState(inputList, submitButtonElement);
+      });
+    });
+  }
+
+  // check current input validity
+  _checkInputValidity(inputElement) {
 
   }
+
+  // change submit button state based on the validity of all form inputs
+  _toggleSubmitButtonState(inputList, submitButtonElement) {
+
+  }
+
+
 
 }
 

@@ -198,3 +198,15 @@ imagePreviewCloseButton.addEventListener('click', () => {
 });
   // close image preview popup on overlay click
 imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
+
+class Card {
+  constructor(cardData, cardSelector) {
+
+  }
+}
+
+
+initialCards.forEach(rawCardItem => {
+  const cardElement = new Card(rawCardItem, '.cards-item cards__item');
+  console.log(cardElement);
+})

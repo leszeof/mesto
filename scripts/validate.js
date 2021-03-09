@@ -41,7 +41,11 @@ class FormValidator {
 
   // change submit button state based on the validity of all form inputs
   _toggleSubmitButtonState(inputList, submitButtonElement) {
-
+    if (hasInvalidInput(inputList)) {
+      submitButtonElement.disabled = true;
+    } else {
+      submitButtonElement.disabled = false;
+    }
   }
 
   // function-predicate for _toggleSubmitButtonState function

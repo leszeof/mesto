@@ -80,16 +80,19 @@ function editProfile(event) {
   currentUserJob.textContent = newUserJob;
 }
 
+//! удалить
 // like card function
 function setLikeButton(event) {
   event.target.classList.toggle('cards-item__like-button_active');
 }
 
+//! удалить
 // delete card function
 function deleteCard(event) {
   event.target.closest('.cards__item').remove();
 }
 
+// TODO по хорошему надо генерировать экземпляр класса
 // add new place popup functions
   // add new card function
 function addNewPlace(event) {
@@ -101,7 +104,7 @@ function addNewPlace(event) {
   cardsContainer.prepend(newCard);
 }
 
-//!
+//! поменять внутри, добавить вызов класса
 // card add functionality (on start and in progress)
   // renders cards on start
 function renderInitialCards(rawArrayOfCards) {
@@ -209,7 +212,7 @@ class Card {
 
   // get html template
   _getTemplate() {
-    console.log('tyt');
+    // console.log('tyt');
     const cardElement = document
       .querySelector('.template-card-item')
       .content
@@ -227,45 +230,38 @@ class Card {
     this._htmlCard.querySelector('.cards-item__image').alt = this._name;
     this._htmlCard.querySelector('.cards-item__image').src = this._link;
 
-    console.log(this._htmlCard);
+    // console.log(this._htmlCard);
     this._setEventListeners();
-
-
 
     return this._htmlCard;
   }
 
-  // set listeners on a card
+  // event listeners on a card
   _setEventListeners() {
-    console.log(this._htmlCard);
-    // fill and open image preview popup
-    this._htmlCard.querySelector('.cards-item__image').addEventListener('click', (event) => {
-      fillImagePreviewPopup(event);
-      openPopup(imagePreviewPopupWindow);
-    });
+
 
     // like card listener
     this._htmlCard.querySelector('.cards-item__like-button').addEventListener('click', (event) => {
-      setLikeButton(event);
+      this._setLikeHandler(event);
     });
 
-    // delete card listener
-    this._htmlCard.querySelector('.cards-item__delete-button').addEventListener('click', (event) => {
-      deleteCard(event);
-    });
+
   }
 
-  // TODO т.к лайки и удаления это часть функционала их надо вхуярить сюда в класс
-  // обработчики
-    // лайк
-    // открывание превью по клику на картинку
-    // удаление карточки
+
+
+  // Handlers functions
+    // like card function
+  _setLikeHandler(event) {
+    event.target.classList.toggle('cards-item__like-button_active');
+  }
+
 
 
 
 }
 
-
+//! это должно быть в теле renderInitialCards
 initialCards.forEach(rawCardItem => {
   const cardElement = new Card(rawCardItem, '.cards-item');
   // console.log(cardElement);

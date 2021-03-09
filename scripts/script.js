@@ -101,6 +101,7 @@ function addNewPlace(event) {
   cardsContainer.prepend(newCard);
 }
 
+//!
 // card add functionality (on start and in progress)
   // renders cards on start
 function renderInitialCards(rawArrayOfCards) {
@@ -111,7 +112,7 @@ function renderInitialCards(rawArrayOfCards) {
 
   cardsContainer.prepend(...renderedCards);
 }
-renderInitialCards(initialCards);
+// renderInitialCards(initialCards);
 
   // generate a card at any moment
 function generateNewCard(name, link) {
@@ -201,12 +202,76 @@ imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
 class Card {
   constructor(cardData, cardSelector) {
-
+    this._name = cardData.name;
+    this._link = cardData.link;
+    this._cardSelector = cardSelector;
   }
+
+  // get html template
+  _getTemplate() {
+    console.log('tyt');
+    const cardElement = document
+      .querySelector('.template-card-item')
+      .content
+      .querySelector('.cards-item')
+      .cloneNode(true);
+
+    return cardElement;
+  }
+
+  // generate a card
+  generateCard() {
+    this._htmlCard = this._getTemplate();
+
+    this._htmlCard.querySelector('.cards-item__title').textContent = this._name;
+    this._htmlCard.querySelector('.cards-item__image').alt = this._name;
+    this._htmlCard.querySelector('.cards-item__image').src = this._link;
+
+    console.log(this._htmlCard);
+    this._setEventListeners();
+
+
+
+    return this._htmlCard;
+  }
+
+  // set listeners on a card
+  _setEventListeners() {
+    console.log(this._htmlCard);
+    // fill and open image preview popup
+    this._htmlCard.querySelector('.cards-item__image').addEventListener('click', (event) => {
+      fillImagePreviewPopup(event);
+      openPopup(imagePreviewPopupWindow);
+    });
+
+    // like card listener
+    this._htmlCard.querySelector('.cards-item__like-button').addEventListener('click', (event) => {
+      setLikeButton(event);
+    });
+
+    // delete card listener
+    this._htmlCard.querySelector('.cards-item__delete-button').addEventListener('click', (event) => {
+      deleteCard(event);
+    });
+  }
+
+  // TODO т.к лайки и удаления это часть функционала их надо вхуярить сюда в класс
+  // обработчики
+    // лайк
+    // открывание превью по клику на картинку
+    // удаление карточки
+
+
 }
 
 
 initialCards.forEach(rawCardItem => {
-  const cardElement = new Card(rawCardItem, '.cards-item cards__item');
-  console.log(cardElement);
+  const cardElement = new Card(rawCardItem, '.cards-item');
+  // console.log(cardElement);
+
+  const newCard = cardElement.generateCard();
+
+  // console.log(newCard);
+
+  cardsContainer.append(newCard);
 })

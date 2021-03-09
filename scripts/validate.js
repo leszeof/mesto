@@ -11,7 +11,21 @@ class FormValidator {
     this._formToValidate = formToValidate;
   }
 
+  enableValidation() {
+    // const formList = Array.from(document.querySelectorAll(formSelector));
+    this._formToValidate.addEventListener('submit', (event) => {
+      event.preventDefault();
+    })
 
+    this._setEventListeners();
+
+  }
+
+
+
+  _setEventListeners() {
+
+  }
 
 }
 

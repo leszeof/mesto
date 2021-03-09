@@ -198,3 +198,7 @@ imagePreviewCloseButton.addEventListener('click', () => {
 });
   // close image preview popup on overlay click
 imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
+
+
+const formValidator = new FormValidator(validationSettings , newPlacePopupForm);
+formValidator.enableValidation();

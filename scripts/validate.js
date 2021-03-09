@@ -1,3 +1,27 @@
+class FormValidator {
+  constructor(settingsObj, formToValidate) {
+    // настройки
+    this._formSelector = settingsObj.formSelector;
+    this._inputSelector = settingsObj.inputSelector;
+    this._submitButtonSelector = settingsObj.submitButtonSelector;
+    this._inputWithErrorClass = settingsObj.inputWithErrorClass;
+    this._activeSpanErrorClass = settingsObj.activeSpanErrorClass;
+
+    // элемент который надо провалидировать
+    this._formToValidate = formToValidate;
+  }
+
+
+
+}
+
+
+
+
+
+
+
+
 const validationSettings = {
   formSelector: '.popup__form',
   inputSelector: '.popup-form__input',
@@ -18,7 +42,7 @@ function enableValidation({formSelector, ...options}) {
     setEventListeners(formElement, options);
   })
 }
-enableValidation(validationSettings);
+// enableValidation(validationSettings);
 
 // set event-listeners in each form on submit buttons and inputs
 function setEventListeners(formElement, {inputSelector, submitButtonSelector, ...options}) {

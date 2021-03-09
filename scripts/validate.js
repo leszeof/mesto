@@ -44,7 +44,20 @@ class FormValidator {
 
   }
 
+  // function-predicate for _toggleSubmitButtonState function
+  _hasInvalidInput() {
 
+  }
+
+  // show span error and invalid input styles
+  _showInputError() {
+
+  }
+
+  // hide span error and show default input styles
+  _hideInputError() {
+
+  }
 
 }
 

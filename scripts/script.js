@@ -203,6 +203,9 @@ imagePreviewCloseButton.addEventListener('click', () => {
   // close image preview popup on overlay click
 imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
+
+
+//TODO возможно понадобится делать импорт тут
 class Card {
   constructor(cardData, cardSelector) {
     this._name = cardData.name;

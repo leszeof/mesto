@@ -82,15 +82,15 @@ function editProfile(event) {
 
 //! удалить
 // like card function
-function setLikeButton(event) {
-  event.target.classList.toggle('cards-item__like-button_active');
-}
+// function setLikeButton(event) {
+//   event.target.classList.toggle('cards-item__like-button_active');
+// }
 
 //! удалить
 // delete card function
-function deleteCard(event) {
-  event.target.closest('.cards__item').remove();
-}
+// function deleteCard(event) {
+//   event.target.closest('.cards__item').remove();
+// }
 
 // TODO по хорошему надо генерировать экземпляр класса
 // add new place popup functions
@@ -100,46 +100,127 @@ function addNewPlace(event) {
 
   const newPlaceName = newPlaceInput.value;
   const newPlaceImageLink = newPlaceImageLinkInput.value;
+
+  //! надо обращаться к классу
   const newCard = generateNewCard(newPlaceName, newPlaceImageLink);
   cardsContainer.prepend(newCard);
 }
+
+
+
+
+
+
+
+
+//TODO возможно понадобится делать импорт тут
+class Card {
+  constructor(cardData, cardSelector) {
+    this._name = cardData.name;
+    this._link = cardData.link;
+    this._cardSelector = cardSelector;
+  }
+
+  // get html template
+  _getTemplate() {
+    // console.log('tyt');
+    const cardElement = document
+      .querySelector('.template-card-item')
+      .content
+      .querySelector('.cards-item')
+      .cloneNode(true);
+
+    return cardElement;
+  }
+
+  // generate a card
+  generateCard() {
+    this._htmlCard = this._getTemplate();
+
+    this._htmlCard.querySelector('.cards-item__title').textContent = this._name;
+    this._htmlCard.querySelector('.cards-item__image').alt = this._name;
+    this._htmlCard.querySelector('.cards-item__image').src = this._link;
+
+    // console.log(this._htmlCard);
+    this._setEventListeners();
+
+    return this._htmlCard;
+  }
+
+  // event listeners on a card
+  _setEventListeners() {
+    // fill and open image preview popup
+    this._htmlCard.querySelector('.cards-item__image').addEventListener('click', (event) => {
+      fillImagePreviewPopup(event);
+      openPopup(imagePreviewPopupWindow);
+    });
+
+    // like card listener
+    this._htmlCard.querySelector('.cards-item__like-button').addEventListener('click', (event) => {
+      this._setLikeHandler(event);
+    });
+
+    // delete card listener
+    this._htmlCard.querySelector('.cards-item__delete-button').addEventListener('click', (event) => {
+      this._deleteCardHandler(event);
+    });
+  }
+
+  // Handlers functions
+    // like card function
+  _setLikeHandler(event) {
+    event.target.classList.toggle('cards-item__like-button_active');
+  }
+
+    // delete card function
+  _deleteCardHandler(event) {
+    event.target.closest('.cards__item').remove();
+  }
+}
+
 
 //! поменять внутри, добавить вызов класса
 // card add functionality (on start and in progress)
   // renders cards on start
 function renderInitialCards(rawArrayOfCards) {
-  const renderedCards = rawArrayOfCards.map( (item) => {
-    const newCard= generateNewCard(item.name, item.link);
-    return newCard;
+
+  const renderedCards = rawArrayOfCards.map( (rawCardItem) => {
+    const cardElementObj = new Card (rawCardItem, '.cards-item');
+    console.log(cardElementObj);
+
+    const newCardElement = cardElementObj.generateCard();
+    console.log(newCardElement);
+
+    return newCardElement;
   })
 
   cardsContainer.prepend(...renderedCards);
 }
-// renderInitialCards(initialCards);
+renderInitialCards(initialCards);
 
   // generate a card at any moment
-function generateNewCard(name, link) {
-  const cardItemTemplate = document.querySelector('.template-card-item').content;
-  const cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
+// function generateNewCard(name, link) {
+//   const cardItemTemplate = document.querySelector('.template-card-item').content;
+//   const cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
 
-  const cardImage = cardElement.querySelector('.cards-item__image')
-  cardImage.src = link;
-  cardImage.alt = name;
-  cardElement.querySelector('.cards-item__title').textContent = name;
+//   const cardImage = cardElement.querySelector('.cards-item__image')
+//   cardImage.src = link;
+//   cardImage.alt = name;
+//   cardElement.querySelector('.cards-item__title').textContent = name;
 
-  // event-listeners
-  // fill and open image preview popup
-  cardElement.querySelector('.cards-item__image').addEventListener('click', (event) => {
-    fillImagePreviewPopup(event);
-    openPopup(imagePreviewPopupWindow);
-  });
-  // like card listener
-  cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton);
-  // delete card listener
-  cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard);
+//   // event-listeners
+//   // fill and open image preview popup
+//   cardElement.querySelector('.cards-item__image').addEventListener('click', (event) => {
+//     fillImagePreviewPopup(event);
+//     openPopup(imagePreviewPopupWindow);
+//   });
+//   // like card listener
+//   cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton);
+//   // delete card listener
+//   cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard);
 
-  return cardElement;
-}
+//   return cardElement;
+// }
 
 // image preview popup functions
   // insert new content in preview image popup
@@ -205,83 +286,16 @@ imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
 
 
-//TODO возможно понадобится делать импорт тут
-class Card {
-  constructor(cardData, cardSelector) {
-    this._name = cardData.name;
-    this._link = cardData.link;
-    this._cardSelector = cardSelector;
-  }
 
-  // get html template
-  _getTemplate() {
-    // console.log('tyt');
-    const cardElement = document
-      .querySelector('.template-card-item')
-      .content
-      .querySelector('.cards-item')
-      .cloneNode(true);
-
-    return cardElement;
-  }
-
-  // generate a card
-  generateCard() {
-    this._htmlCard = this._getTemplate();
-
-    this._htmlCard.querySelector('.cards-item__title').textContent = this._name;
-    this._htmlCard.querySelector('.cards-item__image').alt = this._name;
-    this._htmlCard.querySelector('.cards-item__image').src = this._link;
-
-    // console.log(this._htmlCard);
-    this._setEventListeners();
-
-    return this._htmlCard;
-  }
-
-  // event listeners on a card
-  _setEventListeners() {
-    // fill and open image preview popup
-    this._htmlCard.querySelector('.cards-item__image').addEventListener('click', (event) => {
-      fillImagePreviewPopup(event);
-      openPopup(imagePreviewPopupWindow);
-    });
-
-    // like card listener
-    this._htmlCard.querySelector('.cards-item__like-button').addEventListener('click', (event) => {
-      this._setLikeHandler(event);
-    });
-
-    // delete card listener
-    this._htmlCard.querySelector('.cards-item__delete-button').addEventListener('click', (event) => {
-      this._deleteCardHandler(event);
-    });
-  }
-
-
-
-  // Handlers functions
-    // like card function
-  _setLikeHandler(event) {
-    event.target.classList.toggle('cards-item__like-button_active');
-  }
-
-    // delete card function
-  _deleteCardHandler(event) {
-    event.target.closest('.cards__item').remove();
-  }
-
-
-}
 
 //! это должно быть в теле renderInitialCards
-initialCards.forEach(rawCardItem => {
-  const cardElement = new Card(rawCardItem, '.cards-item');
-  // console.log(cardElement);
+// initialCards.forEach(rawCardItem => {
+//   const cardElement = new Card(rawCardItem, '.cards-item');
+//   // console.log(cardElement);
 
-  const newCard = cardElement.generateCard();
+//   const newCard = cardElement.generateCard();
 
-  // console.log(newCard);
+//   // console.log(newCard);
 
-  cardsContainer.append(newCard);
-})
+//   cardsContainer.append(newCard);
+// })

@@ -69,7 +69,10 @@ class FormValidator {
 
   // hide span error and show default input styles
   _hideInputError(inputElement) {
-
+    const errorSpanElement = this._formToValidate.querySelector(`#${inputElement.id}-error`);
+    errorSpanElement.textContent = '';
+    errorSpanElement.classList.remove(this._activeSpanErrorClass);
+    inputElement.classList.remove(this._inputWithErrorClass);
   }
 
 }

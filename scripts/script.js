@@ -238,7 +238,11 @@ class Card {
 
   // event listeners on a card
   _setEventListeners() {
-
+    // fill and open image preview popup
+    this._htmlCard.querySelector('.cards-item__image').addEventListener('click', (event) => {
+      fillImagePreviewPopup(event);
+      openPopup(imagePreviewPopupWindow);
+    });
 
     // like card listener
     this._htmlCard.querySelector('.cards-item__like-button').addEventListener('click', (event) => {

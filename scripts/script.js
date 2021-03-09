@@ -249,7 +249,10 @@ class Card {
       this._setLikeHandler(event);
     });
 
-
+    // delete card listener
+    this._htmlCard.querySelector('.cards-item__delete-button').addEventListener('click', (event) => {
+      this._deleteCardHandler(event);
+    });
   }
 
 
@@ -260,7 +263,10 @@ class Card {
     event.target.classList.toggle('cards-item__like-button_active');
   }
 
-
+    // delete card function
+  _deleteCardHandler(event) {
+    event.target.closest('.cards__item').remove();
+  }
 
 
 }

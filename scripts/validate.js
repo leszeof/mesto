@@ -36,7 +36,11 @@ class FormValidator {
 
   // check current input validity
   _checkInputValidity(inputElement) {
-
+    if (!inputElement.validity.valid) {
+      showInputError(inputElement, inputElement.validationMessage);
+    } else {
+      hideInputError(inputElement);
+    }
   }
 
   // change submit button state based on the validity of all form inputs
@@ -56,12 +60,12 @@ class FormValidator {
   }
 
   // show span error and invalid input styles
-  _showInputError() {
+  _showInputError(inputElement, validationMessage) {
 
   }
 
   // hide span error and show default input styles
-  _hideInputError() {
+  _hideInputError(inputElement) {
 
   }
 

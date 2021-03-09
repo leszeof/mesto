@@ -37,15 +37,15 @@ class FormValidator {
   // check current input validity
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      showInputError(inputElement, inputElement.validationMessage);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      hideInputError(inputElement);
+      this._hideInputError(inputElement);
     }
   }
 
   // change submit button state based on the validity of all form inputs
   _toggleSubmitButtonState(inputList, submitButtonElement) {
-    if (hasInvalidInput(inputList)) {
+    if (this._hasInvalidInput(inputList)) {
       submitButtonElement.disabled = true;
     } else {
       submitButtonElement.disabled = false;
@@ -60,8 +60,11 @@ class FormValidator {
   }
 
   // show span error and invalid input styles
-  _showInputError(inputElement, validationMessage) {
-
+  _showInputError(inputElement, errorMessage) {
+    const errorSpanElement = this._formToValidate.querySelector(`#${inputElement.id}-error`);
+    errorSpanElement.textContent = errorMessage;
+    errorSpanElement.classList.add(this._activeSpanErrorClass);
+    inputElement.classList.add(this._inputWithErrorClass);
   }
 
   // hide span error and show default input styles

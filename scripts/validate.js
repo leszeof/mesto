@@ -49,8 +49,10 @@ class FormValidator {
   }
 
   // function-predicate for _toggleSubmitButtonState function
-  _hasInvalidInput() {
-
+  _hasInvalidInput(inputList) {
+    return inputList.some(inputElement => {
+      return !inputElement.validity.valid;
+    })
   }
 
   // show span error and invalid input styles

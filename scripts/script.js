@@ -84,19 +84,6 @@ function editProfile(event) {
   currentUserJob.textContent = newUserJob;
 }
 
-//! удалить
-// like card function
-// function setLikeButton(event) {
-//   event.target.classList.toggle('cards-item__like-button_active');
-// }
-
-//! удалить
-// delete card function
-// function deleteCard(event) {
-//   event.target.closest('.cards__item').remove();
-// }
-
-// TODO по хорошему надо генерировать экземпляр класса
 // add new place popup functions
   // add new card function
 function addNewPlace(event) {
@@ -112,18 +99,6 @@ function addNewPlace(event) {
   cardsContainer.prepend(newCardElement);
 }
 
-
-
-
-
-
-
-
-//TODO возможно понадобится делать импорт тут
-
-
-
-//! поменять внутри, добавить вызов класса
 // card add functionality (on start and in progress)
   // renders cards on start
 function renderInitialCards(rawArrayOfCards) {
@@ -141,31 +116,6 @@ function renderInitialCards(rawArrayOfCards) {
   cardsContainer.prepend(...renderedCards);
 }
 renderInitialCards(initialCards);
-
-//! больше не нужно
-  // generate a card at any moment
-// function generateNewCard(name, link) {
-//   const cardItemTemplate = document.querySelector('.template-card-item').content;
-//   const cardElement = cardItemTemplate.querySelector('.cards-item').cloneNode(true);
-
-//   const cardImage = cardElement.querySelector('.cards-item__image')
-//   cardImage.src = link;
-//   cardImage.alt = name;
-//   cardElement.querySelector('.cards-item__title').textContent = name;
-
-//   // event-listeners
-//   // fill and open image preview popup
-//   cardElement.querySelector('.cards-item__image').addEventListener('click', (event) => {
-//     fillImagePreviewPopup(event);
-//     openPopup(imagePreviewPopupWindow);
-//   });
-//   // like card listener
-//   cardElement.querySelector('.cards-item__like-button').addEventListener('click', setLikeButton);
-//   // delete card listener
-//   cardElement.querySelector('.cards-item__delete-button').addEventListener('click', deleteCard);
-
-//   return cardElement;
-// }
 
 // image preview popup functions
   // insert new content in preview image popup
@@ -229,28 +179,11 @@ imagePreviewCloseButton.addEventListener('click', () => {
   // close image preview popup on overlay click
 imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
-
-
-
-
-//! это должно быть в теле renderInitialCards
-// initialCards.forEach(rawCardItem => {
-//   const cardElement = new Card(rawCardItem, '.cards-item');
-//   // console.log(cardElement);
-
-//   const newCard = cardElement.generateCard();
-
-//   // console.log(newCard);
-
-//   cardsContainer.append(newCard);
-// })
-
-
 // Enable validation on forms
-  // add new place form validator
+  // add new place form validator instance
 const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
 newPlacePopupFormValidator.enableValidation();
 
-  // edit user profile form validator
+  // edit user profile form validator instance
 const editProfileFormValidator = new FormValidator(validationSettings , editProfileForm);
 editProfileFormValidator.enableValidation();

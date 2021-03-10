@@ -302,3 +302,13 @@ imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
 //   cardsContainer.append(newCard);
 // })
+
+
+// Enable validation on forms
+  // add new place form validator
+const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
+newPlacePopupFormValidator.enableValidation();
+
+  // edit user profile form validator
+const editProfileFormValidator = new FormValidator(validationSettings , editProfileForm);
+editProfileFormValidator.enableValidation();

@@ -84,3 +84,5 @@ const validationSettings = {
   inputWithErrorClass: 'popup-form__input_type_error',
   activeSpanErrorClass: 'popup__input-error_active'
 };
+
+export {FormValidator, validationSettings};

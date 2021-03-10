@@ -1,3 +1,4 @@
+import {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow} from './script.js'
 class Card {
   constructor(cardData, cardSelector) {
     this._name = cardData.name;
@@ -60,4 +61,4 @@ class Card {
   }
 }
 
-export default initialCards;
+export default Card;

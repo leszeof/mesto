@@ -1,7 +1,8 @@
 // Imports
 import initialCards from './data/cards-data.js';
 import Card from './Card.js';
-import {FormValidator, validationSettings} from './FormValidator.js'
+import FormValidator from './FormValidator.js';
+import validationSettings from './constants.js'
 
 // Exports
 export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};

@@ -94,10 +94,15 @@ function addNewPlace(event) {
     name: newPlaceInput.value,
     link: newPlaceImageLinkInput.value,
   }
-
-  const newCardElement = new Card(newCardData, '.cards-item').generateCard();
+  const newCardElement = createCard(newCardData);
 
   cardsContainer.prepend(newCardElement);
+}
+
+// function calls Card class and return html card
+function createCard(rawCardItem) {
+  const card = new Card(rawCardItem, '.cards-item');
+  return card.generateCard();
 }
 
 // card add functionality (on start and in progress)
@@ -105,11 +110,7 @@ function addNewPlace(event) {
 function renderInitialCards(rawArrayOfCards) {
 
   const renderedCards = rawArrayOfCards.map( (rawCardItem) => {
-    const cardElementObj = new Card (rawCardItem, '.cards-item');
-    //! console.log(cardElementObj);
-
-    const newCardElement = cardElementObj.generateCard();
-    //! console.log(newCardElement);
+    const newCardElement = createCard(rawCardItem);
 
     return newCardElement;
   })

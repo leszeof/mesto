@@ -34,7 +34,10 @@ class Card {
   _setEventListeners() {
     // fill and open image preview popup
     this._htmlCard.querySelector('.cards-item__image').addEventListener('click', (event) => {
-      fillImagePreviewPopup(event);
+      const imageName = event.target.alt;
+      const imageLink = event.target.src;
+      fillImagePreviewPopup(imageName, imageLink);
+
       openPopup(imagePreviewPopupWindow);
     });
 

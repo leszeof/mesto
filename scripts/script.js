@@ -120,13 +120,10 @@ renderInitialCards(initialCards);
 
 // image preview popup functions
   // insert new content in preview image popup
-function fillImagePreviewPopup(event) {
-  const image = event.target.src;
-  const title = event.target.alt;
-
-  imagePreview.src = image;
-  imagePreview.alt = title;
-  imageCaption.textContent = title;
+function fillImagePreviewPopup(name, link) {
+  imagePreview.src = link;
+  imagePreview.alt = name;
+  imageCaption.textContent = name;
 }
 
 // disables submit button for add place popup when popup is reused

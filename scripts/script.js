@@ -157,7 +157,7 @@ editProfileForm.addEventListener('submit', (event) => {
 // Event listeners for add place popup
   // open add place popup
 newPlacePopupOpenButton.addEventListener('click', () => {
-  disableSubmitButton(newPlacePopupForm);
+  newPlacePopupFormValidator.disableSubmitButton(newPlacePopupForm);
   openPopup(newCardPopupWindow);
 });
   // close add place popup
@@ -180,11 +180,12 @@ imagePreviewCloseButton.addEventListener('click', () => {
   // close image preview popup on overlay click
 imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
-// Enable validation on forms
-  // add new place form validator instance
-const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
-newPlacePopupFormValidator.enableValidation();
 
-  // edit user profile form validator instance
+// Validation
+  // edit user profile form validator
 const editProfileFormValidator = new FormValidator(validationSettings , editProfileForm);
 editProfileFormValidator.enableValidation();
+
+  // add new place form validator
+const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
+newPlacePopupFormValidator.enableValidation();

@@ -20,6 +20,13 @@ class FormValidator {
     this._setEventListeners();
   }
 
+  // public class method: disables submit button for add place popup when popup reused
+  disableSubmitButton(formElement) {
+    const submitButton = formElement.querySelector(this._submitButtonSelector);
+    submitButton.disabled = true;
+  }
+
+  // Private methods
   // set event-listeners on submit button and input
   _setEventListeners() {
     const inputList = Array.from(this._formToValidate.querySelectorAll(this._inputSelector));

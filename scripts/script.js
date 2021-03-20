@@ -127,12 +127,6 @@ function fillImagePreviewPopup(name, link) {
   imageCaption.textContent = name;
 }
 
-// disables submit button for add place popup when popup is reused
-function disableSubmitButton(formElement) {
-  const submitButton = formElement.querySelector('.popup-form__submit-button');
-  submitButton.disabled = true;
-}
-
 // Event listeners
   // Event listeners for user profile popup
   // open user profile popup

@@ -21,22 +21,21 @@ class FormValidator {
   }
 
   // public class method: disables submit button for add place popup when popup reused
-  disableSubmitButton(formElement) {
-    const submitButton = formElement.querySelector(this._submitButtonSelector);
-    submitButton.disabled = true;
+  disableSubmitButton() {
+    this.submitButtonElement.disabled = true;
   }
 
   // Private methods
   // set event-listeners on submit button and input
   _setEventListeners() {
-    const inputList = Array.from(this._formToValidate.querySelectorAll(this._inputSelector));
-    const submitButtonElement = this._formToValidate.querySelector(this._submitButtonSelector);
+    this.inputList = Array.from(this._formToValidate.querySelectorAll(this._inputSelector));
+    this.submitButtonElement = this._formToValidate.querySelector(this._submitButtonSelector);
 
-    inputList.forEach (inputElement => {
+    this.inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
 
-        this._toggleSubmitButtonState(inputList, submitButtonElement);
+        this._toggleSubmitButtonState();
       });
     });
   }
@@ -51,17 +50,17 @@ class FormValidator {
   }
 
   // change submit button state based on the validity of all form inputs
-  _toggleSubmitButtonState(inputList, submitButtonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      submitButtonElement.disabled = true;
+  _toggleSubmitButtonState() {
+    if (this._hasInvalidInput()) {
+      this.submitButtonElement.disabled = true;
     } else {
-      submitButtonElement.disabled = false;
+      this.submitButtonElement.disabled = false;
     }
   }
 
   // function-predicate for _toggleSubmitButtonState function
-  _hasInvalidInput(inputList) {
-    return inputList.some(inputElement => {
+  _hasInvalidInput() {
+    return this.inputList.some(inputElement => {
       return !inputElement.validity.valid;
     })
   }
@@ -81,7 +80,6 @@ class FormValidator {
     errorSpanElement.classList.remove(this._activeSpanErrorClass);
     inputElement.classList.remove(this._inputWithErrorClass);
   }
-
 }
 
 export default FormValidator;

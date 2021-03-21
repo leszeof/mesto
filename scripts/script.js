@@ -132,6 +132,7 @@ function fillImagePreviewPopup(name, link) {
   // open user profile popup
 editProfileOpenButton.addEventListener('click', () => {
   setInputValues();
+  editProfileFormValidator.resetValidation();
   openPopup(editProfilePopupWindow);
 });
   // close edit profile popup
@@ -150,6 +151,9 @@ editProfileForm.addEventListener('submit', (event) => {
   // open add place popup
 newPlacePopupOpenButton.addEventListener('click', () => {
   newPlacePopupFormValidator.disableSubmitButton(newPlacePopupForm);
+  newPlaceInput.value = '';
+  newPlaceImageLinkInput.value = '';
+  newPlacePopupFormValidator.resetValidation();
   openPopup(newCardPopupWindow);
 });
   // close add place popup

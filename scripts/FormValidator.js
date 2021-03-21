@@ -25,6 +25,14 @@ class FormValidator {
     this.submitButtonElement.disabled = true;
   }
 
+  resetValidation() {
+    this.inputList.forEach(inputElement => {
+      this._hideInputError(inputElement);
+    });
+
+    this._toggleSubmitButtonState();
+  }
+
   // Private methods
   // set event-listeners on submit button and input
   _setEventListeners() {

@@ -3,6 +3,7 @@ import initialCards from './data/cards-data.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import validationSettings from './constants.js'
+import Popup from './Popup.js'
 
 // Exports
 export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};
@@ -41,7 +42,7 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 
   // close popup on escape listener
-  document.addEventListener('keydown', closePopupOnEscPress);
+  // document.addEventListener('keydown', closePopupOnEscPress);
 }
 
   // close any popup, universal function
@@ -49,7 +50,7 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 
   // delete close popup on escape listener
-  document.removeEventListener('keydown', closePopupOnEscPress);
+  // document.removeEventListener('keydown', closePopupOnEscPress);
 }
 
   // close any popup on 'escape' press
@@ -159,9 +160,9 @@ newPlacePopupOpenButton.addEventListener('click', () => {
   openPopup(newCardPopupWindow);
 });
   // close add place popup
-newPlacePopupCloseButton.addEventListener('click', () => {
-  closePopup(newCardPopupWindow);
-});
+// newPlacePopupCloseButton.addEventListener('click', () => {
+//   closePopup(newCardPopupWindow);
+// });
   // close add place popup on overlay click
 newCardPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 newPlacePopupForm.addEventListener('submit', (event) => {
@@ -187,3 +188,10 @@ editProfileFormValidator.enableValidation();
   // add new place form validator
 const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
 newPlacePopupFormValidator.enableValidation();
+
+
+// тестовая попытка потыкать модальное окно, проверить работоспособность класса
+let a = new Popup('.popup_type_add-place')
+console.log(a);
+a.open()
+a.setEventListeners();

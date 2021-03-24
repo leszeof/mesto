@@ -30,7 +30,11 @@ class PopupWithForm extends Popup {
   }
 
   // делать ресет формы
-  close() {}
+  close() {
+    super.close();
+
+    this._popupForm.reset();
+  }
 }
 
 export default PopupWithForm;

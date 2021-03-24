@@ -2,7 +2,7 @@ class Section {
   constructor({items, renderer}, containerSelector) {
     this._itemsArray = items;
     this._renderer = renderer;
-    this._container = document.querySelector(containerSelector);
+    this._containerElement = document.querySelector(containerSelector);
   }
 
   // render data items to html presentation

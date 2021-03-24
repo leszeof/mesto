@@ -1,8 +1,10 @@
 class Popup {
   constructor(popupSelector, closeButtonSelector) {
     this._popupElem = document.querySelector(popupSelector);
+    this._closeButtonElem = this._popupElem.querySelector(closeButtonSelector);
 
-    this._closeButtonElem = document.querySelector(closeButtonSelector);
+    this._handleEscClose = this._handleEscClose.bind(this);
+    this._closeOnOverlayClick = this._closeOnOverlayClick.bind(this);
   }
 
   // open popup
@@ -10,16 +12,15 @@ class Popup {
     this._popupElem.classList.add('popup_opened');
 
     // close popup on escape listener
-    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   // close popup
   close() {
-    console.log(this._popupElem);
     this._popupElem.classList.remove('popup_opened');
 
     // delete close popup on escape listener
-    document.removeEventListener('keydown', this._handleEscClose.bind(this));
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 
   // close popup on 'escape' press
@@ -33,10 +34,10 @@ class Popup {
   // set eventlisteners on popup
   setEventListeners() {
     // close popup on overlay click listener
-    this._popupElem.addEventListener('click', this._closeOnOverlayClick.bind(this));
+    this._popupElem.addEventListener('click', this._closeOnOverlayClick);
 
     // close popup on close button listener
-    this._popupElem.querySelector('.popup__close-button').addEventListener('click', this.close.bind(this));
+    this._closeButtonElem.addEventListener('click', this.close.bind(this));
   }
 
   // close popup on overlay click

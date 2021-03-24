@@ -4,6 +4,7 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import validationSettings from './constants.js'
 import Popup from './Popup.js'
+import PopupWithImage from './PopupWithImage.js'
 
 // Exports
 export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};

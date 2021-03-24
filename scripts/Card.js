@@ -1,8 +1,8 @@
 import {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow} from './script.js'
 class Card {
-  constructor(cardData, cardSelector) {
-    this._name = cardData.name;
-    this._link = cardData.link;
+  constructor({name, link}, cardSelector) {
+    this._name = name;
+    this._link = link;
     this._cardSelector = cardSelector;
   }
 

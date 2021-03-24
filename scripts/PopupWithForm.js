@@ -1,5 +1,4 @@
-
-
+import Popup from './Popup.js';
 class PopupWithForm extends Popup {
   constructor(popupSelector, closeButtonSelector,) {
     super(popupSelector, closeButtonSelector);
@@ -7,3 +6,4 @@ class PopupWithForm extends Popup {
 
 }
 
+export default PopupWithForm;

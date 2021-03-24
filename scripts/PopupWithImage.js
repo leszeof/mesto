@@ -1,10 +1,10 @@
 import Popup from './Popup.js';
 class PopupWithImage extends Popup {
-  constructor(popupSelector, imageSelector, titleSelector) {
-    super(popupSelector);
+  constructor(popupSelector, closeButtonSelector, imageSelector, titleSelector) {
+    super(popupSelector, closeButtonSelector);
 
-    this._image = this._popup.querySelector(imageSelector);
-    this._imageName = this._popup.querySelector(titleSelector);
+    this._imageElem = this._popupElem.querySelector(imageSelector);
+    this._imageCaptionElem = this._popupElem.querySelector(titleSelector);
   }
 
   // open popup
@@ -15,9 +15,9 @@ class PopupWithImage extends Popup {
 
   // insert new content in preview image popup
   _configurePopup(name, link) {
-    this._image.src = link;
-    this._image.alt = name;
-    this._imageName.textContent = name;
+    this._imageElem.src = link;
+    this._imageElem.alt = name;
+    this._imageCaptionElem.textContent = name;
   }
 }
 

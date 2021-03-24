@@ -27,8 +27,6 @@ class Popup {
     }
   }
 
-  //! а что делать с закрытием по оверлею?
-
   setEventListeners() {
     // close popup on overlay click listener
     this._popupElem.addEventListener('click', this._closeOnOverlayClick);
@@ -37,8 +35,10 @@ class Popup {
     this._popupElem.querySelector('.popup__close-button').addEventListener('click', this.close);
   }
 
-  _closeOnOverlayClick() {
-
+  _closeOnOverlayClick(event) {
+    if (event.currentTarget == event.target) {
+      this.close();
+    }
   }
 }
 

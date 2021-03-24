@@ -13,7 +13,7 @@ class Section {
   }
 
   // insert html item to container
-  setItem(element) {
+  addItem(element) {
     this._container.append(element);
   }
 }

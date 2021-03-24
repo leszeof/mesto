@@ -193,6 +193,12 @@ newPlacePopupFormValidator.enableValidation();
 
 // тестовая попытка потыкать модальное окно, проверить работоспособность класса
 let a = new Popup('.popup_type_add-place')
-console.log(a);
-a.open()
-a.setEventListeners();
+// console.log(a);
+// a.open()
+// a.setEventListeners();
+
+
+// test
+let b = new PopupWithImage('.popup_type_image-preview');
+console.log(b);
+b.open();

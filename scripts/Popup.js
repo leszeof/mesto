@@ -28,7 +28,7 @@ class Popup {
     }
   }
 
-  // set eventlisteners on popup
+  // set event listeners on popup
   setEventListeners() {
     // close popup on overlay click listener
     this._popupElem.addEventListener('click', this._closeOnOverlayClick.bind(this));

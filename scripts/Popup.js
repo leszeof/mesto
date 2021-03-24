@@ -11,3 +11,5 @@ class Popup {
 
   setEventListeners() {}
 }
+
+export default Popup;

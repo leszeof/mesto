@@ -5,7 +5,7 @@ class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  // render data items to html view
+  // render data items to html presentation
   renderItems() {
     this._itemsArray.forEach(item => {
       this._renderer(item);

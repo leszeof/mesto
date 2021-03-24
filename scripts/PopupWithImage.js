@@ -9,13 +9,15 @@ class PopupWithImage extends Popup {
 
   // open popup
   open(name, link) {
-    this._fillPopup(name, link);
+    this._configurePopup(name, link);
     super.open();
   }
 
   // insert new content in preview image popup
-  _fillPopup(name, link) {
-
+  _configurePopup(name, link) {
+    this._image.src = link;
+    this._image.alt = name;
+    this._imageName.textContent = name;
   }
 }
 

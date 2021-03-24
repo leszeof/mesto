@@ -34,3 +34,21 @@ export const imageCaption = document.querySelector('.popup__image-caption');
   // initial cards
 export const cardsContainer = document.querySelector('.cards__list');
 
+export const popupSelectors = {
+  // user profile popup
+  editProfilePopupSelector: '.popup_type_edit-profile',
+
+  // add new place popup
+  newCardPopupSelector: '.popup_type_add-place',
+
+  // image preview popup
+  imagePreviewPopupSelector: '.popup_type_image-preview',
+  imagePreviewSelector: '.popup__image',
+  titlePreviewSelector: '.popup__image-caption',
+
+  // global
+  closeButtonSelector: '',
+  popupFormSelector: '.popup__form',
+  popupInputSelector: '.popup-form__input',
+  popupOpenedClass: 'popup_opened',
+};

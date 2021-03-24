@@ -2,41 +2,38 @@
 import initialCards from './data/cards-data.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import validationSettings from './constants.js'
+import {validationSettings} from './constants.js'
 import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import {
+  editProfilePopupWindow,
+  editProfileOpenButton,
+  editProfileCloseButton,
+  editProfileForm,
+  editProfileUserNameInput,
+  editProfileUserJobInput,
+  currentUserName,
+  currentUserJob,
+  newCardPopupWindow,
+  newPlacePopupOpenButton,
+  newPlacePopupCloseButton,
+  newPlacePopupForm,
+  newPlaceInput,
+  imagePreviewPopupWindow,
+  imagePreviewCloseButton,
+  imagePreview,
+  imageCaption,
+  cardsContainer,
+  popupSelectors,
+} from './constants.js';
 
 // Exports
 export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};
 
-// Variables
-  // user profile popup
-const editProfilePopupWindow = document.querySelector('.popup_type_edit-profile');
-const editProfileOpenButton = document.querySelector('.user-profile__edit-profile-button');
-const editProfileCloseButton = editProfilePopupWindow.querySelector('.popup__close-button');
-const editProfileForm = editProfilePopupWindow.querySelector('.popup__form');
-const editProfileUserNameInput = editProfileForm.querySelector('.popup-form__input_type_name');
-const editProfileUserJobInput = editProfileForm.querySelector('.popup-form__input_type_job');
-const currentUserName = document.querySelector('.user-profile__name');
-const currentUserJob = document.querySelector('.user-profile__description');
 
-  // add new place popup
-const newCardPopupWindow = document.querySelector('.popup_type_add-place');
-const newPlacePopupOpenButton = document.querySelector('.user-profile__add-button');
-const newPlacePopupCloseButton = newCardPopupWindow.querySelector('.popup__close-button');
-const newPlacePopupForm = newCardPopupWindow.querySelector('.popup__form');
-const newPlaceInput = newPlacePopupForm.querySelector('.popup-form__input_type_place');
-const newPlaceImageLinkInput = newPlacePopupForm.querySelector('.popup-form__input_type_link');
 
-  // image preview popup
-const imagePreviewPopupWindow = document.querySelector('.popup_type_image-preview');
-const imagePreviewCloseButton = imagePreviewPopupWindow.querySelector('.popup__close-button');
-const imagePreview = document.querySelector('.popup__image');
-const imageCaption = document.querySelector('.popup__image-caption');
 
-  // initial cards
-const cardsContainer = document.querySelector('.cards__list');
 
 // Functions
   // open any popup, universal function

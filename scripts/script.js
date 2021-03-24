@@ -5,6 +5,7 @@ import FormValidator from './FormValidator.js';
 import validationSettings from './constants.js'
 import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
 
 // Exports
 export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};
@@ -160,10 +161,12 @@ newPlacePopupOpenButton.addEventListener('click', () => {
   newPlacePopupFormValidator.disableSubmitButton(newPlacePopupForm);
   openPopup(newCardPopupWindow);
 });
+
   // close add place popup
 // newPlacePopupCloseButton.addEventListener('click', () => {
 //   closePopup(newCardPopupWindow);
 // });
+
   // close add place popup on overlay click
 newCardPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 newPlacePopupForm.addEventListener('submit', (event) => {
@@ -202,8 +205,10 @@ console.log(a);
 let b = new PopupWithImage('.popup_type_image-preview', '.popup__close-button', '.popup__image', '.popup__image-caption');
 console.log(b);
 // b.open();
+// b.setEventListeners();
 
 // test 2
 let c = new PopupWithForm('.popup_type_image-preview', '.popup__close-button', '.popup__image', '.popup__image-caption');
 console.log(c);
 // c.open();
+// c.setEventListeners();

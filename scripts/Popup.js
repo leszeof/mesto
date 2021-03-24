@@ -10,9 +10,19 @@ class Popup {
     document.addEventListener('keydown', this._handleEscClose);
   }
 
-  close() {}
+  close() {
+    this._popupElem.classList.remove('popup_opened');
 
-  _handleEscClose() {}
+    // delete close popup on escape listener
+    document.removeEventListener('keydown', this._handleEscClose);
+  }
+
+  _handleEscClose(event) {
+    if (event.key === 'Escape') {
+      const curentOpenedPopup = document.querySelector('.popup_opened');
+      this.close(curentOpenedPopup);
+    }
+  }
 
   setEventListeners() {}
 }

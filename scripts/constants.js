@@ -52,3 +52,8 @@ export const popupSelectors = {
   popupInputSelector: '.popup-form__input',
   popupOpenedClass: 'popup_opened',
 };
+
+export const userProfileSelectors = {
+  userName: '.user-profile__name',
+  userDescription: '.user-profile__description',
+}

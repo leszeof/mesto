@@ -26,6 +26,7 @@ import {
   imageCaption,
   cardsContainer,
   popupSelectors,
+  userProfileSelectors,
 } from './constants.js';
 
 // Exports

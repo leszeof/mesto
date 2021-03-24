@@ -3,7 +3,8 @@ import initialCards from './data/cards-data.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import validationSettings from './constants.js'
-import Popup from './Popup.js'
+import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
 
 // Exports
 export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};
@@ -193,5 +194,16 @@ newPlacePopupFormValidator.enableValidation();
 // тестовая попытка потыкать модальное окно, проверить работоспособность класса
 let a = new Popup('.popup_type_add-place', '.popup__close-button')
 console.log(a);
-a.open()
-a.setEventListeners();
+// a.open()
+// a.setEventListeners();
+
+
+// test
+let b = new PopupWithImage('.popup_type_image-preview', '.popup__close-button', '.popup__image', '.popup__image-caption');
+console.log(b);
+// b.open();
+
+// test 2
+let c = new PopupWithForm('.popup_type_image-preview', '.popup__close-button', '.popup__image', '.popup__image-caption');
+console.log(c);
+// c.open();

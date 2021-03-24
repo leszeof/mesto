@@ -5,14 +5,17 @@ class Section {
     this._container = document.querySelector(containerSelector);
   }
 
+  // render data items to html view
   renderItems() {
     this._itemsArray.forEach(item => {
       this._renderer(item);
     })
   }
 
-
-
+  // insert html item to container
+  setItem(element) {
+    this._container.append(element);
+  }
 }
 
 export default Section;

@@ -208,7 +208,7 @@ console.log(b);
 // b.setEventListeners();
 
 // test 2
-let c = new PopupWithForm('.popup_type_image-preview', '.popup__close-button', '.popup__image', '.popup__image-caption');
+let c = new PopupWithForm('.popup_type_add-place', '.popup__close-button', '.popup__form', '.popup-form__input');
 console.log(c);
 // c.open();
 // c.setEventListeners();

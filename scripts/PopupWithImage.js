@@ -7,7 +7,16 @@ class PopupWithImage extends Popup {
     this._imageName = this._popup.querySelector(titleSelector);
   }
 
+  // open popup
+  open(name, link) {
+    this._fillPopup(name, link);
+    super.open();
+  }
 
+  // insert new content in preview image popup
+  _fillPopup(name, link) {
+
+  }
 }
 
 export default PopupWithImage;

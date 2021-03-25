@@ -44,7 +44,7 @@ const editProfilePopup = new PopupWithForm(
 );
 editProfilePopup.setEventListeners();
 
-const userInfo = new UserInfo(profileSelectors);
+const userInfo = new UserInfo(userProfileSelectors);
 
 
   // add new place popup controller copy
@@ -94,11 +94,12 @@ function closePopup(popup) {
 //   }
 // }
 
+//! пока не понял как заменить
 //edit user profile popup functions
   // set input values when opening edit profile popup
-function setInputValues() {
-  editProfileUserNameInput.value = currentUserName.textContent;
-  editProfileUserJobInput.value = currentUserJob.textContent;
+function setInputValues({currentUserName, currentUserDescription}) {
+  editProfileUserNameInput.value = currentUserName;
+  editProfileUserJobInput.value = currentUserDescription;
 }
 
 
@@ -111,6 +112,14 @@ function updateProfile() {
 
   currentUserName.textContent = editProfileUserNameInput.value;
   currentUserJob.textContent = editProfileUserJobInput.value;
+
+  //! нужно вот так сделать
+  // const newData = {
+  //   newName: editProfileUserNameInput.value,
+  //   newDescription: editProfileUserJobInput.value
+  // }
+
+  // userInfo.setUserInfo(newData);
 }
 
 // supporting function for PopupWithImage class
@@ -190,7 +199,7 @@ function fillImagePreviewPopup(name, link) {
   // Event listeners for user profile popup
   // open user profile popup
 editProfileOpenButton.addEventListener('click', () => {
-  setInputValues();
+  setInputValues(userInfo.getUserInfo());
   editProfilePopup.open(); //!
 });
   // close edit profile popup

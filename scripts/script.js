@@ -62,11 +62,11 @@ function closePopup(popup) {
 }
 
   // close any popup on overlay click
-function closePopupOnOverlayClick(event) {
-  if (event.currentTarget == event.target) {
-    closePopup(event.currentTarget);
-  }
-}
+// function closePopupOnOverlayClick(event) {
+//   if (event.currentTarget == event.target) {
+//     closePopup(event.currentTarget);
+//   }
+// }
 
 //edit user profile popup functions
   // set input values when opening edit profile popup
@@ -74,6 +74,13 @@ function setInputValues() {
   editProfileUserNameInput.value = currentUserName.textContent;
   editProfileUserJobInput.value = currentUserJob.textContent;
 }
+
+//!
+function submitFormHandler() {
+  currentUserName.textContent = editProfileUserNameInput.value;
+  currentUserJob.textContent = editProfileUserJobInput.value;
+}
+//!
 
   // update user profile
 function editProfile(event) {
@@ -141,19 +148,24 @@ function fillImagePreviewPopup(name, link) {
   // open user profile popup
 editProfileOpenButton.addEventListener('click', () => {
   setInputValues();
-  openPopup(editProfilePopupWindow);
+  editProfilePopup.open(); //!
 });
   // close edit profile popup
 editProfileCloseButton.addEventListener('click', () => {
-  closePopup(editProfilePopupWindow);
+  // closePopup(editProfilePopupWindow);
+  editProfilePopup.close(); //!
 });
   // close edit profile popup on overlay click
-editProfilePopupWindow.addEventListener('click', closePopupOnOverlayClick);
+// editProfilePopupWindow.addEventListener('click', closePopupOnOverlayClick);
   // submit edit profile form
 editProfileForm.addEventListener('submit', (event) => {
   editProfile(event);
-  closePopup(editProfilePopupWindow);
+  editProfilePopup.close();
 })
+
+
+
+
 
 // Event listeners for add place popup
   // open add place popup
@@ -168,7 +180,7 @@ newPlacePopupOpenButton.addEventListener('click', () => {
 // });
 
   // close add place popup on overlay click
-newCardPopupWindow.addEventListener('click', closePopupOnOverlayClick);
+// newCardPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 newPlacePopupForm.addEventListener('submit', (event) => {
   addNewPlace(event);
   newPlacePopupForm.reset();
@@ -181,7 +193,7 @@ imagePreviewCloseButton.addEventListener('click', () => {
   closePopup(imagePreviewPopupWindow);
 });
   // close image preview popup on overlay click
-imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
+// imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
 
 
@@ -206,20 +218,20 @@ newPlacePopupFormValidator.enableValidation();
 
 
 // тестовая попытка потыкать модальное окно, проверить работоспособность класса
-let a = new Popup('.popup_type_add-place', '.popup__close-button')
-console.log(a);
+// let a = new Popup('.popup_type_add-place', '.popup__close-button')
+// console.log(a);
 // a.open()
 // a.setEventListeners();
 
 
-// test
-let b = new PopupWithImage('.popup_type_image-preview', '.popup__close-button', '.popup__image', '.popup__image-caption');
-console.log(b);
+// test 1
+// let b = new PopupWithImage('.popup_type_image-preview', '.popup__close-button', '.popup__image', '.popup__image-caption');
+// console.log(b);
 // b.open();
 // b.setEventListeners();
 
 // test 2
-let c = new PopupWithForm('.popup_type_add-place', '.popup__close-button', '.popup__form', '.popup-form__input');
-console.log(c);
+// let c = new PopupWithForm('.popup_type_add-place', '.popup__close-button', '.popup__form', '.popup-form__input');
+// console.log(c);
 // c.open();
 // c.setEventListeners();

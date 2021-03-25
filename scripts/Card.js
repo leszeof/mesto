@@ -1,4 +1,3 @@
-import {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow} from './script.js';
 class Card {
   constructor({name, link}, cardSelector, handleCardClick) {
     this._name = name;

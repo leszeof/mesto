@@ -34,10 +34,6 @@ import {
   userProfileSelectors,
 } from './constants.js';
 
-// Exports
-export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};
-
-
 
 // Popup classes in use
   // edit profile popup controller copy
@@ -45,7 +41,8 @@ const editProfilePopup = new PopupWithForm(popupSelectors.editProfilePopupSelect
 editProfilePopup.setEventListeners();
 
   // add new place popup controller copy
-
+const addNewPlacePopup = new PopupWithForm(popupSelectors.editProfilePopupSelector, popupSelectors, submitFormHandler);
+addNewPlacePopup.setEventListeners();
 
   // image preview popup controller copy
 const imagePreviewPopup = new PopupWithImage(popupSelectors.imagePreviewPopupSelector, popupSelectors);

@@ -39,22 +39,20 @@ import {
 //   edit profile popup controller copy
 const editProfilePopup = new PopupWithForm(
   '.popup_type_edit-profile',
-  updateProfile
+  updateProfile //! данные из инпутов обрабатывает колбэк, а нужно _getInputValues
 );
 editProfilePopup.setEventListeners();
 
 
   // add new place popup controller copy
-// const addNewPlacePopup = new PopupWithForm(
-//   '.popup_type_add-place',
-//   (name, link) => {
-//     popupWithImage.open(name, link);
-//   }
-// );
-// addNewPlacePopup.setEventListeners();
+const addNewPlacePopup = new PopupWithForm(
+  '.popup_type_add-place',
+  addNewPlace //! данные из инпутов обрабатывает колбэк, а нужно _getInputValues
+);
+addNewPlacePopup.setEventListeners();
 
 
-
+//! вот это вроде работает по канонам
   // image preview popup controller copy
 const imagePreviewPopup = new PopupWithImage(
   '.popup_type_image-preview',
@@ -100,10 +98,14 @@ function setInputValues() {
   editProfileUserJobInput.value = currentUserJob.textContent;
 }
 
-//!
 
+
+
+//! функции колбэки под классы
 
 function updateProfile() {
+  //! по хорошему тут будет связь с UserInfo классом, а не с вот этой фигней
+
   currentUserName.textContent = editProfileUserNameInput.value;
   currentUserJob.textContent = editProfileUserJobInput.value;
 }
@@ -114,8 +116,16 @@ function handleCardClick(name, link) {
 }
 //!
 
+
+
+
+
+
+
+//!выкинуть
   // update user profile
 function editProfile(event) {
+  //! сюда надо передать результат работы this._getInputValues() и как то его размузолить
   event.preventDefault();
 
   const newUserName = editProfileUserNameInput.value;
@@ -127,9 +137,8 @@ function editProfile(event) {
 
 // add new place popup functions
   // add new card function
-function addNewPlace(event) {
-  event.preventDefault();
-
+function addNewPlace(formData) {
+  console.log(formData); //! сюда надо передать результат работы this._getInputValues() и как то его размузолить
   const newCardData = {
     name: newPlaceInput.value,
     link: newPlaceImageLinkInput.value,
@@ -190,10 +199,12 @@ editProfileCloseButton.addEventListener('click', () => {
 
   //! выкинуть
 // editProfilePopupWindow.addEventListener('click', closePopupOnOverlayClick);
+
+//! выкинуть
   // submit edit profile form
 editProfileForm.addEventListener('submit', (event) => {
-  editProfile(event);
-  editProfilePopup.close();
+  // editProfile(event);
+  // editProfilePopup.close();
 })
 
 
@@ -204,7 +215,7 @@ editProfileForm.addEventListener('submit', (event) => {
   // open add place popup
 newPlacePopupOpenButton.addEventListener('click', () => {
   newPlacePopupFormValidator.disableSubmitButton(newPlacePopupForm);
-  openPopup(newCardPopupWindow);
+  addNewPlacePopup.open();
 });
 
 //! выкинуть
@@ -217,18 +228,22 @@ newPlacePopupOpenButton.addEventListener('click', () => {
   //! выкинуть
 // newCardPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
-newPlacePopupForm.addEventListener('submit', (event) => {
-  addNewPlace(event);
-  newPlacePopupForm.reset();
-  closePopup(newCardPopupWindow);
-});
+//! выкинуть
+// newPlacePopupForm.addEventListener('submit', (event) => {
+//   addNewPlace(event);
+//   newPlacePopupForm.reset();
+//   closePopup(newCardPopupWindow);
+// });
 
   // Event listeners for image preview popup
   // close image preview popup
-imagePreviewCloseButton.addEventListener('click', () => {
-  closePopup(imagePreviewPopupWindow);
-});
+  //! выкинуть
+// imagePreviewCloseButton.addEventListener('click', () => {
+//   closePopup(imagePreviewPopupWindow);
+// });
   // close image preview popup on overlay click
+
+  //! выкинуть
 // imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
 
@@ -246,28 +261,3 @@ editProfileFormValidator.enableValidation();
   // add new place form validator
 const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
 newPlacePopupFormValidator.enableValidation();
-
-
-
-
-
-
-
-// тестовая попытка потыкать модальное окно, проверить работоспособность класса
-// let a = new Popup('.popup_type_add-place', '.popup__close-button')
-// console.log(a);
-// a.open()
-// a.setEventListeners();
-
-
-// test 1
-// let b = new PopupWithImage('.popup_type_image-preview', '.popup__close-button', '.popup__image', '.popup__image-caption');
-// console.log(b);
-// b.open();
-// b.setEventListeners();
-
-// test 2
-// let c = new PopupWithForm('.popup_type_add-place', '.popup__close-button', '.popup__form', '.popup-form__input');
-// console.log(c);
-// c.open();
-// c.setEventListeners();

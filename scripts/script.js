@@ -38,12 +38,17 @@ export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};
 
 
 
-// classes in use
-  // Popup class
+// Popup classes in use
+  // edit profile popup controller copy
 const editProfilePopup = new PopupWithForm(popupSelectors.editProfilePopupSelector, popupSelectors, submitFormHandler);
 editProfilePopup.setEventListeners();
-console.log(editProfilePopup);
 
+  // add new place popup controller copy
+
+
+  // image preview popup controller copy
+const imagePreviePopup = new PopupWithImage(popupSelectors.imagePreviewPopupSelector, popupSelectors);
+imagePreviePopup.setEventListeners();
 
 
 // Functions

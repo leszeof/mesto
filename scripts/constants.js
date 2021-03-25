@@ -35,22 +35,23 @@ export const imageCaption = document.querySelector('.popup__image-caption');
 export const cardsContainer = document.querySelector('.cards__list');
 
 export const popupSelectors = {
-  // user profile popup
+  // user profile popup //! Невозможно нормально использовать
   editProfilePopupSelector: '.popup_type_edit-profile',
 
-  // add new place popup
+  // add new place popup //! Невозможно нормально использовать
   newCardPopupSelector: '.popup_type_add-place',
 
-  // image preview popup
+  // image preview popup //! Невозможно нормально использовать
   imagePreviewPopupSelector: '.popup_type_image-preview',
-  imagePreviewSelector: '.popup__image',
-  titlePreviewSelector: '.popup__image-caption',
+
+  popupImageSelector: '.popup__image',
+  popupImageTitleSelector: '.popup__image-caption',
 
   // global
-  closeButtonSelector: '',
-  popupFormSelector: '.popup__form',
-  popupInputSelector: '.popup-form__input',
-  popupOpenedClass: 'popup_opened',
+  closeButtonSelector: '.popup__close-button',
+  formSelector: '.popup__form',
+  formInputSelector: '.popup-form__input',
+  popupActiveClass: 'popup_opened',
 };
 
 export const userProfileSelectors = {

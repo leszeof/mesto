@@ -39,16 +39,27 @@ import {
 //   edit profile popup controller copy
 const editProfilePopup = new PopupWithForm(
   '.popup_type_edit-profile',
-  editProfileFunction
+  updateProfile
 );
 editProfilePopup.setEventListeners();
 
+
   // add new place popup controller copy
-// const addNewPlacePopup = new PopupWithForm(popupSelectors.editProfilePopupSelector, popupSelectors, submitFormHandler);
+// const addNewPlacePopup = new PopupWithForm(
+//   '.popup_type_add-place',
+//   (name, link) => {
+//     popupWithImage.open(name, link);
+//   }
+// );
 // addNewPlacePopup.setEventListeners();
 
+
+
   // image preview popup controller copy
-const imagePreviewPopup = new PopupWithImage(popupSelectors.imagePreviewPopupSelector, popupSelectors);
+const imagePreviewPopup = new PopupWithImage(
+  '.popup_type_image-preview',
+  handleCardClick
+);
 imagePreviewPopup.setEventListeners();
 
 
@@ -60,6 +71,7 @@ imagePreviewPopup.setEventListeners();
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 
+  //! выкинуть
   // close popup on escape listener
   // document.addEventListener('keydown', closePopupOnEscPress);
 }
@@ -68,11 +80,13 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 
+  //! выкинуть
   // delete close popup on escape listener
   // document.removeEventListener('keydown', closePopupOnEscPress);
 }
 
   // close any popup on overlay click
+  //! выкинуть
 // function closePopupOnOverlayClick(event) {
 //   if (event.currentTarget == event.target) {
 //     closePopup(event.currentTarget);
@@ -89,7 +103,7 @@ function setInputValues() {
 //!
 
 
-function editProfileFunction() {
+function updateProfile() {
   currentUserName.textContent = editProfileUserNameInput.value;
   currentUserJob.textContent = editProfileUserJobInput.value;
 }
@@ -147,10 +161,9 @@ renderInitialCards(initialCards);
 
 // image preview popup functions
   // insert new content in preview image popup
+//! выкинуть
 function fillImagePreviewPopup(name, link) {
-  imagePreview.src = link;
-  imagePreview.alt = name;
-  imageCaption.textContent = name;
+  imagePreviewPopup.open(name, link);
 }
 
 
@@ -174,6 +187,8 @@ editProfileCloseButton.addEventListener('click', () => {
   editProfilePopup.close(); //!
 });
   // close edit profile popup on overlay click
+
+  //! выкинуть
 // editProfilePopupWindow.addEventListener('click', closePopupOnOverlayClick);
   // submit edit profile form
 editProfileForm.addEventListener('submit', (event) => {
@@ -192,13 +207,16 @@ newPlacePopupOpenButton.addEventListener('click', () => {
   openPopup(newCardPopupWindow);
 });
 
+//! выкинуть
   // close add place popup
 // newPlacePopupCloseButton.addEventListener('click', () => {
 //   closePopup(newCardPopupWindow);
 // });
 
   // close add place popup on overlay click
+  //! выкинуть
 // newCardPopupWindow.addEventListener('click', closePopupOnOverlayClick);
+
 newPlacePopupForm.addEventListener('submit', (event) => {
   addNewPlace(event);
   newPlacePopupForm.reset();

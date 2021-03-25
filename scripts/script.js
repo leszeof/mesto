@@ -8,6 +8,7 @@ import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import Section from './Section.js';
+import UserInfo from './UserInfo.js';
   // constants
 import {
   validationSettings,
@@ -42,6 +43,8 @@ const editProfilePopup = new PopupWithForm(
   updateProfile //! данные из инпутов обрабатывает колбэк, а нужно _getInputValues
 );
 editProfilePopup.setEventListeners();
+
+const userInfo = new UserInfo(profileSelectors);
 
 
   // add new place popup controller copy

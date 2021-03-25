@@ -16,4 +16,4 @@ class UserInfo {
     this._userDescriptionElem.textContent = '';
   }
 }
-
+export default UserInfo;

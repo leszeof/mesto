@@ -1,6 +1,6 @@
 import Popup from './Popup.js';
 class PopupWithForm extends Popup {
-  constructor(popupSelector, closeButtonSelector, formSelector, formInputSelector, submitFormHandler) {
+  constructor(popupSelector, {closeButtonSelector, formSelector, formInputSelector}, submitFormHandler) {
     super(popupSelector, closeButtonSelector);
 
     this._popupForm = this._popupElem.querySelector(formSelector);
@@ -9,7 +9,7 @@ class PopupWithForm extends Popup {
     this._submitFormHandler = submitFormHandler;
   }
 
-  // получаем значения всех полей формы
+  // get all input values
   _getInputValues() {
     this._formValues = {};
 
@@ -20,16 +20,18 @@ class PopupWithForm extends Popup {
     return this._formValues;
   }
 
-  // обработчик сабмита
+  // set event-listeners
   setEventListeners() {
     super.setEventListeners();
 
     this._popupForm.addEventListener('submit', (event) => {
-      this._submitFormHandler(event);
+      event.preventDefault();
+
+      this._submitFormHandler();
     });
   }
 
-  // делать ресет формы
+  // close popup with additional functionality
   close() {
     super.close();
 

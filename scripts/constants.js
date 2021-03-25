@@ -34,6 +34,7 @@ export const imageCaption = document.querySelector('.popup__image-caption');
   // initial cards
 export const cardsContainer = document.querySelector('.cards__list');
 
+//! выкинуть этот объект нах
 export const popupSelectors = {
   // user profile popup //! Невозможно нормально использовать
   editProfilePopupSelector: '.popup_type_edit-profile',
@@ -55,6 +56,6 @@ export const popupSelectors = {
 };
 
 export const userProfileSelectors = {
-  userName: '.user-profile__name',
-  userDescription: '.user-profile__description',
+  userNameSelector: '.user-profile__name',
+  userDescriptionSelector: '.user-profile__description',
 }

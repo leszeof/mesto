@@ -1,7 +1,7 @@
 class Popup {
-  constructor(popupSelector, closeButtonSelector) {
+  constructor(popupSelector) {
     this._popupElem = document.querySelector(popupSelector);
-    this._closeButtonElem = this._popupElem.querySelector(closeButtonSelector);
+    this._closeButtonElem = this._popupElem.querySelector('.popup__close-button');
 
     this._handleEscClose = this._handleEscClose.bind(this);
     this._closeOnOverlayClick = this._closeOnOverlayClick.bind(this);

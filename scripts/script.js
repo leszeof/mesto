@@ -24,6 +24,7 @@ import {
   newPlacePopupCloseButton,
   newPlacePopupForm,
   newPlaceInput,
+  newPlaceImageLinkInput,
   imagePreviewPopupWindow,
   imagePreviewCloseButton,
   imagePreview,

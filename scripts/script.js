@@ -47,8 +47,12 @@ editProfilePopup.setEventListeners();
 
 
   // image preview popup controller copy
-const imagePreviePopup = new PopupWithImage(popupSelectors.imagePreviewPopupSelector, popupSelectors);
-imagePreviePopup.setEventListeners();
+const imagePreviewPopup = new PopupWithImage(popupSelectors.imagePreviewPopupSelector, popupSelectors);
+imagePreviewPopup.setEventListeners();
+
+
+
+
 
 
 // Functions
@@ -87,6 +91,11 @@ function submitFormHandler() {
   currentUserName.textContent = editProfileUserNameInput.value;
   currentUserJob.textContent = editProfileUserJobInput.value;
 }
+
+// supporting function for PopupWithImage class
+function handleCardClick(name, link) {
+  imagePreviewPopup.open(name, link);
+}
 //!
 
   // update user profile
@@ -116,7 +125,7 @@ function addNewPlace(event) {
 
 // function calls Card class and return html card
 function createCard(rawCardItem) {
-  const card = new Card(rawCardItem, '.cards-item');
+  const card = new Card(rawCardItem, '.cards-item', handleCardClick);
   return card.generateCard();
 }
 

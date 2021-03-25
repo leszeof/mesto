@@ -1,9 +1,11 @@
 import {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow} from './script.js';
 class Card {
-  constructor({name, link}, cardSelector) {
+  constructor({name, link}, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+
+    this._handleCardClick = handleCardClick;
   }
 
   // get html template
@@ -36,9 +38,7 @@ class Card {
     this._htmlCard.querySelector('.cards-item__image').addEventListener('click', (event) => {
       const imageName = event.target.alt;
       const imageLink = event.target.src;
-      fillImagePreviewPopup(imageName, imageLink);
-
-      openPopup(imagePreviewPopupWindow);
+      this._handleCardClick(imageName, imageLink)
     });
 
     // like card listener

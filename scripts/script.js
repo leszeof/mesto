@@ -36,18 +36,20 @@ import {
 
 
 // Popup classes in use
-  // edit profile popup controller copy
-const editProfilePopup = new PopupWithForm(popupSelectors.editProfilePopupSelector, popupSelectors, submitFormHandler);
+//   edit profile popup controller copy
+const editProfilePopup = new PopupWithForm(
+  '.popup_type_edit-profile',
+  editProfileFunction
+);
 editProfilePopup.setEventListeners();
 
   // add new place popup controller copy
-const addNewPlacePopup = new PopupWithForm(popupSelectors.editProfilePopupSelector, popupSelectors, submitFormHandler);
-addNewPlacePopup.setEventListeners();
+// const addNewPlacePopup = new PopupWithForm(popupSelectors.editProfilePopupSelector, popupSelectors, submitFormHandler);
+// addNewPlacePopup.setEventListeners();
 
   // image preview popup controller copy
 const imagePreviewPopup = new PopupWithImage(popupSelectors.imagePreviewPopupSelector, popupSelectors);
 imagePreviewPopup.setEventListeners();
-
 
 
 
@@ -85,7 +87,9 @@ function setInputValues() {
 }
 
 //!
-function submitFormHandler() {
+
+
+function editProfileFunction() {
   currentUserName.textContent = editProfileUserNameInput.value;
   currentUserJob.textContent = editProfileUserJobInput.value;
 }

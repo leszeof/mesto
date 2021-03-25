@@ -39,7 +39,7 @@ export const popupSelectors = {
   editProfilePopupSelector: '.popup_type_edit-profile',
 
   // add new place popup //! Невозможно нормально использовать
-  newCardPopupSelector: '.popup_type_add-place',
+  addNewPlacePopupSelector: '.popup_type_add-place',
 
   // image preview popup //! Невозможно нормально использовать
   imagePreviewPopupSelector: '.popup_type_image-preview',

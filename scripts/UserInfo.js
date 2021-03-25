@@ -6,10 +6,14 @@ class UserInfo {
 
   getUserInfo() {
     return {
-      currentUserName: this._userNameElem.value,
-      currentUserDescription: this._userDescriptionElem.value
+      currentUserName: this._userNameElem.textContent,
+      currentUserDescription: this._userDescriptionElem.textContent
     }
   }
 
-  setUserInfo() {}
+  setUserInfo(newData) {
+    this._userNameElem.textContent = '';
+    this._userDescriptionElem.textContent = '';
+  }
 }
+

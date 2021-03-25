@@ -40,7 +40,9 @@ export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};
 
 // classes in use
   // Popup class
-
+const editProfilePopup = new PopupWithForm(popupSelectors.editProfilePopupSelector, popupSelectors, submitFormHandler);
+editProfilePopup.setEventListeners();
+console.log(editProfilePopup);
 
 
 

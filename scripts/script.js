@@ -38,6 +38,10 @@ export {fillImagePreviewPopup, openPopup, imagePreviewPopupWindow};
 
 
 
+// classes in use
+  // Popup class
+
+
 
 
 // Functions
@@ -55,14 +59,6 @@ function closePopup(popup) {
 
   // delete close popup on escape listener
   // document.removeEventListener('keydown', closePopupOnEscPress);
-}
-
-  // close any popup on 'escape' press
-function closePopupOnEscPress(event) {
-  if (event.key === 'Escape') {
-    const curentOpenedPopup = document.querySelector('.popup_opened');
-    closePopup(curentOpenedPopup);
-  }
 }
 
   // close any popup on overlay click
@@ -132,11 +128,13 @@ function fillImagePreviewPopup(name, link) {
   imageCaption.textContent = name;
 }
 
-// disables submit button for add place popup when popup is reused
-function disableSubmitButton(formElement) {
-  const submitButton = formElement.querySelector('.popup-form__submit-button');
-  submitButton.disabled = true;
-}
+
+
+
+
+
+
+
 
 // Event listeners
   // Event listeners for user profile popup
@@ -186,6 +184,12 @@ imagePreviewCloseButton.addEventListener('click', () => {
 imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
 
+
+
+
+
+
+
 // Validation
   // edit user profile form validator
 const editProfileFormValidator = new FormValidator(validationSettings , editProfileForm);
@@ -194,6 +198,11 @@ editProfileFormValidator.enableValidation();
   // add new place form validator
 const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
 newPlacePopupFormValidator.enableValidation();
+
+
+
+
+
 
 
 // тестовая попытка потыкать модальное окно, проверить работоспособность класса

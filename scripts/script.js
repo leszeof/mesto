@@ -71,29 +71,16 @@ imagePreviewPopup.setEventListeners();
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 
-  //! выкинуть
-  // close popup on escape listener
-  // document.addEventListener('keydown', closePopupOnEscPress);
 }
 
   // close any popup, universal function
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 
-  //! выкинуть
-  // delete close popup on escape listener
-  // document.removeEventListener('keydown', closePopupOnEscPress);
 }
 
-  // close any popup on overlay click
-  //! выкинуть
-// function closePopupOnOverlayClick(event) {
-//   if (event.currentTarget == event.target) {
-//     closePopup(event.currentTarget);
-//   }
-// }
 
-//! пока не понял как заменить
+//! работает при открытии модалки с данными юзера (подставляет данные)
 //edit user profile popup functions
   // set input values when opening edit profile popup
 function setInputValues({currentUserName, currentUserDescription}) {
@@ -127,18 +114,7 @@ function handleCardClick(name, link) {
 
 
 
-//!выкинуть
-  // update user profile
-function editProfile(event) {
-  //! сюда надо передать результат работы this._getInputValues() и как то его размузолить
-  event.preventDefault();
 
-  const newUserName = editProfileUserNameInput.value;
-  const newUserJob = editProfileUserJobInput.value;
-
-  currentUserName.textContent = newUserName;
-  currentUserJob.textContent = newUserJob;
-}
 
 // add new place popup functions
   // add new card function
@@ -176,12 +152,7 @@ function renderInitialCards(rawArrayOfCards) {
 }
 renderInitialCards(initialCards);
 
-// image preview popup functions
-  // insert new content in preview image popup
-//! выкинуть
-function fillImagePreviewPopup(name, link) {
-  imagePreviewPopup.open(name, link);
-}
+
 
 
 
@@ -205,8 +176,6 @@ editProfileCloseButton.addEventListener('click', () => {
 });
   // close edit profile popup on overlay click
 
-  //! выкинуть
-// editProfilePopupWindow.addEventListener('click', closePopupOnOverlayClick);
 
 //! выкинуть
   // submit edit profile form

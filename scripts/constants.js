@@ -34,27 +34,6 @@ export const imageCaption = document.querySelector('.popup__image-caption');
   // initial cards
 export const cardsContainer = document.querySelector('.cards__list');
 
-//! выкинуть этот объект нах
-export const popupSelectors = {
-  // user profile popup //! Невозможно нормально использовать
-  editProfilePopupSelector: '.popup_type_edit-profile',
-
-  // add new place popup //! Невозможно нормально использовать
-  addNewPlacePopupSelector: '.popup_type_add-place',
-
-  // image preview popup //! Невозможно нормально использовать
-  imagePreviewPopupSelector: '.popup_type_image-preview',
-
-  popupImageSelector: '.popup__image',
-  popupImageTitleSelector: '.popup__image-caption',
-
-  // global
-  closeButtonSelector: '.popup__close-button',
-  formSelector: '.popup__form',
-  formInputSelector: '.popup-form__input',
-  popupActiveClass: 'popup_opened',
-};
-
 export const userProfileSelectors = {
   userNameSelector: '.user-profile__name',
   userDescriptionSelector: '.user-profile__description',

@@ -31,7 +31,6 @@ import {
   imagePreview,
   imageCaption,
   cardsContainer,
-  popupSelectors,
   userProfileSelectors,
 } from './constants.js';
 

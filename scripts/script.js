@@ -105,23 +105,17 @@ function setInputValues({currentUserName, currentUserDescription}) {
 
 
 //! функции колбэки под классы
+// callback function for editProfilePopup copy of PopupWithForm class
+function updateProfile(rawData) {
+  const newInfo = {
+    newName: rawData['new-user-name'],
+    newDescription: rawData['new-user-description']
+  };
 
-function updateProfile() {
-  //! по хорошему тут будет связь с UserInfo классом, а не с вот этой фигней
-
-  currentUserName.textContent = editProfileUserNameInput.value;
-  currentUserJob.textContent = editProfileUserJobInput.value;
-
-  //! нужно вот так сделать
-  // const newData = {
-  //   newName: editProfileUserNameInput.value,
-  //   newDescription: editProfileUserJobInput.value
-  // }
-
-  // userInfo.setUserInfo(newData);
+  userInfo.setUserInfo(newInfo);
 }
 
-// supporting function for PopupWithImage class
+// callback function for imagePreviewPopup copy of PopupWithImage class
 function handleCardClick(name, link) {
   imagePreviewPopup.open(name, link);
 }
@@ -148,8 +142,10 @@ function editProfile(event) {
 
 // add new place popup functions
   // add new card function
+
+  //! функция колбэк, которая нужна будет для отрисовки новой карточки после PopupWithForm класса
 function addNewPlace(formData) {
-  console.log(formData); //! сюда надо передать результат работы this._getInputValues() и как то его размузолить
+  // console.log(formData); //! сюда надо передать результат работы this._getInputValues() и как то его размузолить
   const newCardData = {
     name: newPlaceInput.value,
     link: newPlaceImageLinkInput.value,
@@ -157,6 +153,7 @@ function addNewPlace(formData) {
   const newCardElement = createCard(newCardData);
 
   cardsContainer.prepend(newCardElement);
+
 }
 
 // function calls Card class and return html card

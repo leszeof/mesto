@@ -8,13 +8,17 @@ class Section {
   // render data items to html presentation
   renderItems() {
     this._itemsArray.forEach(item => {
+      //! глобальная функция createCard станет этим самым колбэком _renderer
+      //! в ней создается отображение карточки и вставляется в верстку
       this._renderer(item);
     })
   }
 
   // insert html item to container
   addItem(element) {
-    this._container.append(element);
+    console.log(element);
+    // console.log(this._containerElement);
+    this._containerElement.append(element);
   }
 }
 

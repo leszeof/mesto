@@ -35,21 +35,32 @@ import {
 } from './constants.js';
 
 
+
+
+
+
 // Popup classes in use
 //   edit profile popup controller copy
 const editProfilePopup = new PopupWithForm(
   '.popup_type_edit-profile',
-  updateProfile //! данные из инпутов обрабатывает колбэк, а нужно _getInputValues
+  updateProfile
+
+  //TODO подвязку колбэка + _getInputValues + UserInfo класса сделал
 );
 editProfilePopup.setEventListeners();
-
-const userInfo = new UserInfo(userProfileSelectors);
-
 
   // add new place popup controller copy
 const addNewPlacePopup = new PopupWithForm(
   '.popup_type_add-place',
-  addNewPlace //! данные из инпутов обрабатывает колбэк, а нужно _getInputValues
+  addNewPlace
+
+  //TODO
+  /*
+  - сделал присоединение getUserInfo для сборки полей формы при сабмите
+  - сделал отрисовку новой карточки (правда ставится она в конец!!) (но похоже это нормально)
+
+
+  */
 );
 addNewPlacePopup.setEventListeners();
 
@@ -63,23 +74,26 @@ const imagePreviewPopup = new PopupWithImage(
 imagePreviewPopup.setEventListeners();
 
 
+//! секция имени + описания юзера (хтмл)
+const userInfo = new UserInfo(userProfileSelectors);
+
+//! секция отрисовки карточек, экзепляр Section
+const cardsSection = new Section(
+  {
+    items: initialCards,
+    renderer: createCard,
+  },
+  '.cards__list'
+);
+console.log(cardsSection);
+
+
+
 
 
 
 // Functions
-  // open any popup, universal function
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-
-}
-
-  // close any popup, universal function
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-
-}
-
-
+//TODO новые функции, которые используются как связки между классами либо при открытии/закрытии
 //! работает при открытии модалки с данными юзера (подставляет данные)
 //edit user profile popup functions
   // set input values when opening edit profile popup
@@ -88,15 +102,12 @@ function setInputValues({currentUserName, currentUserDescription}) {
   editProfileUserJobInput.value = currentUserDescription;
 }
 
-
-
-
 //! функции колбэки под классы
 // callback function for editProfilePopup copy of PopupWithForm class
-function updateProfile(rawData) {
+function updateProfile(formData) {
   const newInfo = {
-    newName: rawData['new-user-name'],
-    newDescription: rawData['new-user-description']
+    newName: formData['new-user-name'],
+    newDescription: formData['new-user-description']
   };
 
   userInfo.setUserInfo(newInfo);
@@ -119,44 +130,47 @@ function handleCardClick(name, link) {
 // add new place popup functions
   // add new card function
 
-  //! функция колбэк, которая нужна будет для отрисовки новой карточки после PopupWithForm класса
+//! функция колбэк, которая нужна будет для отрисовки новой карточки после PopupWithForm класса
+  //!addNewPlacePopup
 function addNewPlace(formData) {
-  // console.log(formData); //! сюда надо передать результат работы this._getInputValues() и как то его размузолить
   const newCardData = {
-    name: newPlaceInput.value,
-    link: newPlaceImageLinkInput.value,
-  }
-  const newCardElement = createCard(newCardData);
+    name: formData['new-place-name'],
+    link: formData['new-place-link']
+  };
 
-  cardsContainer.prepend(newCardElement);
+  //! либо так (так было раньше)
+  // const newCardElement = createCard(newCardData);
 
+  //! либо так
+  const card = new Card(newCardData, '.cards-item', handleCardClick);
+  const cardElement = card.generateCard();
+
+  cardsSection.addItem(cardElement);
 }
 
-// function calls Card class and return html card
+//! функция колбэк, которая нужна будет для отрисовки новой карточки после PopupWithForm класса
+// callback function for cardsSection copy of Section class
 function createCard(rawCardItem) {
   const card = new Card(rawCardItem, '.cards-item', handleCardClick);
-  return card.generateCard();
+  const cardElement = card.generateCard();
+
+  cardsSection.addItem(cardElement);
 }
 
-// card add functionality (on start and in progress)
-  // renders cards on start
-function renderInitialCards(rawArrayOfCards) {
 
-  const renderedCards = rawArrayOfCards.map( (rawCardItem) => {
-    const newCardElement = createCard(rawCardItem);
-
-    return newCardElement;
-  })
-
-  cardsContainer.prepend(...renderedCards);
-}
-renderInitialCards(initialCards);
+// renders cards on start
+cardsSection.renderItems();
 
 
+//TODO на вечер 27.03
+/*
+1) разобраться как добавить новую карточку в начало, а не конец (при добавлении 1 новой через форму)
+2) почистить файл констант и файлы классов от коментов и неиспользуемых переменных
+3) создать файл utils.js со всеми функциями общего назначения (и листенерами?), посмотри теорию
 
 
-
-
+PS по моему это нормально, что новая карточка идет в конец!
+*/
 
 
 
@@ -171,19 +185,9 @@ editProfileOpenButton.addEventListener('click', () => {
 });
   // close edit profile popup
 editProfileCloseButton.addEventListener('click', () => {
-  // closePopup(editProfilePopupWindow);
   editProfilePopup.close(); //!
 });
   // close edit profile popup on overlay click
-
-
-//! выкинуть
-  // submit edit profile form
-editProfileForm.addEventListener('submit', (event) => {
-  // editProfile(event);
-  // editProfilePopup.close();
-})
-
 
 
 
@@ -195,11 +199,6 @@ newPlacePopupOpenButton.addEventListener('click', () => {
   addNewPlacePopup.open();
 });
 
-//! выкинуть
-  // close add place popup
-// newPlacePopupCloseButton.addEventListener('click', () => {
-//   closePopup(newCardPopupWindow);
-// });
 
   // close add place popup on overlay click
   //! выкинуть
@@ -211,22 +210,6 @@ newPlacePopupOpenButton.addEventListener('click', () => {
 //   newPlacePopupForm.reset();
 //   closePopup(newCardPopupWindow);
 // });
-
-  // Event listeners for image preview popup
-  // close image preview popup
-  //! выкинуть
-// imagePreviewCloseButton.addEventListener('click', () => {
-//   closePopup(imagePreviewPopupWindow);
-// });
-  // close image preview popup on overlay click
-
-  //! выкинуть
-// imagePreviewPopupWindow.addEventListener('click', closePopupOnOverlayClick);
-
-
-
-
-
 
 
 

@@ -12,7 +12,6 @@ class UserInfo {
   }
 
   setUserInfo({newName, newDescription}) {
-    console.log('tyt1');
     this._userNameElem.textContent = newName;
     this._userDescriptionElem.textContent = newDescription;
   }

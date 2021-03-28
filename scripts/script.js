@@ -75,7 +75,6 @@ const cardsSection = new Section(
   },
   '.cards__list'
 );
-console.log(cardsSection);
 
 
 

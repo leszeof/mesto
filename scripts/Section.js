@@ -8,8 +8,6 @@ class Section {
   // render data items to html presentation
   renderItems() {
     this._itemsArray.forEach(item => {
-      //! глобальная функция createCard станет этим самым колбэком _renderer
-      //! в ней создается отображение карточки и вставляется в верстку
       this._renderer(item);
     })
   }
@@ -19,5 +17,4 @@ class Section {
     this._containerElement.prepend(element);
   }
 }
-
 export default Section;

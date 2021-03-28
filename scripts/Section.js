@@ -16,9 +16,7 @@ class Section {
 
   // insert html item to container
   addItem(element) {
-    console.log(element);
-    // console.log(this._containerElement);
-    this._containerElement.append(element);
+    this._containerElement.prepend(element);
   }
 }
 

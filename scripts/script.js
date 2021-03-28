@@ -44,8 +44,6 @@ import {
 const editProfilePopup = new PopupWithForm(
   '.popup_type_edit-profile',
   updateProfile
-
-  //TODO подвязку колбэка + _getInputValues + UserInfo класса сделал
 );
 editProfilePopup.setEventListeners();
 
@@ -53,14 +51,6 @@ editProfilePopup.setEventListeners();
 const addNewPlacePopup = new PopupWithForm(
   '.popup_type_add-place',
   addNewPlace
-
-  //TODO
-  /*
-  - сделал присоединение getUserInfo для сборки полей формы при сабмите
-  - сделал отрисовку новой карточки (правда ставится она в конец!!) (но похоже это нормально)
-
-
-  */
 );
 addNewPlacePopup.setEventListeners();
 
@@ -158,6 +148,7 @@ function createCard(rawCardItem) {
 }
 
 
+
 // renders cards on start
 cardsSection.renderItems();
 
@@ -181,13 +172,13 @@ PS по моему это нормально, что новая карточка
   // open user profile popup
 editProfileOpenButton.addEventListener('click', () => {
   setInputValues(userInfo.getUserInfo());
-  editProfilePopup.open(); //!
+  editProfilePopup.open();
 });
   // close edit profile popup
 editProfileCloseButton.addEventListener('click', () => {
-  editProfilePopup.close(); //!
+  editProfilePopup.close();
 });
-  // close edit profile popup on overlay click
+
 
 
 
@@ -199,17 +190,6 @@ newPlacePopupOpenButton.addEventListener('click', () => {
   addNewPlacePopup.open();
 });
 
-
-  // close add place popup on overlay click
-  //! выкинуть
-// newCardPopupWindow.addEventListener('click', closePopupOnOverlayClick);
-
-//! выкинуть
-// newPlacePopupForm.addEventListener('submit', (event) => {
-//   addNewPlace(event);
-//   newPlacePopupForm.reset();
-//   closePopup(newCardPopupWindow);
-// });
 
 
 

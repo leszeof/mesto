@@ -121,22 +121,3 @@ editProfileFormValidator.enableValidation();
   // add new place form validator
 const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
 newPlacePopupFormValidator.enableValidation();
-
-//TODO утро 28.03
-/*
-1) создать папку компонентс, туда закинуть все классы
-  -- поменять пути при импортах к ним
-
-2) Создать папку utils
-  -- засунуть туда файл констант + переменные
-  -- скорее всего туда же пойдет файл utils.js с функциями (почитай чеклист)
-
-3) почистить файл констант и файлы классов от коментов и неиспользуемых переменных
-
-4) возможно разобать папку ДАТА и исправить пути к ней (положить в utils)
-
-
-! В файле index.js должно остаться только создание классов и добавление некоторых обработчиков.
-
-
-*/

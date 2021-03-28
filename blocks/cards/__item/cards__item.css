@@ -1,3 +1,4 @@
 .cards__item {
   position: relative;
+  overflow: hidden;
 }

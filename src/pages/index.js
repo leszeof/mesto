@@ -1,4 +1,6 @@
 // Imports
+  // css
+import './index.css';
   // classes
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';

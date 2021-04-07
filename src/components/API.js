@@ -10,8 +10,16 @@ export default class Api {
     })
       .then(res => res.json())
       .then((result) => {
-        console.log(result);
+        return result;
+      });
+  }
 
+  getInitialCards() {
+    fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards ', {
+      headers: this._headers,
+    })
+      .then(res => res.json())
+      .then((result) => {
         return result;
       });
   }

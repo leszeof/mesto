@@ -165,3 +165,4 @@ const api = new Api({
 });
 // task 1
 api.getUserInfo();
+api.getInitialCards();

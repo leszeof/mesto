@@ -49,8 +49,9 @@ export const newPlacePopupOpenButton = document.querySelector('.user-profile__ad
 export const newPlacePopupForm = newCardPopupWindow.querySelector('.popup__form');
 
   // edit profile popup
-export const editUserAvatarPopup = document.querySelector('.popup_type_edit-avatar');
-export const userAvatarElem = document.querySelector('.user-profile__avatar');
+  export const editUserAvatarPopup = document.querySelector('.popup_type_edit-avatar');
+  export const editUserAvatarPopupForm = editUserAvatarPopup.querySelector('.popup__form');
+  export const userAvatarElem = document.querySelector('.user-profile__avatar');
 
 // user profile selectors
 export const userProfileSelectors = {

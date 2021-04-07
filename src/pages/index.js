@@ -19,6 +19,7 @@ import {
   newPlacePopupOpenButton,
   newPlacePopupForm,
   userAvatarElem,
+  editUserAvatarPopupForm,
   userProfileSelectors,
 } from '../utils/constants.js';
 
@@ -45,11 +46,10 @@ const imagePreviewPopup = new PopupWithImage(
 );
 imagePreviewPopup.setEventListeners();
 
-  //! NEW
   // edit avatar popup controller copy
 const editUserAvatarPopup = new PopupWithForm(
   '.popup_type_edit-avatar',
-  //! функция-хэндлер для отправки
+  //! нужна нормальная функция-хэндлер для отправки
   () => {
     console.log('editUserAvatarPopup submit handler');
   }
@@ -128,16 +128,19 @@ newPlacePopupOpenButton.addEventListener('click', () => {
 });
 
   // Event listeners for edit user avatar
-  //! NEW
 userAvatarElem.addEventListener('click', () => {
   editUserAvatarPopup.open();
 })
 
 // Validation
   // edit user profile form validator
-const editProfileFormValidator = new FormValidator(validationSettings , editProfileForm);
+const editProfileFormValidator = new FormValidator(validationSettings, editProfileForm);
 editProfileFormValidator.enableValidation();
 
   // add new place form validator
-const newPlacePopupFormValidator = new FormValidator(validationSettings , newPlacePopupForm);
+const newPlacePopupFormValidator = new FormValidator(validationSettings, newPlacePopupForm);
 newPlacePopupFormValidator.enableValidation();
+
+  // edit user avatar form validator
+const editUserAvatarPopupFormValidator = new FormValidator(validationSettings, editUserAvatarPopupForm);
+editUserAvatarPopupFormValidator.enableValidation();

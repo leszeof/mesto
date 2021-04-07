@@ -24,6 +24,9 @@ import {
   userProfileSelectors,
 } from '../utils/constants.js';
 
+
+
+
 //! API Connection
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
@@ -33,9 +36,9 @@ const api = new Api({
   }
 });
 
-// generate initial cards
+// render initial cards on start using API
 api.getInitialCards()
-  .then(cards => {
+  .then( (cards) => {
     cardsSection = new Section(
       {
         items: cards,
@@ -49,6 +52,25 @@ api.getInitialCards()
 
     cardsSection.renderItems(); //! если поставить эту строку вне этого, то будет cardsSection = undefined
   })
+
+// render user info on start using API
+api.getUserInfo()
+  .then( (userData) => {
+    // console.log(userData);
+    fillUserInfoOnStart(userData, userProfileSelectors);
+  })
+
+  //! либо лучше создать 2 переменные (name и description + использовать их в классе userInfo)
+function fillUserInfoOnStart({name, about, avatar}, {userNameSelector, userDescriptionSelector}) {
+  document.querySelector(userNameSelector).textContent = name;
+  document.querySelector(userDescriptionSelector).textContent = about;
+  userAvatarElem.src = avatar;
+}
+
+
+
+
+
 
 // Classes in use
   // Popup classes

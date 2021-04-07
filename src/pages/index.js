@@ -163,3 +163,5 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+// task 1
+api.getUserInfo();

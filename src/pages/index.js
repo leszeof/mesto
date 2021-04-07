@@ -72,7 +72,7 @@ const userInfo = new UserInfo(userProfileSelectors);
   // Section class
 const cardsSection = new Section(
   {
-    items: initialCards,
+    items: initialCards, //! вот сюда надо загонять карточки из API
     renderer: (cardData) => {
       const newCardElement = createCard(cardData, '.cards-item', handleCardClick);
       cardsSection.addItem(newCardElement);
@@ -155,6 +155,8 @@ newPlacePopupFormValidator.enableValidation();
 const editUserAvatarPopupFormValidator = new FormValidator(validationSettings, editUserAvatarPopupForm);
 editUserAvatarPopupFormValidator.enableValidation();
 
+
+// task 1
 //! API Connection
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
@@ -163,6 +165,8 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
-// task 1
 api.getUserInfo();
 api.getInitialCards();
+// console.log(api.getInitialCards());
+let a = api.getInitialCards();
+console.log(a);

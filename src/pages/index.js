@@ -24,6 +24,32 @@ import {
   userProfileSelectors,
 } from '../utils/constants.js';
 
+//! API Connection
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
+  headers: {
+    authorization: '098e56f1-8498-493a-8138-2fc5a6b46ab9',
+    'Content-Type': 'application/json'
+  }
+});
+
+// generate initial cards
+api.getInitialCards()
+  .then(cards => {
+    cardsSection = new Section(
+      {
+        items: cards,
+        renderer: (cardData) => {
+          const newCardElement = createCard(cardData, '.cards-item', handleCardClick);
+          cardsSection.addItem(newCardElement);
+        },
+      },
+      '.cards__list'
+    );
+
+    cardsSection.renderItems(); //! если поставить эту строку вне этого, то будет cardsSection = undefined
+  })
+
 // Classes in use
   // Popup classes
   // edit profile popup controller copy
@@ -70,16 +96,36 @@ editUserAvatarPopup.setEventListeners();
 const userInfo = new UserInfo(userProfileSelectors);
 
   // Section class
-const cardsSection = new Section(
-  {
-    items: initialCards, //! вот сюда надо загонять карточки из API
-    renderer: (cardData) => {
-      const newCardElement = createCard(cardData, '.cards-item', handleCardClick);
-      cardsSection.addItem(newCardElement);
-    },
-  },
-  '.cards__list'
-);
+let cardsSection;
+// api.getInitialCards()
+//   .then( (cards) => {
+//     cardsSection = new Section(
+//       {
+//         items: cards,
+//         renderer: (cardData) => {
+//           const newCardElement = createCard(cardData, '.cards-item', handleCardClick);
+//           cardsSection.addItem(newCardElement);
+//         },
+//       },
+//       '.cards__list'
+//     );
+
+//     cardsSection.renderItems(); //! если поставить эту строку вне этого, то будет cardsSection = undefined
+//   })
+
+//! прежняя функция рендеринга стартовых карточек
+// const cardsSection = new Section(
+//   {
+//     items: initialCards, //! вот сюда надо загонять карточки из API
+//     renderer: (cardData) => {
+//       const newCardElement = createCard(cardData, '.cards-item', handleCardClick);
+//       cardsSection.addItem(newCardElement);
+//     },
+//   },
+//   '.cards__list'
+// );
+// renders cards on start
+// cardsSection.renderItems();
 
 // Functions
   // set input values when opening edit profile popup
@@ -119,9 +165,6 @@ function createCard(rawCardItem) {
   return card.generateCard();
 }
 
-// renders cards on start
-cardsSection.renderItems();
-
 // Event listeners
   // Event listeners for user profile popup
   // open user profile popup
@@ -154,19 +197,3 @@ newPlacePopupFormValidator.enableValidation();
   // edit user avatar form validator
 const editUserAvatarPopupFormValidator = new FormValidator(validationSettings, editUserAvatarPopupForm);
 editUserAvatarPopupFormValidator.enableValidation();
-
-
-// task 1
-//! API Connection
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
-  headers: {
-    authorization: '098e56f1-8498-493a-8138-2fc5a6b46ab9',
-    'Content-Type': 'application/json'
-  }
-});
-api.getUserInfo();
-api.getInitialCards();
-// console.log(api.getInitialCards());
-let a = api.getInitialCards();
-console.log(a);

@@ -28,14 +28,20 @@ import {
   // edit profile popup controller copy
 const editProfilePopup = new PopupWithForm(
   '.popup_type_edit-profile',
-  updateProfile
+  updateProfile,
+  () => {
+    editProfileFormValidator.resetValidation();
+  }
 );
 editProfilePopup.setEventListeners();
 
   // add new place popup controller copy
 const addNewPlacePopup = new PopupWithForm(
   '.popup_type_add-place',
-  submitNewCardHandler
+  submitNewCardHandler,
+  () => {
+    newPlacePopupFormValidator.resetValidation();
+  }
 );
 addNewPlacePopup.setEventListeners();
 
@@ -52,6 +58,9 @@ const editUserAvatarPopup = new PopupWithForm(
   //! нужна нормальная функция-хэндлер для отправки
   () => {
     console.log('editUserAvatarPopup submit handler');
+  },
+  () => {
+    editUserAvatarPopupFormValidator.resetValidation();
   }
 );
 editUserAvatarPopup.setEventListeners();

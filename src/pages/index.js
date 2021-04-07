@@ -8,6 +8,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/API.js';
   // constants
 import {
   initialCards,
@@ -153,3 +154,12 @@ newPlacePopupFormValidator.enableValidation();
   // edit user avatar form validator
 const editUserAvatarPopupFormValidator = new FormValidator(validationSettings, editUserAvatarPopupForm);
 editUserAvatarPopupFormValidator.enableValidation();
+
+//! API Connection
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
+  headers: {
+    authorization: '098e56f1-8498-493a-8138-2fc5a6b46ab9',
+    'Content-Type': 'application/json'
+  }
+});

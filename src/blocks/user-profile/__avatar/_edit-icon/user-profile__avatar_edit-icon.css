@@ -1,0 +1,19 @@
+.user-profile__avatar_edit-icon {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  visibility: hidden;
+  opacity: 0;
+  width: 26px;
+  height: 26px;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transition: all 0.5s linear;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+}

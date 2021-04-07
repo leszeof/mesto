@@ -12,7 +12,10 @@
     </header>
     <main class="content page-container__content">
       <section class="user-profile content__user-profile">
-        <img class="user-profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар пользователя">
+        <div class="user-profile_avatar-wrapper">
+          <img class="user-profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар пользователя">
+          <img class="user-profile__avatar_edit-icon" src="<%=require('./images/edit-profile-icon.svg')%>" alt="Иконка смены аватара">
+        </div>
         <div class="user-profile__info-wrapper">
           <div class="user-profile__info">
             <h1 class="user-profile__name">Жак-Ив Кусто</h1>

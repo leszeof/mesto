@@ -18,6 +18,7 @@ import {
   editProfileUserJobInput,
   newPlacePopupOpenButton,
   newPlacePopupForm,
+  userAvatarElem,
   userProfileSelectors,
 } from '../utils/constants.js';
 
@@ -43,6 +44,17 @@ const imagePreviewPopup = new PopupWithImage(
   handleCardClick
 );
 imagePreviewPopup.setEventListeners();
+
+  //! NEW
+  // edit avatar popup controller copy
+const editUserAvatarPopup = new PopupWithForm(
+  '.popup_type_edit-avatar',
+  //! функция-хэндлер для отправки
+  () => {
+    console.log('editUserAvatarPopup submit handler');
+  }
+);
+editUserAvatarPopup.setEventListeners();
 
   // UserInfo class
 const userInfo = new UserInfo(userProfileSelectors);
@@ -108,12 +120,18 @@ editProfileOpenButton.addEventListener('click', () => {
   editProfilePopup.open();
 });
 
-// Event listeners for add place popup
+  // Event listeners for add place popup
   // open add place popup
 newPlacePopupOpenButton.addEventListener('click', () => {
   newPlacePopupFormValidator.disableSubmitButton(newPlacePopupForm);
   addNewPlacePopup.open();
 });
+
+  // Event listeners for edit user avatar
+  //! NEW
+userAvatarElem.addEventListener('click', () => {
+  editUserAvatarPopup.open();
+})
 
 // Validation
   // edit user profile form validator

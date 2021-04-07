@@ -48,6 +48,11 @@ export const newPlacePopupOpenButton = document.querySelector('.user-profile__ad
 // export const newPlacePopupCloseButton = newCardPopupWindow.querySelector('.popup__close-button');
 export const newPlacePopupForm = newCardPopupWindow.querySelector('.popup__form');
 
+  // edit profile popup
+export const editUserAvatarPopup = document.querySelector('.popup_type_edit-avatar');
+export const userAvatarElem = document.querySelector('.user-profile__avatar');
+
+// user profile selectors
 export const userProfileSelectors = {
   userNameSelector: '.user-profile__name',
   userDescriptionSelector: '.user-profile__description',

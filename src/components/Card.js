@@ -1,9 +1,11 @@
 class Card {
-  constructor({name, link}, cardSelector, handleCardClick) {
+  constructor({name, link, likes, owner}, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
-    this._cardSelector = cardSelector;
+    this._owner = owner;
+    this._likes = likes;
 
+    this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
 
@@ -25,6 +27,7 @@ class Card {
     this._htmlCard.querySelector('.cards-item__title').textContent = this._name;
     this._htmlCard.querySelector('.cards-item__image').alt = this._name;
     this._htmlCard.querySelector('.cards-item__image').src = this._link;
+    this._htmlCard.querySelector('.cards-item__like-counter').textContent = this._likes;
 
     this._setEventListeners();
 

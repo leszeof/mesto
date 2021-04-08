@@ -197,7 +197,14 @@ function submitNewCardHandler(formData) {
 
 // callback function for cardsSection copy of Section class
 function createCard(rawCardItem) {
-  const card = new Card(rawCardItem, '.cards-item', handleCardClick);
+  const cardData = {
+    name: rawCardItem.name,
+    link: rawCardItem.link,
+    likes: rawCardItem.likes.length,
+    owner: rawCardItem.owner,
+  }
+
+  const card = new Card(cardData, '.cards-item', handleCardClick);
   return card.generateCard();
 }
 

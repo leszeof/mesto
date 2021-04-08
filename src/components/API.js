@@ -1,13 +1,17 @@
 export default class Api {
   constructor({baseUrl, headers}) {
-    this._baseUrl = baseUrl;
+    this._baseUrl = baseUrl; // https://mesto.nomoreparties.co/v1/cohort-22
     this._headers = headers;
   }
 
   getUserInfo() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me ', {
-      headers: this._headers,
-    })
+    return fetch(
+      `${this._baseUrl}/users/me`,
+      {
+        method: 'GET',
+        headers: this._headers,
+      }
+    )
       .then( (response) => {
         if (response.ok) {
           return response.json();
@@ -20,14 +24,18 @@ export default class Api {
         return result;
       })
       .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль
+        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
       })
   }
 
   getInitialCards() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards ', {
-      headers: this._headers,
-    })
+    return fetch(
+      `${this._baseUrl}/cards`,
+      {
+        method: 'GET',
+        headers: this._headers,
+      }
+    )
       .then( (response) => {
         if (response.ok) {
           return response.json();
@@ -40,7 +48,21 @@ export default class Api {
         return result;
       })
       .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль
+        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
       })
+  }
+
+  updateUserInfo({name, about}) {
+    return fetch(
+      `${this._baseUrl}/users/me`,
+      {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: name,
+          about: about
+        }),
+      }
+    )
   }
 }

@@ -39,7 +39,7 @@ const api = new Api({
 // render initial cards on start using API
 api.getInitialCards()
   .then( (cards) => {
-    cardsSection = new Section(
+    const cardsSection = new Section(
       {
         items: cards,
         renderer: (cardData) => {
@@ -50,13 +50,12 @@ api.getInitialCards()
       '.cards__list'
     );
 
-    cardsSection.renderItems(); //! если поставить эту строку вне этого, то будет cardsSection = undefined
+    cardsSection.renderItems();
   })
 
 // render user info on start using API
 api.getUserInfo()
   .then( (userData) => {
-    // console.log(userData);
     fillUserInfoOnStart(userData, userProfileSelectors);
   })
 
@@ -118,7 +117,7 @@ editUserAvatarPopup.setEventListeners();
 const userInfo = new UserInfo(userProfileSelectors);
 
   // Section class
-let cardsSection;
+// let cardsSection;
 // api.getInitialCards()
 //   .then( (cards) => {
 //     cardsSection = new Section(
@@ -159,11 +158,15 @@ function setInputValues({currentUserName, currentUserDescription}) {
 // callback function on submit edit user profile form
 function updateProfile(formData) {
   const newInfo = {
-    newName: formData['new-user-name'],
-    newDescription: formData['new-user-description']
+    name: formData['new-user-name'],
+    about: formData['new-user-description']
   };
 
+  // set new user info in html
   userInfo.setUserInfo(newInfo);
+
+  // update user info on server
+  api.updateUserInfo(newInfo);
 }
 
 // callback function for imagePreviewPopup copy of PopupWithImage class

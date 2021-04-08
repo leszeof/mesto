@@ -11,9 +11,9 @@ class UserInfo {
     }
   }
 
-  setUserInfo({newName, newDescription}) {
-    this._userNameElem.textContent = newName;
-    this._userDescriptionElem.textContent = newDescription;
+  setUserInfo({name, about}) {
+    this._userNameElem.textContent = name;
+    this._userDescriptionElem.textContent = about;
   }
 }
 export default UserInfo;

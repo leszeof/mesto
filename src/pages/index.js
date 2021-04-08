@@ -105,8 +105,8 @@ imagePreviewPopup.setEventListeners();
 const editUserAvatarPopup = new PopupWithForm(
   {
     popupSelector:'.popup_type_edit-avatar',
-    submitFormHandler: (formData) => {
-      const newLink = formData['new-avatar-link'];
+    submitFormHandler: () => {
+      // const newLink = formData['new-avatar-link'];
       api.postNewUserAvatar(newLink)
         .then( newSrc => {
           userAvatarElem.src = newSrc.avatar;
@@ -152,16 +152,18 @@ function handleCardClick(name, link) {
 
 // add new card callback function on submit add new place form
 function submitNewCardHandler(formData) {
-  // create and render card element from form data
+  // prepare new card data
   const newCardData = {
     name: formData['new-place-name'],
     link: formData['new-place-link']
   };
-  const newCardElement = createCard(newCardData, '.cards-item');
-  cardsSection.addItem(newCardElement);
 
-  // post new card to server
-  api.postNewCard(newCardData);
+  // post new card to server and render it
+  api.postNewCard(newCardData)
+    .then((newCardData) => {
+      const newCardElement = createCard(newCardData, '.cards-item');
+      cardsSection.addItem(newCardElement);
+    });
 }
 
 // callback function for cardsSection copy of Section class

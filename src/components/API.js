@@ -77,5 +77,28 @@ export default class Api {
       })
   }
 
+  postNewCard({name, link}) {
+    return fetch(
+      `${this._baseUrl}/cards`,
+      {
+        method: 'POST',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: name,
+          link: link
+        }),
+      }
+    )
+      .then( (response) => {
+        if (response.ok) {
+          return response.json();
+        }
 
+        // если ошибка сервера, отклоняем промис
+        return Promise.reject(`Ошибка: ${response.status}`);
+      })
+      .catch( (err) => {
+        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
+      })
+  }
 }

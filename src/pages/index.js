@@ -24,7 +24,7 @@ import {
   userProfileSelectors,
 } from '../utils/constants.js';
 
-
+let cardsSection;
 
 
 //! API Connection
@@ -39,7 +39,7 @@ const api = new Api({
 // render initial cards on start using API
 api.getInitialCards()
   .then( (cards) => {
-    const cardsSection = new Section(
+    cardsSection = new Section(
       {
         items: cards,
         renderer: (cardData) => {
@@ -116,6 +116,9 @@ editUserAvatarPopup.setEventListeners();
   // UserInfo class
 const userInfo = new UserInfo(userProfileSelectors);
 
+
+
+
   // Section class
 // let cardsSection;
 // api.getInitialCards()
@@ -148,6 +151,9 @@ const userInfo = new UserInfo(userProfileSelectors);
 // renders cards on start
 // cardsSection.renderItems();
 
+
+
+
 // Functions
   // set input values when opening edit profile popup
 function setInputValues({currentUserName, currentUserDescription}) {
@@ -157,15 +163,16 @@ function setInputValues({currentUserName, currentUserDescription}) {
 
 // callback function on submit edit user profile form
 function updateProfile(formData) {
+  // create and render new user info from form data
   const newInfo = {
     name: formData['new-user-name'],
     about: formData['new-user-description']
   };
 
-  // set new user info in html
+  // render new user info
   userInfo.setUserInfo(newInfo);
 
-  // update user info on server
+  // post new user info to server
   api.updateUserInfo(newInfo);
 }
 
@@ -176,12 +183,16 @@ function handleCardClick(name, link) {
 
 // add new card callback function on submit add new place form
 function submitNewCardHandler(formData) {
+  // create and render card element from form data
   const newCardData = {
     name: formData['new-place-name'],
     link: formData['new-place-link']
   };
   const newCardElement = createCard(newCardData, '.cards-item', handleCardClick);
   cardsSection.addItem(newCardElement);
+
+  // post new card to server
+  api.postNewCard(newCardData);
 }
 
 // callback function for cardsSection copy of Section class

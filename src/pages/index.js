@@ -139,10 +139,7 @@ function updateUserInfo(formData) {
     about: formData['new-user-description']
   };
 
-  // render new user info
-  // userInfo.setUserInfo(newInfo);
-
-  // post new user info to server
+  // post new user info to server and render it
   api.updateUserInfo(newInfo)
     .then(userData => {
       userInfo.setUserInfo(userData);
@@ -150,7 +147,7 @@ function updateUserInfo(formData) {
 }
 
 // callback function for imagePreviewPopup copy of PopupWithImage class
-function handleCardClick(name, link) {
+function handleCardPreview(name, link) {
   imagePreviewPopup.open(name, link);
 }
 
@@ -170,6 +167,10 @@ function submitNewCardHandler(formData) {
     });
 }
 
+function deleteCardHandler() {
+  console.log('tyt');
+}
+
 // callback function for cardsSection copy of Section class
 function createCard(rawCardItem) {
   const cardData = {
@@ -179,7 +180,15 @@ function createCard(rawCardItem) {
     owner: rawCardItem.owner,
   }
 
-  const card = new Card(cardData, '.cards-item', handleCardClick);
+  // может сразу rawCardItem передавать...
+  const card = new Card(
+    {
+      cardData: cardData,
+      cardSelector: '.cards-item',
+      handleCardPreview: handleCardPreview,
+      deleteCardHandler: deleteCardHandler,
+    }
+  )
   return card.generateCard();
 }
 

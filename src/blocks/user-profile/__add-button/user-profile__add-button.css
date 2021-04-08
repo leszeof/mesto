@@ -34,7 +34,7 @@
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 680px) {
   .user-profile__add-button {
     margin-left: 0;
     width: 100%;

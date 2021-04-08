@@ -105,9 +105,12 @@ imagePreviewPopup.setEventListeners();
 const editUserAvatarPopup = new PopupWithForm(
   {
     popupSelector:'.popup_type_edit-avatar',
-    //! нужна нормальная функция-хэндлер для обновления аватарки
-    submitFormHandler: () => {
-      console.log('editUserAvatarPopup submit handler');
+    submitFormHandler: (formData) => {
+      const newLink = formData['new-avatar-link'];
+      api.postNewUserAvatar(newLink)
+        .then( newSrc => {
+          userAvatarElem.src = newSrc.avatar;
+        });
     },
     validationHandler: () => {
       editUserAvatarPopupFormValidator.resetValidation();

@@ -101,4 +101,30 @@ export default class Api {
         console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
       })
   }
+
+
+
+  postNewUserAvatar(src) {
+    return fetch(
+      `${this._baseUrl}/users/me/avatar`,
+      {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          avatar: src
+        }),
+      }
+    )
+      .then( (response) => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        // если ошибка сервера, отклоняем промис
+        return Promise.reject(`Ошибка: ${response.status}`);
+      })
+      .catch( (err) => {
+        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
+      })
+  }
 }

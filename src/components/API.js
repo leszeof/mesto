@@ -64,5 +64,18 @@ export default class Api {
         }),
       }
     )
+      .then( (response) => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        // если ошибка сервера, отклоняем промис
+        return Promise.reject(`Ошибка: ${response.status}`);
+      })
+      .catch( (err) => {
+        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
+      })
   }
+
+
 }

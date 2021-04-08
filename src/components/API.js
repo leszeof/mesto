@@ -52,7 +52,6 @@ export default class Api {
       })
   }
 
-  //! не совсем понимаю как использовать ответ
   updateUserInfo({name, about}) {
     return fetch(
       `${this._baseUrl}/users/me`,
@@ -104,21 +103,20 @@ export default class Api {
   }
 
 
-  //! не совсем понимаю как использовать ответ
-  postNewUserAvatar(src) {
+  updateUserAvatar(newLink) {
+    console.log(newLink);
     return fetch(
       `${this._baseUrl}/users/me/avatar`,
       {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
-          avatar: src
+          avatar: newLink
         }),
       }
     )
       .then( (response) => {
         if (response.ok) {
-          console.log(response.json());
           return response.json();
         }
 

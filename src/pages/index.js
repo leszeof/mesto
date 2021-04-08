@@ -77,7 +77,7 @@ function fillUserInfoOnStart({name, about, avatar}, {userNameSelector, userDescr
 const editProfilePopup = new PopupWithForm(
   {
     popupSelector: '.popup_type_edit-profile',
-    submitFormHandler: updateProfile,
+    submitFormHandler: updateUserInfo,
     validationHandler: () => {
       editProfileFormValidator.resetValidation();
     }
@@ -105,11 +105,12 @@ imagePreviewPopup.setEventListeners();
 const editUserAvatarPopup = new PopupWithForm(
   {
     popupSelector:'.popup_type_edit-avatar',
-    submitFormHandler: () => {
-      // const newLink = formData['new-avatar-link'];
-      api.postNewUserAvatar(newLink)
-        .then( newSrc => {
-          userAvatarElem.src = newSrc.avatar;
+    submitFormHandler: (formData) => {
+      const newLink = formData['new-avatar-link'];
+
+      api.updateUserAvatar(newLink)
+        .then( newProfileData => {
+          userAvatarElem.src = newProfileData.avatar;
         });
     },
     validationHandler: () => {
@@ -131,7 +132,7 @@ function setInputValues({currentUserName, currentUserDescription}) {
 }
 
 // callback function on submit edit user profile form
-function updateProfile(formData) {
+function updateUserInfo(formData) {
   // create and render new user info from form data
   const newInfo = {
     name: formData['new-user-name'],
@@ -139,10 +140,13 @@ function updateProfile(formData) {
   };
 
   // render new user info
-  userInfo.setUserInfo(newInfo);
+  // userInfo.setUserInfo(newInfo);
 
   // post new user info to server
-  api.updateUserInfo(newInfo);
+  api.updateUserInfo(newInfo)
+    .then(userData => {
+      userInfo.setUserInfo(userData);
+    });
 }
 
 // callback function for imagePreviewPopup copy of PopupWithImage class

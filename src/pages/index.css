@@ -54,3 +54,6 @@
 @import url('../blocks/popup/__image-wrapper/popup__image-wrapper.css');
 @import url('../blocks/popup/__image/popup__image.css');
 @import url('../blocks/popup/__image-caption/popup__image-caption.css');
+/* Popup delete card*/
+@import url('../blocks/popup/__title/_delete-card/popup__title_delete-card.css');
+@import url('../blocks/delete-confirm-button/delete-confirm-button.css');

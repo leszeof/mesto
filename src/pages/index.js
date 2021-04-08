@@ -43,7 +43,7 @@ api.getInitialCards()
       {
         items: cards,
         renderer: (cardData) => {
-          const newCardElement = createCard(cardData, '.cards-item', handleCardClick);
+          const newCardElement = createCard(cardData, '.cards-item');
           cardsSection.addItem(newCardElement);
         },
       },
@@ -75,83 +75,49 @@ function fillUserInfoOnStart({name, about, avatar}, {userNameSelector, userDescr
   // Popup classes
   // edit profile popup controller copy
 const editProfilePopup = new PopupWithForm(
-  '.popup_type_edit-profile',
-  updateProfile,
-  () => {
-    editProfileFormValidator.resetValidation();
+  {
+    popupSelector: '.popup_type_edit-profile',
+    submitFormHandler: updateProfile,
+    validationHandler: () => {
+      editProfileFormValidator.resetValidation();
+    }
   }
 );
 editProfilePopup.setEventListeners();
 
   // add new place popup controller copy
 const addNewPlacePopup = new PopupWithForm(
-  '.popup_type_add-place',
-  submitNewCardHandler,
-  () => {
-    newPlacePopupFormValidator.resetValidation();
+  {
+    popupSelector: '.popup_type_add-place',
+    submitFormHandler: submitNewCardHandler,
+    validationHandler: () => {
+      newPlacePopupFormValidator.resetValidation();
+    },
   }
 );
 addNewPlacePopup.setEventListeners();
 
   // image preview popup controller copy
-const imagePreviewPopup = new PopupWithImage(
-  '.popup_type_image-preview',
-  handleCardClick
-);
+const imagePreviewPopup = new PopupWithImage('.popup_type_image-preview');
 imagePreviewPopup.setEventListeners();
 
   // edit avatar popup controller copy
 const editUserAvatarPopup = new PopupWithForm(
-  '.popup_type_edit-avatar',
-  //! нужна нормальная функция-хэндлер для отправки
-  () => {
-    console.log('editUserAvatarPopup submit handler');
-  },
-  () => {
-    editUserAvatarPopupFormValidator.resetValidation();
+  {
+    popupSelector:'.popup_type_edit-avatar',
+    //! нужна нормальная функция-хэндлер для обновления аватарки
+    submitFormHandler: () => {
+      console.log('editUserAvatarPopup submit handler');
+    },
+    validationHandler: () => {
+      editUserAvatarPopupFormValidator.resetValidation();
+    }
   }
 );
 editUserAvatarPopup.setEventListeners();
 
   // UserInfo class
 const userInfo = new UserInfo(userProfileSelectors);
-
-
-
-
-  // Section class
-// let cardsSection;
-// api.getInitialCards()
-//   .then( (cards) => {
-//     cardsSection = new Section(
-//       {
-//         items: cards,
-//         renderer: (cardData) => {
-//           const newCardElement = createCard(cardData, '.cards-item', handleCardClick);
-//           cardsSection.addItem(newCardElement);
-//         },
-//       },
-//       '.cards__list'
-//     );
-
-//     cardsSection.renderItems(); //! если поставить эту строку вне этого, то будет cardsSection = undefined
-//   })
-
-//! прежняя функция рендеринга стартовых карточек
-// const cardsSection = new Section(
-//   {
-//     items: initialCards, //! вот сюда надо загонять карточки из API
-//     renderer: (cardData) => {
-//       const newCardElement = createCard(cardData, '.cards-item', handleCardClick);
-//       cardsSection.addItem(newCardElement);
-//     },
-//   },
-//   '.cards__list'
-// );
-// renders cards on start
-// cardsSection.renderItems();
-
-
 
 
 // Functions
@@ -188,7 +154,7 @@ function submitNewCardHandler(formData) {
     name: formData['new-place-name'],
     link: formData['new-place-link']
   };
-  const newCardElement = createCard(newCardData, '.cards-item', handleCardClick);
+  const newCardElement = createCard(newCardData, '.cards-item');
   cardsSection.addItem(newCardElement);
 
   // post new card to server

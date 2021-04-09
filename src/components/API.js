@@ -102,6 +102,28 @@ export default class Api {
       })
   }
 
+  deleteCard(id) {
+    return fetch(
+      `${this._baseUrl}/cards/${id}`,
+      {
+        method: 'DELETE',
+        headers: this._headers,
+      }
+    )
+      .then( (response) => {
+        if (response.ok) {
+          return response.json();
+          // return Promise.resolve(); // может так надо??
+        }
+
+        // если ошибка сервера, отклоняем промис
+        return Promise.reject(`Ошибка: ${response.status}`);
+      })
+      .catch( (err) => {
+        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
+      })
+  }
+
 
   updateUserAvatar(newLink) {
     console.log(newLink);

@@ -1,10 +1,12 @@
 class Card {
   constructor({cardData, cardSelector, handleCardPreview, deleteCardHandler}) {
-    console.log(arguments);
     this._name = cardData.name;
     this._link = cardData.link;
-    this._owner = cardData.owner;
-    this._likes = cardData.likes;
+    this._likes = cardData.likes.length;
+
+    // пока не ясно нужно ли это
+    this._cardID = cardData._id;
+    this._ownerID = cardData.owner._id;
 
     this._cardSelector = cardSelector;
 
@@ -22,6 +24,10 @@ class Card {
 
     return cardElement;
   }
+
+  // getCardID() {
+  //   return this._cardID;
+  // }
 
   // generate a card
   generateCard() {
@@ -53,19 +59,21 @@ class Card {
 
     // delete card listener
     this._htmlCard.querySelector('.cards-item__delete-button').addEventListener('click', () => {
-      // nice animations
-      this._htmlCard.style.transition = '0.5s';
-      this._htmlCard.style.transform = 'scale(0, 0.3) rotate(360deg)';
-      this._htmlCard.style.opacity = '0';
-      setTimeout(() => {
-        this._htmlCard.remove();
-      }, 500);
-
       // delete callback
         //! в нем надо открывать попап (экземпляр класса) ХОТИТЕ УДАЛИТЬ
         //! при клике ДА - проваливаемся в САБМИТ ХЭНДЛЕР для ПОПАПА!
+          // сабмит хэндлер уже будет идти в АПИ класс, а затем удалять карточку
         //! в нем желательно иметь id карточки чтобы послать DELETE запрос на сервер
-      this._deleteCardHandler();
+      this._deleteCardHandler(this, this._cardID);
+
+      // nice animations for delete
+        //! как вариант засунуть в отдельную публичную функцию и вызывать при реальном удалении карточки
+      // this._htmlCard.style.transition = '0.5s';
+      // this._htmlCard.style.transform = 'scale(0, 0.3) rotate(360deg)';
+      // this._htmlCard.style.opacity = '0';
+      // setTimeout(() => {
+      //   this._htmlCard.remove();
+      // }, 500);
     });
   }
 

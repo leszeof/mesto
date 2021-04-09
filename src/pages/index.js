@@ -61,20 +61,13 @@ api.getInitialCards()
 // render user info on start using API class
 api.getUserInfo()
   .then( (userData) => {
-    fillUserInfoOnStart(userData, userProfileSelectors);
+    userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData);
   })
   .catch( (error) => {
     console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
     // можно еще добавить индикатор загрузки
   });
-
-  //! либо лучше создать 2 переменные (name и description + использовать их в классе userInfo)
-function fillUserInfoOnStart({name, about, avatar}, {userNameSelector, userDescriptionSelector}) {
-  document.querySelector(userNameSelector).textContent = name;
-  document.querySelector(userDescriptionSelector).textContent = about;
-  userAvatarElem.src = avatar;
-}
-
 
 
 
@@ -119,7 +112,7 @@ const editUserAvatarPopup = new PopupWithForm(
 
       api.updateUserAvatar(newLink)
         .then( newProfileData => {
-          userAvatarElem.src = newProfileData.avatar;
+          userInfo.setUserAvatar(newProfileData);
         })
         .catch( (error) => {
           console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
@@ -190,7 +183,7 @@ function submitNewCardHandler(formData) {
 
 // итого шаги
 /*
-1. создаем карточку, в корзинке зашит хэдлер удаляющего колбэка + анимации (после удаления)
+1. создаем карточку, в корзинке зашит хэндлер удаляющего колбэка + анимации (после удаления)
   * контролировать будут ли анимации, если сервер не сможет осилить запрос
 
 2. при нажатии на корзинку проваливаемся к хэндлер удаления КАРТОЧКИ
@@ -209,7 +202,7 @@ function submitNewCardHandler(formData) {
 const deleteCardPopup = new PopupWithConfirm(
   {
     popupSelector: '.popup_type_delete-card',
-    submitFormHandler: () => {
+    submitFormHandler: (cardToDelete, cardID) => {
       console.log('deleteCardPopup -> submitFormHandler');
 
     },
@@ -218,13 +211,14 @@ const deleteCardPopup = new PopupWithConfirm(
 deleteCardPopup.setEventListeners();
 
 // callback function delete card in Card class (connected to API class)
-function deleteCardHandler() {
+function deleteCardHandler(cardToDelete, cardID) {
   console.log('card -> deleteCardHandler');
-  deleteCardPopup.open();
+  deleteCardPopup.open(cardToDelete, cardID);
 }
 
 // callback function for creating new cards (on start and by user)
 function createCard(rawCardData) {
+  // console.log(rawCardData);
   const cardData = {
     name: rawCardData.name,
     link: rawCardData.link,
@@ -244,7 +238,7 @@ function createCard(rawCardData) {
   //? может сразу rawCardItem передавать... (либо надо какую то подготовку делать в виде определения владельца, id и тд)
   const card = new Card(
     {
-      cardData: cardData,
+      cardData: rawCardData, // было cardData
       cardSelector: '.cards-item',
       handleCardPreview: handleCardPreview,
       deleteCardHandler: deleteCardHandler,

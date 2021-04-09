@@ -126,7 +126,6 @@ export default class Api {
 
 
   updateUserAvatar(newLink) {
-    console.log(newLink);
     return fetch(
       `${this._baseUrl}/users/me/avatar`,
       {

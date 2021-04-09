@@ -36,7 +36,7 @@ const api = new Api({
   }
 });
 
-// render initial cards on start using API
+// render initial cards on start using API class
 api.getInitialCards()
   .then( (cards) => {
     cardsSection = new Section(
@@ -52,12 +52,20 @@ api.getInitialCards()
 
     cardsSection.renderItems();
   })
+  .catch( (error) => {
+    console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
+    // можно еще добавить индикатор загрузки
+  })
 
-// render user info on start using API
+// render user info on start using API class
 api.getUserInfo()
   .then( (userData) => {
     fillUserInfoOnStart(userData, userProfileSelectors);
   })
+  .catch( (error) => {
+    console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
+    // можно еще добавить индикатор загрузки
+  });
 
   //! либо лучше создать 2 переменные (name и description + использовать их в классе userInfo)
 function fillUserInfoOnStart({name, about, avatar}, {userNameSelector, userDescriptionSelector}) {
@@ -111,6 +119,10 @@ const editUserAvatarPopup = new PopupWithForm(
       api.updateUserAvatar(newLink)
         .then( newProfileData => {
           userAvatarElem.src = newProfileData.avatar;
+        })
+        .catch( (error) => {
+          console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
+          // можно еще добавить индикатор загрузки
         });
     },
     validationHandler: () => {
@@ -126,12 +138,12 @@ const userInfo = new UserInfo(userProfileSelectors);
 
 // Functions
   // set input values when opening edit profile popup
-function setInputValues({currentUserName, currentUserDescription}) {
+function setInputValuesOnOpen({currentUserName, currentUserDescription}) {
   editProfileUserNameInput.value = currentUserName;
   editProfileUserJobInput.value = currentUserDescription;
 }
 
-// callback function on submit edit user profile form
+// callback function on submit edit user profile form (connected to API class)
 function updateUserInfo(formData) {
   // create and render new user info from form data
   const newInfo = {
@@ -139,19 +151,23 @@ function updateUserInfo(formData) {
     about: formData['new-user-description']
   };
 
-  // post new user info to server and render it
+  // post new user info to server then render it
   api.updateUserInfo(newInfo)
     .then(userData => {
       userInfo.setUserInfo(userData);
+    })
+    .catch( (error) => {
+      console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
+      // можно еще добавить индикатор загрузки
     });
 }
 
-// callback function for imagePreviewPopup copy of PopupWithImage class
+// callback function for open imagePreviewPopup in Card class
 function handleCardPreview(name, link) {
   imagePreviewPopup.open(name, link);
 }
 
-// add new card callback function on submit add new place form
+// callback function add new card on submit add new place form
 function submitNewCardHandler(formData) {
   // prepare new card data
   const newCardData = {
@@ -159,19 +175,24 @@ function submitNewCardHandler(formData) {
     link: formData['new-place-link']
   };
 
-  // post new card to server and render it
+  // post new card to server then render it
   api.postNewCard(newCardData)
     .then((newCardData) => {
       const newCardElement = createCard(newCardData, '.cards-item');
       cardsSection.addItem(newCardElement);
+    })
+    .catch( (error) => {
+      console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
+      // можно еще добавить индикатор загрузки
     });
 }
 
+// callback function delete card in Card class (connected to API class)
 function deleteCardHandler() {
   console.log('tyt');
 }
 
-// callback function for cardsSection copy of Section class
+// callback function for creating new cards (on start and by user)
 function createCard(rawCardItem) {
   const cardData = {
     name: rawCardItem.name,
@@ -180,7 +201,7 @@ function createCard(rawCardItem) {
     owner: rawCardItem.owner,
   }
 
-  // может сразу rawCardItem передавать...
+  //? может сразу rawCardItem передавать... (либо надо какую то подготовку делать в виде определения владельца, id и тд)
   const card = new Card(
     {
       cardData: cardData,
@@ -196,7 +217,7 @@ function createCard(rawCardItem) {
   // Event listeners for user profile popup
   // open user profile popup
 editProfileOpenButton.addEventListener('click', () => {
-  setInputValues(userInfo.getUserInfo());
+  setInputValuesOnOpen(userInfo.getUserInfo());
   editProfilePopup.open();
 });
 

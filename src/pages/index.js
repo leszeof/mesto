@@ -6,6 +6,7 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/API.js';
@@ -187,19 +188,63 @@ function submitNewCardHandler(formData) {
     });
 }
 
+// итого шаги
+/*
+1. создаем карточку, в корзинке зашит хэдлер удаляющего колбэка + анимации (после удаления)
+  * контролировать будут ли анимации, если сервер не сможет осилить запрос
+
+2. при нажатии на корзинку проваливаемся к хэндлер удаления КАРТОЧКИ
+  3. в этом хэндлере открываем попап (экземпляр класса Попап-ов)
+4. при нажатии ДА проваливаемся к хэндлер САБМИТА для ПОПАПА!
+  5. в этом хэндлере обращаемся к апи, удаляем карточку с сервера
+  6. в блоке then (index.js) для этого запроса мы проводим рендеринг удаления карточки (анимации + физическое удаление из верстки)
+
+!нюансы:
+* нам надо знать ВЛАДЕЛЬЦА карточки
+* нам надо знать ID карточки (например публичный метод в классе Card - getCardID)
+
+
+*/
+
+const deleteCardPopup = new PopupWithConfirm(
+  {
+    popupSelector: '.popup_type_delete-card',
+    submitFormHandler: () => {
+      console.log('deleteCardPopup -> submitFormHandler');
+    },
+  }
+);
+
+
+
+
+
+
+deleteCardPopup.setEventListeners();
+
 // callback function delete card in Card class (connected to API class)
 function deleteCardHandler() {
-  console.log('tyt');
+  console.log('card -> deleteCardHandler');
+  deleteCardPopup.open();
 }
 
 // callback function for creating new cards (on start and by user)
-function createCard(rawCardItem) {
+function createCard(rawCardData) {
   const cardData = {
-    name: rawCardItem.name,
-    link: rawCardItem.link,
-    likes: rawCardItem.likes.length,
-    owner: rawCardItem.owner,
-  }
+    name: rawCardData.name,
+    link: rawCardData.link,
+    likes: rawCardData.likes.length,
+    owner: rawCardData.owner,
+  };
+
+  //! на этапе создании карточки важно определить ты владелец ее или нет, если нет - передаем соответствующий буль и тогда иконку корзинки вообще не отрисовываем
+
+  //! если isLiked, то надо закрасить лайк при отрисовке
+
+  //! так же надо в классе создать функцию прибавления/убавления лайка при лайке
+
+  // isOwner
+  // isLiked
 
   //? может сразу rawCardItem передавать... (либо надо какую то подготовку делать в виде определения владельца, id и тд)
   const card = new Card(
@@ -209,7 +254,7 @@ function createCard(rawCardItem) {
       handleCardPreview: handleCardPreview,
       deleteCardHandler: deleteCardHandler,
     }
-  )
+  );
   return card.generateCard();
 }
 

@@ -211,15 +211,10 @@ const deleteCardPopup = new PopupWithConfirm(
     popupSelector: '.popup_type_delete-card',
     submitFormHandler: () => {
       console.log('deleteCardPopup -> submitFormHandler');
+
     },
   }
 );
-
-
-
-
-
-
 deleteCardPopup.setEventListeners();
 
 // callback function delete card in Card class (connected to API class)

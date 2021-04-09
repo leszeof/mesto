@@ -63,6 +63,7 @@ api.getUserInfo()
   .then( (userData) => {
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData);
+    userInfo.setUserId(userData);
   })
   .catch( (error) => {
     console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
@@ -128,7 +129,6 @@ editUserAvatarPopup.setEventListeners();
 
   // UserInfo class
 const userInfo = new UserInfo(userProfileSelectors);
-
 
 // Functions
   // set input values when opening edit profile popup

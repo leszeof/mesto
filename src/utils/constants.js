@@ -57,4 +57,5 @@ export const editUserAvatarPopupForm = editUserAvatarPopup.querySelector('.popup
 export const userProfileSelectors = {
   userNameSelector: '.user-profile__name',
   userDescriptionSelector: '.user-profile__description',
+  avatarSelector: '.user-profile__avatar'
 }

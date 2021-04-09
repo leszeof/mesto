@@ -44,7 +44,7 @@ api.getInitialCards()
       {
         items: cards,
         renderer: (cardData) => {
-          const newCardElement = createCard(cardData, '.cards-item');
+          const newCardElement = createCard(cardData);
           cardsSection.addItem(newCardElement);
         },
       },
@@ -56,7 +56,7 @@ api.getInitialCards()
   .catch( (error) => {
     console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
     // можно еще добавить индикатор загрузки
-  })
+  });
 
 // render user info on start using API class
 api.getUserInfo()
@@ -172,7 +172,7 @@ function submitNewCardHandler(formData) {
   // post new card to server then render it
   api.postNewCard(newCardData)
     .then((newCardData) => {
-      const newCardElement = createCard(newCardData, '.cards-item');
+      const newCardElement = createCard(newCardData);
       cardsSection.addItem(newCardElement);
     })
     .catch( (error) => {
@@ -197,23 +197,36 @@ function submitNewCardHandler(formData) {
 * нам надо знать ID карточки (например публичный метод в классе Card - getCardID)
 
 
+вот узнали мы как то владелец мы или нет, дальше ---
+
 */
 
 const deleteCardPopup = new PopupWithConfirm(
   {
     popupSelector: '.popup_type_delete-card',
-    submitFormHandler: (cardToDelete, cardID) => {
+    submitFormHandler: (cardToDelete, cardId) => {
       console.log('deleteCardPopup -> submitFormHandler');
-
+      api.deleteCard(cardId)
+        .then( () => {
+          cardToDelete.deleteCard();
+        })
+        .catch( (error) => {
+          console.log(error);
+        });
     },
   }
 );
 deleteCardPopup.setEventListeners();
 
 // callback function delete card in Card class (connected to API class)
-function deleteCardHandler(cardToDelete, cardID) {
+function deleteCardHandler(cardToDelete, cardId) {
   console.log('card -> deleteCardHandler');
-  deleteCardPopup.open(cardToDelete, cardID);
+  deleteCardPopup.open(cardToDelete, cardId);
+}
+
+function likeCardHandler() {
+  console.log('card -> likeCardHandler');
+
 }
 
 // callback function for creating new cards (on start and by user)
@@ -239,11 +252,14 @@ function createCard(rawCardData) {
   const card = new Card(
     {
       cardData: rawCardData, // было cardData
-      cardSelector: '.cards-item',
+      cardTemplateSelector: '.cards-item',
+      currentUserId: userInfo.getUserId(),
       handleCardPreview: handleCardPreview,
       deleteCardHandler: deleteCardHandler,
+      likeCardHandler: likeCardHandler,
     }
   );
+  // console.log(card);
   return card.generateCard();
 }
 

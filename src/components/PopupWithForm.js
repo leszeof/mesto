@@ -35,7 +35,6 @@ class PopupWithForm extends Popup {
     });
   }
 
-  //! косячная функция, надо запоминать текст кнопки
   renderLoading(isLoading) {
     if (isLoading) {
       this._submitButtonPreviousText = this._submitButton.textContent;

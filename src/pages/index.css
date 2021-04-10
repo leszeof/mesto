@@ -12,9 +12,9 @@
 @import url('../blocks/page-container/__content/page-container__content.css');
 /* User-profile section */
 @import url('../blocks/content/__user-profile/content__user-profile.css');
-@import url('../blocks/user-profile/__avatar-wrapper/user-profile_avatar-wrapper.css');
+@import url('../blocks/user-profile/__avatar-wrapper/user-profile__avatar-wrapper.css');
 @import url('../blocks/user-profile/__avatar/user-profile__avatar.css');
-@import url('../blocks/user-profile/__avatar/_edit-icon/user-profile__avatar_edit-icon.css');
+@import url('../blocks/user-profile/__avatar/_edit-icon/user-profile__avatar-edit-icon.css');
 @import url('../blocks/user-profile/__info-wrapper/user-profile__info-wrapper.css');
 @import url('../blocks/user-profile/__info/user-profile__info.css');
 @import url('../blocks/user-profile/__name/user-profile__name.css');

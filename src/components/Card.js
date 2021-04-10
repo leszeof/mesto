@@ -17,7 +17,6 @@ class Card {
     this._link = cardData.link;
     this._likes = cardData.likes.length;
     this._cardId = cardData._id;
-    console.log(this._cardId);
     this._ownerId = cardData.owner._id;
     this._isOwner = currentUserId === this._ownerId;
   }

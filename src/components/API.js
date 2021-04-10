@@ -4,7 +4,7 @@ export default class Api {
     this._headers = headers;
   }
 
-  //! или может тут нафиг не нужен второй then...
+  // return user data (object)
   getUserInfo() {
     return fetch(
       `${this._baseUrl}/users/me`,
@@ -21,15 +21,12 @@ export default class Api {
         // если ошибка сервера, отклоняем промис
         return Promise.reject(`Ошибка: ${response.status}`);
       })
-      .then( (result) => {
-        return result;
-      })
       .catch( (err) => {
         console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
       });
   }
 
-  //! или может тут нафиг не нужен второй then...
+  // return array of cards
   getInitialCards() {
     return fetch(
       `${this._baseUrl}/cards`,
@@ -54,7 +51,7 @@ export default class Api {
       });
   }
 
-//! разве тут не нужен еще один then ??
+  // return updated user data (object)
   updateUserInfo({name, about}) {
     return fetch(
       `${this._baseUrl}/users/me`,
@@ -80,7 +77,7 @@ export default class Api {
       });
   }
 
-//! разве тут не нужен еще один then ??
+  // return new card (object)
   postNewCard({name, link}) {
     return fetch(
       `${this._baseUrl}/cards`,
@@ -106,7 +103,7 @@ export default class Api {
       });
   }
 
-//! разве тут не нужен еще один then ??
+  // return string 'Объект удален'
   deleteCard(id) {
     return fetch(
       `${this._baseUrl}/cards/${id}`,
@@ -118,7 +115,7 @@ export default class Api {
       .then( (response) => {
         if (response.ok) {
           // return response.json(); // ответ: "Пост удален"
-          return Promise.resolve(); // можно и так
+          return Promise.resolve('Пост удален'); // можно и так
         }
 
         // если ошибка сервера, отклоняем промис
@@ -129,6 +126,7 @@ export default class Api {
       });
   }
 
+  // return updated card (object)
   putLike(cardId) {
     return fetch(
       `${this._baseUrl}/cards/likes/${cardId}`,
@@ -139,7 +137,7 @@ export default class Api {
     )
       .then( (response) => {
         if (response.ok) {
-          return response.json(); //! ИТАК возвоащает карточку с обновленными лайками
+          return response.json();
         }
 
         // если ошибка сервера, отклоняем промис
@@ -150,6 +148,7 @@ export default class Api {
       });
   }
 
+  // return updated card (object)
   deleteLike(cardId) {
     return fetch(
       `${this._baseUrl}/cards/likes/${cardId}`,
@@ -171,7 +170,7 @@ export default class Api {
       });
   }
 
-  //! разве тут не нужен еще один then ??
+  // return updated user data (object)
   updateUserAvatar(newLink) {
     return fetch(
       `${this._baseUrl}/users/me/avatar`,

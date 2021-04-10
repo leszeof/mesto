@@ -156,11 +156,6 @@ function updateUserInfo(formData) {
     });
 }
 
-// callback function for open imagePreviewPopup in Card class
-function handleCardPreview(name, link) {
-  imagePreviewPopup.open(name, link);
-}
-
 // callback function add new card on submit add new place form
 function submitNewCardHandler(formData) {
   // prepare new card data
@@ -218,49 +213,76 @@ const deleteCardPopup = new PopupWithConfirm(
 );
 deleteCardPopup.setEventListeners();
 
-// callback function delete card in Card class (connected to API class)
-function deleteCardHandler(cardToDelete, cardId) {
-  console.log('card -> deleteCardHandler');
-  deleteCardPopup.open(cardToDelete, cardId);
-}
 
-function likeCardHandler() {
-  console.log('card -> likeCardHandler');
 
-  // api.
-}
+
+
+// // callback function delete card in Card class (connected to API class)
+// function deleteCardHandler(cardToDelete, cardId) {
+//   console.log('card -> deleteCardHandler');
+//   deleteCardPopup.open(cardToDelete, cardId);
+// }
+
+// function likeCardHandler(isLiked) {
+//   console.log('card -> likeCardHandler');
+
+//   console.log(card);
+//   // if (isLiked) {
+//   //   api.deleteLike().then().catch()
+//   // } else {
+//   //   api.putLike().then().catch()
+//   // }
+// }
+
+// // callback function for open imagePreviewPopup in Card class
+// function handleCardPreview(name, link) {
+//   imagePreviewPopup.open(name, link);
+// }
 
 // callback function for creating new cards (on start and by user)
 function createCard(rawCardData) {
-  // console.log(rawCardData);
-  const cardData = {
-    name: rawCardData.name,
-    link: rawCardData.link,
-    likes: rawCardData.likes.length,
-    owner: rawCardData.owner,
-  };
-
-  //! на этапе создании карточки важно определить ты владелец ее или нет, если нет - передаем соответствующий буль и тогда иконку корзинки вообще не отрисовываем
-
-  //! если isLiked, то надо закрасить лайк при отрисовке
-
-  //! так же надо в классе создать функцию прибавления/убавления лайка при лайке
-
-  // isOwner
-  // isLiked
-
-  //? может сразу rawCardItem передавать... (либо надо какую то подготовку делать в виде определения владельца, id и тд)
   const card = new Card(
     {
       cardData: rawCardData, // было cardData
       cardSelector: '.cards-item',
       currentUserId: userInfo.getUserId(),
-      handleCardPreview: handleCardPreview,
-      deleteCardHandler: deleteCardHandler,
-      likeCardHandler: likeCardHandler,
+
+      // callback function for open imagePreviewPopup in Card class
+      handleCardPreview: (name, link) => {
+        imagePreviewPopup.open(name, link);
+      },
+
+      // callback function to delete card (connected to Api class)
+      deleteCardHandler: (cardId) => {
+        deleteCardPopup.open(card, cardId);
+      },
+
+      // callback function to like card (connected to Api class)
+      likeCardHandler: (id, isLiked) => {
+        if (isLiked) {
+          api.deleteLike(id)
+          .then( (updatedCardData) => {
+            console.log('likeCardHandler -> card is already liked (IF)');
+            card.updateLike(updatedCardData);
+            //! ты передаешь объект, а нужен likes.length
+          })
+          .catch( (error) => {
+            console.log(error);
+          })
+        } else {
+          api.putLike(id)
+          .then( (updatedCardData) => {
+            console.log('likeCardHandler -> card is NOT liked (ELSE)');
+            card.updateLike(updatedCardData);
+            //! ты передаешь объект, а нужен likes.length
+          })
+          .catch( (error) => {
+            console.log(error);
+          })
+        }
+      },
     }
   );
-  // console.log(card);
   return card.generateCard();
 }
 

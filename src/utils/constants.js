@@ -59,3 +59,11 @@ export const userProfileSelectors = {
   userDescriptionSelector: '.user-profile__description',
   avatarSelector: '.user-profile__avatar'
 }
+
+export const apiBasicSettings = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
+  headers: {
+    authorization: '098e56f1-8498-493a-8138-2fc5a6b46ab9',
+    'Content-Type': 'application/json'
+  }
+}

@@ -12,7 +12,6 @@ import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
   // constants
 import {
-  initialCards,
   validationSettings,
   editProfileOpenButton,
   editProfileForm,
@@ -23,21 +22,15 @@ import {
   userAvatarElem,
   editUserAvatarPopupForm,
   userProfileSelectors,
+  apiBasicSettings
 } from '../utils/constants.js';
 
-let cardsSection;
-
-
-//! API Connection
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-22',
-  headers: {
-    authorization: '098e56f1-8498-493a-8138-2fc5a6b46ab9',
-    'Content-Type': 'application/json'
-  }
-});
+// Classes in use
+// API class
+const api = new Api(apiBasicSettings);
 
 // render initial cards on start using API class
+let cardsSection;
 api.getInitialCards()
   .then( (cards) => {
     cardsSection = new Section(
@@ -73,8 +66,6 @@ api.getUserInfo()
 
 
 
-
-// Classes in use
   // Popup classes
   // edit profile popup controller copy
 const editProfilePopup = new PopupWithForm(
@@ -176,26 +167,6 @@ function submitNewCardHandler(formData) {
     });
 }
 
-// итого шаги
-/*
-1. создаем карточку, в корзинке зашит хэндлер удаляющего колбэка + анимации (после удаления)
-  * контролировать будут ли анимации, если сервер не сможет осилить запрос
-
-2. при нажатии на корзинку проваливаемся к хэндлер удаления КАРТОЧКИ
-  3. в этом хэндлере открываем попап (экземпляр класса Попап-ов)
-4. при нажатии ДА проваливаемся к хэндлер САБМИТА для ПОПАПА!
-  5. в этом хэндлере обращаемся к апи, удаляем карточку с сервера
-  6. в блоке then (index.js) для этого запроса мы проводим рендеринг удаления карточки (анимации + физическое удаление из верстки)
-
-!нюансы:
-* нам надо знать ВЛАДЕЛЬЦА карточки
-* нам надо знать ID карточки (например публичный метод в классе Card - getCardID)
-
-
-вот узнали мы как то владелец мы или нет, дальше ---
-
-*/
-
 const deleteCardPopup = new PopupWithConfirm(
   {
     popupSelector: '.popup_type_delete-card',
@@ -212,32 +183,6 @@ const deleteCardPopup = new PopupWithConfirm(
   }
 );
 deleteCardPopup.setEventListeners();
-
-
-
-
-
-// // callback function delete card in Card class (connected to API class)
-// function deleteCardHandler(cardToDelete, cardId) {
-//   console.log('card -> deleteCardHandler');
-//   deleteCardPopup.open(cardToDelete, cardId);
-// }
-
-// function likeCardHandler(isLiked) {
-//   console.log('card -> likeCardHandler');
-
-//   console.log(card);
-//   // if (isLiked) {
-//   //   api.deleteLike().then().catch()
-//   // } else {
-//   //   api.putLike().then().catch()
-//   // }
-// }
-
-// // callback function for open imagePreviewPopup in Card class
-// function handleCardPreview(name, link) {
-//   imagePreviewPopup.open(name, link);
-// }
 
 // callback function for creating new cards (on start and by user)
 function createCard(rawCardData) {
@@ -264,7 +209,6 @@ function createCard(rawCardData) {
           .then( (updatedCardData) => {
             console.log('likeCardHandler -> card is already liked (IF)');
             card.updateLike(updatedCardData);
-            //! ты передаешь объект, а нужен likes.length
           })
           .catch( (error) => {
             console.log(error);
@@ -274,7 +218,6 @@ function createCard(rawCardData) {
           .then( (updatedCardData) => {
             console.log('likeCardHandler -> card is NOT liked (ELSE)');
             card.updateLike(updatedCardData);
-            //! ты передаешь объект, а нужен likes.length
           })
           .catch( (error) => {
             console.log(error);

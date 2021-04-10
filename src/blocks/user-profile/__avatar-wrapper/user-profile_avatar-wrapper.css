@@ -1,4 +1,4 @@
-.user-profile_avatar-wrapper {
+.user-profile__avatar-wrapper {
   position: relative;
   width: 120px;
   /* height: 120px; */
@@ -9,24 +9,24 @@
   -o-border-radius: 50%;
 }
 
-.user-profile_avatar-wrapper:hover .user-profile__avatar_edit-icon {
+.user-profile__avatar-wrapper:hover .user-profile__avatar-edit-icon {
   visibility: visible;
   opacity: 1;
 }
 
-.user-profile_avatar-wrapper:hover .user-profile__avatar {
+.user-profile__avatar-wrapper:hover .user-profile__avatar {
   cursor: pointer;
   opacity: 0.3;
 }
 
 @media (max-width: 620px) {
-  .user-profile_avatar-wrapper {
+  .user-profile__avatar-wrapper {
     margin-bottom: 22px;
   }
 }
 
 @media (max-width: 320px) {
-  .user-profile_avatar-wrapper {
+  .user-profile__avatar-wrapper {
     margin: 0 auto;
     margin-bottom: 26px;
   }

@@ -56,9 +56,22 @@ class Card {
   generateCard() {
     this._renderCard();
 
+    this._setCardPartsState();
+
     this._setEventListeners();
 
     return this._htmlCard;
+  }
+
+  // set the state of card parts on start
+  _setCardPartsState() {
+    if (this._isLiked) {
+      this._likeButtonElem.classList.toggle('cards-item__like-button_active');
+    }
+
+    if (!this._isOwner) {
+      this._deleteButtonElem.style.display = 'none';
+    }
   }
 
   // render card presentation
@@ -84,9 +97,11 @@ class Card {
     });
 
     // delete button listener
-    this._deleteButtonElem.addEventListener('click', () => {
-      this._deleteCardHandler(this._cardId);
-    });
+    if (this._isOwner) {
+      this._deleteButtonElem.addEventListener('click', () => {
+        this._deleteCardHandler(this._cardId);
+      });
+    }
   }
 
   // Handlers functions

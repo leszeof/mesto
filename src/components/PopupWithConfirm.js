@@ -9,8 +9,6 @@ class PopupWithConfirm extends Popup {
 
   open(cardToDelete, cardID) {
     super.open();
-    console.log('tyt open PopupWithConfirm');
-
     this._cardToDelete = cardToDelete;
     this._cardID = cardID;
   }

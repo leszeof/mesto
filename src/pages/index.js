@@ -227,6 +227,7 @@ function deleteCardHandler(cardToDelete, cardId) {
 function likeCardHandler() {
   console.log('card -> likeCardHandler');
 
+  // api.
 }
 
 // callback function for creating new cards (on start and by user)
@@ -252,7 +253,7 @@ function createCard(rawCardData) {
   const card = new Card(
     {
       cardData: rawCardData, // было cardData
-      cardTemplateSelector: '.cards-item',
+      cardSelector: '.cards-item',
       currentUserId: userInfo.getUserId(),
       handleCardPreview: handleCardPreview,
       deleteCardHandler: deleteCardHandler,

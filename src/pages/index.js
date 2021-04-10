@@ -109,6 +109,10 @@ const editUserAvatarPopup = new PopupWithForm(
         .catch( (error) => {
           console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
           // можно еще добавить индикатор загрузки
+        })
+        .finally( () => {
+          editUserAvatarPopup.renderLoading(false);
+          editUserAvatarPopup.close();
         });
     },
     validationHandler: () => {
@@ -144,6 +148,10 @@ function updateUserInfo(formData) {
     .catch( (error) => {
       console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
       // можно еще добавить индикатор загрузки
+    })
+    .finally( () => {
+      editProfilePopup.renderLoading(false);
+      editProfilePopup.close();
     });
 }
 
@@ -163,7 +171,11 @@ function submitNewCardHandler(formData) {
     })
     .catch( (error) => {
       console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
+    })
+    .finally( () => {
       // можно еще добавить индикатор загрузки
+      addNewPlacePopup.renderLoading(false);
+      addNewPlacePopup.close();
     });
 }
 
@@ -178,6 +190,10 @@ const deleteCardPopup = new PopupWithConfirm(
         })
         .catch( (error) => {
           console.log(error);
+        })
+        .finally( () => {
+          deleteCardPopup.renderLoading(false);
+          deleteCardPopup.close();
         });
     },
   }

@@ -31,8 +31,20 @@ const api = new Api(apiBasicSettings);
 
 // render initial cards on start using API class
 let cardsSection;
-api.getInitialCards()
-  .then( (cards) => {
+
+Promise.all(
+  [
+    api.getInitialCards(),
+    api.getUserInfo(),
+  ]
+)
+  .then( ([cards, userData]) => {
+    // set user info
+    userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData);
+    userInfo.setUserId(userData);
+
+    // render card from server
     cardsSection = new Section(
       {
         items: cards,
@@ -47,24 +59,8 @@ api.getInitialCards()
     cardsSection.renderItems();
   })
   .catch( (error) => {
-    console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
-    // можно еще добавить индикатор загрузки
+    console.log(error);
   });
-
-// render user info on start using API class
-api.getUserInfo()
-  .then( (userData) => {
-    userInfo.setUserInfo(userData);
-    userInfo.setUserAvatar(userData);
-    userInfo.setUserId(userData);
-  })
-  .catch( (error) => {
-    console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
-    // можно еще добавить индикатор загрузки
-  });
-
-
-
 
   // Popup classes
   // edit profile popup controller copy

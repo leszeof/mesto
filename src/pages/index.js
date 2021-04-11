@@ -105,6 +105,7 @@ const editUserAvatarPopup = new PopupWithForm(
       api.updateUserAvatar(newLink)
         .then( newProfileData => {
           userInfo.setUserAvatar(newProfileData);
+          editUserAvatarPopup.close();
         })
         .catch( (error) => {
           console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
@@ -112,7 +113,6 @@ const editUserAvatarPopup = new PopupWithForm(
         })
         .finally( () => {
           editUserAvatarPopup.renderLoading(false);
-          editUserAvatarPopup.close();
         });
     },
     validationHandler: () => {
@@ -144,6 +144,7 @@ function updateUserInfo(formData) {
   api.updateUserInfo(newInfo)
     .then(userData => {
       userInfo.setUserInfo(userData);
+      editProfilePopup.close();
     })
     .catch( (error) => {
       console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
@@ -151,7 +152,6 @@ function updateUserInfo(formData) {
     })
     .finally( () => {
       editProfilePopup.renderLoading(false);
-      editProfilePopup.close();
     });
 }
 
@@ -168,6 +168,7 @@ function submitNewCardHandler(formData) {
     .then((newCardData) => {
       const newCardElement = createCard(newCardData);
       cardsSection.addItem(newCardElement);
+      addNewPlacePopup.close();
     })
     .catch( (error) => {
       console.log(error); // в дальнейшем заменить на модальное окно с ошибкой
@@ -175,7 +176,6 @@ function submitNewCardHandler(formData) {
     .finally( () => {
       // можно еще добавить индикатор загрузки
       addNewPlacePopup.renderLoading(false);
-      addNewPlacePopup.close();
     });
 }
 
@@ -187,13 +187,13 @@ const deleteCardPopup = new PopupWithConfirm(
       api.deleteCard(cardId)
         .then( () => {
           cardToDelete.deleteCard();
+          deleteCardPopup.close();
         })
         .catch( (error) => {
           console.log(error);
         })
         .finally( () => {
           deleteCardPopup.renderLoading(false);
-          deleteCardPopup.close();
         });
     },
   }
@@ -228,7 +228,7 @@ function createCard(rawCardData) {
           })
           .catch( (error) => {
             console.log(error);
-          })
+          });
         } else {
           api.putLike(id)
           .then( (updatedCardData) => {
@@ -237,7 +237,7 @@ function createCard(rawCardData) {
           })
           .catch( (error) => {
             console.log(error);
-          })
+          });
         }
       },
     }

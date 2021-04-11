@@ -70,7 +70,7 @@ class Card {
     }
 
     if (!this._isOwner) {
-      this._deleteButtonElem.style.display = 'none';
+      this._deleteButtonElem.remove();
     }
   }
 

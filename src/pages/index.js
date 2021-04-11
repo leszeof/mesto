@@ -179,7 +179,6 @@ const deleteCardPopup = new PopupWithConfirm(
   {
     popupSelector: '.popup_type_delete-card',
     submitFormHandler: (cardToDelete, cardId) => {
-      console.log('deleteCardPopup -> submitFormHandler');
       api.deleteCard(cardId)
         .then( () => {
           cardToDelete.deleteCard();
@@ -219,7 +218,6 @@ function createCard(rawCardData) {
         if (isLiked) {
           api.deleteLike(id)
           .then( (updatedCardData) => {
-            console.log('likeCardHandler -> card is already liked (IF)');
             card.updateLike(updatedCardData);
           })
           .catch( (error) => {
@@ -228,7 +226,6 @@ function createCard(rawCardData) {
         } else {
           api.putLike(id)
           .then( (updatedCardData) => {
-            console.log('likeCardHandler -> card is NOT liked (ELSE)');
             card.updateLike(updatedCardData);
           })
           .catch( (error) => {

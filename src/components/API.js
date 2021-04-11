@@ -13,17 +13,7 @@ export default class Api {
         headers: this._headers,
       }
     )
-      .then( (response) => {
-        if (response.ok) {
-          return response.json();
-        }
-
-        // если ошибка сервера, отклоняем промис
-        return Promise.reject(`Ошибка: ${response.status}`);
-      })
-      .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
-      });
+    .then( (response) => this._handleResponse(response) );
   }
 
   // return array of cards
@@ -35,20 +25,7 @@ export default class Api {
         headers: this._headers,
       }
     )
-      .then( (response) => {
-        if (response.ok) {
-          return response.json();
-        }
-
-        // если ошибка сервера, отклоняем промис
-        return Promise.reject(`Ошибка: ${response.status}`);
-      })
-      .then( (result) => {
-        return result;
-      })
-      .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
-      });
+    .then( (response) => this._handleResponse(response) );
   }
 
   // return updated user data (object)
@@ -64,17 +41,7 @@ export default class Api {
         }),
       }
     )
-      .then( (response) => {
-        if (response.ok) {
-          return response.json();
-        }
-
-        // если ошибка сервера, отклоняем промис
-        return Promise.reject(`Ошибка: ${response.status}`);
-      })
-      .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
-      });
+    .then( (response) => this._handleResponse(response) );
   }
 
   // return new card (object)
@@ -90,17 +57,7 @@ export default class Api {
         }),
       }
     )
-      .then( (response) => {
-        if (response.ok) {
-          return response.json();
-        }
-
-        // если ошибка сервера, отклоняем промис
-        return Promise.reject(`Ошибка: ${response.status}`);
-      })
-      .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
-      });
+    .then( (response) => this._handleResponse(response) );
   }
 
   // return string 'Объект удален'
@@ -112,18 +69,7 @@ export default class Api {
         headers: this._headers,
       }
     )
-      .then( (response) => {
-        if (response.ok) {
-          // return response.json(); // ответ: "Пост удален"
-          return Promise.resolve('Пост удален'); // можно и так
-        }
-
-        // если ошибка сервера, отклоняем промис
-        return Promise.reject(`Ошибка: ${response.status}`);
-      })
-      .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
-      });
+    .then( (response) => this._handleResponse(response) );
   }
 
   // return updated card (object)
@@ -135,17 +81,7 @@ export default class Api {
         headers: this._headers,
       }
     )
-      .then( (response) => {
-        if (response.ok) {
-          return response.json();
-        }
-
-        // если ошибка сервера, отклоняем промис
-        return Promise.reject(`Ошибка: ${response.status}`);
-      })
-      .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
-      });
+    .then( (response) => this._handleResponse(response) );
   }
 
   // return updated card (object)
@@ -157,17 +93,7 @@ export default class Api {
         headers: this._headers,
       }
     )
-      .then( (response) => {
-        if (response.ok) {
-          return response.json();
-        }
-
-        // если ошибка сервера, отклоняем промис
-        return Promise.reject(`Ошибка: ${response.status}`);
-      })
-      .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
-      });
+    .then( (response) => this._handleResponse(response) );
   }
 
   // return updated user data (object)
@@ -182,16 +108,16 @@ export default class Api {
         }),
       }
     )
-      .then( (response) => {
-        if (response.ok) {
-          return response.json();
-        }
+    .then( (response) => this._handleResponse(response) );
+  }
 
-        // если ошибка сервера, отклоняем промис
-        return Promise.reject(`Ошибка: ${response.status}`);
-      })
-      .catch( (err) => {
-        console.log(err); // выведем ошибку в консоль (в дальнейшем лучше обработать)
-      })
+  // handle all responses to Api, return error or final result
+  _handleResponse(response) {
+    if (response.ok) {
+      return response.json();
+    }
+
+    // если ошибка сервера, отклоняем промис
+    return Promise.reject(`Ошибка: ${response.status}`);
   }
 }
